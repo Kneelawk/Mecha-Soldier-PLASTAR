@@ -20,7 +20,13 @@
   "license": "MIT",
   "icon": "assets/${mod_id}/icon.png",
   "environment": "*",
-  "entrypoints": { },
+  "entrypoints": {
+    "main": [
+      {
+        "value": "com.github.plastar.fabric.FabricMod"
+      }
+    ]
+  },
   "mixins": [ ],
   "depends": {
     "fabricloader": ">=0.15.0",
