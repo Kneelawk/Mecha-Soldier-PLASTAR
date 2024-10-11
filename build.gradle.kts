@@ -6,3 +6,9 @@ plugins {
 tasks.create("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)
 }
+
+subprojects {
+    repositories {
+        maven("https://maven.ithundxr.dev/hidden") { name = "Flywheel Beta" }
+    }
+}

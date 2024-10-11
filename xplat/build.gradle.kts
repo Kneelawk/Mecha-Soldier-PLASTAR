@@ -7,7 +7,17 @@ plugins {
 submodule {
     setRefmaps("plastar")
     val common_events_version: String by project
-    xplatExternalDependency(include = false) { "com.kneelawk.common-events:common-events-$it:$common_events_version" }
+    xplatExternalDependency { "com.kneelawk.common-events:common-events-$it:$common_events_version" }
+    val flywheel_version: String by project
+    val flywheel_mc_version: String by project
+    xplatExternalDependency {
+        val platform = when (it) {
+            "neoforge" -> "forge" // TODO: remove this line once flywheel fixes their neoforge naming
+            "xplat-intermediary" -> "common-intermediary-api"
+            else -> it
+        }
+        "dev.engine_room.flywheel:flywheel-$platform-$flywheel_mc_version:$flywheel_version"
+    }
 }
 
 kpublish {
