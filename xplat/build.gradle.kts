@@ -23,3 +23,7 @@ submodule {
 kpublish {
     createPublication("intermediate")
 }
+
+loom {
+    accessWidenerPath.set(file("platform-aw.accesswidener"))
+}

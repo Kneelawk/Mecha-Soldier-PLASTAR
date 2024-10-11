@@ -1,0 +1,4 @@
+accessWidener v2 named
+
+# This AW contains entries which both fabric and neoforge have, but which we need to use in xplat without either one
+# Because both loaders already include these, this is *not* a resource file, and not used at runtime in any way
