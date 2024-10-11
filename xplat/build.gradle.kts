@@ -6,8 +6,8 @@ plugins {
 
 submodule {
     setRefmaps("plastar")
-    val common_events_version: String by project
-    xplatExternalDependency { "com.kneelawk.common-events:common-events-$it:$common_events_version" }
+    val knet_version: String by project
+    xplatExternalDependency { "com.kneelawk.knet:knet-$it:$knet_version" }
     val flywheel_version: String by project
     val flywheel_mc_version: String by project
     xplatExternalDependency {

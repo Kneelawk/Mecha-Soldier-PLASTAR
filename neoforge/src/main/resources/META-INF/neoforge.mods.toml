@@ -18,13 +18,6 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "common_events"
-type = "REQUIRED"
-versionRange = "[1,)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
 modId = "flywheel"
 type = "REQUIRED"
 versionRange = "[1.0.0-beta,2)"
