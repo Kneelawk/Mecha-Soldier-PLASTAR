@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "Mecha Soldier PLASTAR",
+  "description": "Tiny Mecha Mod!",
+  "authors": [
+    "LemmaEOF",
+    "June",
+    "Snakefangox",
+    "MattiDragon",
+    "MerchantPug",
+    "Kneelawk"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Kneelawk/Mecha-Soldier-PLASTAR",
+    "issues": "https://github.com/Kneelawk/Mecha-Soldier-PLASTAR/issues",
+    "sources": "https://github.com/Kneelawk/Mecha-Soldier-PLASTAR"
+  },
+  "license": "MIT",
+  "icon": "assets/${mod_id}/icon.png",
+  "environment": "*",
+  "entrypoints": { },
+  "mixins": [ ],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "fabric-api": "*",
+    "common_events": ">=1",
+    "minecraft": ">=1.21- <1.22-",
+    "java": ">=17"
+  },
+  "custom": {
+    "modmenu": { }
+  }
+}
