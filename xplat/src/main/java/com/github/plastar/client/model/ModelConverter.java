@@ -1,6 +1,5 @@
 package com.github.plastar.client.model;
 
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Map;
 

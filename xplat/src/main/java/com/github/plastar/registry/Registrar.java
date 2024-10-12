@@ -3,13 +3,13 @@ package com.github.plastar.registry;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import org.jetbrains.annotations.Nullable;
+
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-
-import org.jetbrains.annotations.Nullable;
 
 import static com.github.plastar.Constants.rl;
 

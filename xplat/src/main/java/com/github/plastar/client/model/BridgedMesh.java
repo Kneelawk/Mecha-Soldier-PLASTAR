@@ -1,12 +1,13 @@
 package com.github.plastar.client.model;
 
+import org.lwjgl.system.MemoryUtil;
+
 import de.javagl.jgltf.model.AccessorFloatData;
 import de.javagl.jgltf.model.AccessorShortData;
 import de.javagl.jgltf.model.MeshPrimitiveModel;
 import dev.engine_room.flywheel.api.model.IndexSequence;
 import dev.engine_room.flywheel.api.model.Mesh;
 import dev.engine_room.flywheel.api.vertex.MutableVertexList;
-
 import dev.engine_room.flywheel.api.vertex.VertexList;
 import dev.engine_room.flywheel.lib.memory.MemoryBlock;
 import dev.engine_room.flywheel.lib.model.ModelUtil;
@@ -16,8 +17,6 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4fc;
-
-import org.lwjgl.system.MemoryUtil;
 
 public class BridgedMesh implements Mesh {
     

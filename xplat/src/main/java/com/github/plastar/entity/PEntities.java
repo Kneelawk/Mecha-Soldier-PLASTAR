@@ -1,7 +1,6 @@
 package com.github.plastar.entity;
 
 import com.github.plastar.PLASTARMod;
-
 import com.github.plastar.data.Mecha;
 
 import net.minecraft.core.registries.Registries;
@@ -12,7 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
 public class PEntities {
-    public static EntityType<MechaEntity> MECHA_ENTITY =
+    public static final EntityType<MechaEntity> MECHA_ENTITY =
         EntityType.Builder.of(MechaEntity::new, MobCategory.CREATURE).build("mecha");
 
     public static final EntityDataSerializer<Mecha> MECHA_DATA_SERIALIZER =
