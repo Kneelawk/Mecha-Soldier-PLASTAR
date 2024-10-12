@@ -3,7 +3,6 @@ package com.github.plastar.entity;
 import com.github.plastar.data.Mecha;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,11 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 
 public class MechaEntity extends LivingEntity {
-    private static final EntityDataSerializer<Mecha> MECHA_DATA_SERIALIZER =
-        EntityDataSerializer.forValueType(Mecha.STREAM_CODEC);
     private static final EntityDataAccessor<Mecha> MECHA_DATA_ACCESSOR =
-        SynchedEntityData.defineId(MechaEntity.class,
-            MECHA_DATA_SERIALIZER);
+        SynchedEntityData.defineId(MechaEntity.class, PEntities.MECHA_DATA_SERIALIZER);
 
     protected MechaEntity(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
