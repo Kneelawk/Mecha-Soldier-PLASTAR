@@ -1,5 +1,7 @@
 package com.github.plastar.data;
 
+import com.mojang.serialization.Codec;
+
 import net.minecraft.util.StringRepresentable;
 
 /**
@@ -21,6 +23,8 @@ public enum MechaSection implements StringRepresentable {
     MechaSection(String name) {
         this.name = name;
     }
+
+    public static final Codec<MechaSection> CODEC = StringRepresentable.fromEnum(MechaSection::values);
 
     @Override
     public String getSerializedName() {
