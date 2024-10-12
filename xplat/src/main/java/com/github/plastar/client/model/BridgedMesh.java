@@ -19,7 +19,6 @@ import org.joml.Vector3f;
 import org.joml.Vector4fc;
 
 public class BridgedMesh implements Mesh {
-    
     private final Vector4fc boundingSphere;
     private final Indices indices;
     private final VertexList vertices;
