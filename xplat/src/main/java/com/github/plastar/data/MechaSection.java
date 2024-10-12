@@ -2,6 +2,10 @@ package com.github.plastar.data;
 
 import com.mojang.serialization.Codec;
 
+import io.netty.buffer.ByteBuf;
+
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 
 /**
@@ -19,12 +23,14 @@ public enum MechaSection implements StringRepresentable {
     SHIELD("shield");
 
     private final String name;
-
+    
     MechaSection(String name) {
         this.name = name;
     }
-
+    
     public static final Codec<MechaSection> CODEC = StringRepresentable.fromEnum(MechaSection::values);
+    public static final StreamCodec<FriendlyByteBuf, MechaSection> STREAM_CODEC =
+        StreamCodec.of(FriendlyByteBuf::writeEnum, buf -> buf.readEnum(MechaSection.class));
 
     @Override
     public String getSerializedName() {
