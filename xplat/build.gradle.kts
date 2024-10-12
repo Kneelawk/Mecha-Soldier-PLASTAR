@@ -20,6 +20,11 @@ submodule {
     }
 }
 
+dependencies {
+    // TODO: ask Kneelawk how to do this with submodule
+    api("de.javagl:jgltf-model:2.0.4")
+}
+
 kpublish {
     createPublication("intermediate")
 }
