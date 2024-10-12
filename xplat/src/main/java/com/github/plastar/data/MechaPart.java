@@ -31,7 +31,7 @@ public interface MechaPart {
     List<AttributeModifier> getStats();
 
     static MechaPart create(MechaSection section, List<AttributeModifier> stats) {
-        // We'll need to figure out how this gets populated, if we do use a record this'll be much easier
-        return null;
+        // TODO: We'll need to figure out how this gets populated, if we do use a record this'll be much easier
+        throw new UnsupportedOperationException();
     }
 }

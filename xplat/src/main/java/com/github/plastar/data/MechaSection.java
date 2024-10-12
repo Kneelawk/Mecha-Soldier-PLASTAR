@@ -2,8 +2,6 @@ package com.github.plastar.data;
 
 import com.mojang.serialization.Codec;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;

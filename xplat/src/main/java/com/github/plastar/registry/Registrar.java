@@ -9,6 +9,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
+import org.jetbrains.annotations.Nullable;
+
 import static com.github.plastar.Constants.rl;
 
 public class Registrar<T> {
@@ -22,6 +24,7 @@ public class Registrar<T> {
         if (stuff.containsKey(name)) throw new IllegalArgumentException("Tried to register " + name + " twice!");
 
         Supplier<T> memoized = new Supplier<>() {
+            @Nullable
             private T value;
 
             @Override

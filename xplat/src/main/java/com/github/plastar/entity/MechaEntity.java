@@ -1,5 +1,7 @@
 package com.github.plastar.entity;
 
+import java.util.Collections;
+
 import com.github.plastar.data.Mecha;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -10,10 +12,6 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
 
 public class MechaEntity extends LivingEntity {
     private static final EntityDataAccessor<Mecha> MECHA_DATA_ACCESSOR =
@@ -31,22 +29,22 @@ public class MechaEntity extends LivingEntity {
     }
 
     @Override
-    public @NotNull Iterable<ItemStack> getArmorSlots() {
+    public Iterable<ItemStack> getArmorSlots() {
         return Collections.emptyList();
     }
 
     @Override
-    public @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot) {
+    public ItemStack getItemBySlot(EquipmentSlot slot) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public void setItemSlot(@NotNull EquipmentSlot slot, @NotNull ItemStack stack) {
+    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
 
     }
 
     @Override
-    public @NotNull HumanoidArm getMainArm() {
+    public HumanoidArm getMainArm() {
         return HumanoidArm.RIGHT;
     }
 }
