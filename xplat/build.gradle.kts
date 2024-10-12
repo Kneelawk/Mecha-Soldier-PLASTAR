@@ -18,11 +18,7 @@ submodule {
         }
         "dev.engine_room.flywheel:flywheel-$platform-$flywheel_mc_version:$flywheel_version"
     }
-}
-
-dependencies {
-    // TODO: ask Kneelawk how to do this with submodule
-    api("de.javagl:jgltf-model:2.0.4")
+    xplatExternalDependency { "de.javagl:jgltf-model:2.0.4" }
 }
 
 kpublish {

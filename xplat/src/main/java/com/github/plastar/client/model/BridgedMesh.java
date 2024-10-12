@@ -8,6 +8,7 @@ import dev.engine_room.flywheel.api.model.Mesh;
 import dev.engine_room.flywheel.api.vertex.MutableVertexList;
 
 import dev.engine_room.flywheel.api.vertex.VertexList;
+import dev.engine_room.flywheel.lib.memory.MemoryBlock;
 import dev.engine_room.flywheel.lib.model.ModelUtil;
 import dev.engine_room.flywheel.lib.vertex.PosTexNormalVertexView;
 
@@ -19,6 +20,7 @@ import org.joml.Vector4fc;
 import org.lwjgl.system.MemoryUtil;
 
 public class BridgedMesh implements Mesh {
+    
     private final Vector4fc boundingSphere;
     private final Indices indices;
     private final VertexList vertices;
@@ -43,9 +45,14 @@ public class BridgedMesh implements Mesh {
     private VertexList buildVertices(Matrix4f transformMatrix, AccessorFloatData positionData,
                                      AccessorFloatData normalData, AccessorFloatData uvData) {
         var normalMatrix = transformMatrix.normal(new Matrix3f());
+
+        var vertexCount = positionData.getNumElements();
         
         var vertices = new PosTexNormalVertexView();
-        for (int i = 0; i < vertexCount(); i++) {
+        var block = MemoryBlock.mallocTracked((long) vertexCount * PosTexNormalVertexView.STRIDE);
+        vertices.ptr(block.ptr());
+        
+        for (int i = 0; i < vertexCount; i++) {
             var pos = new Vector3f(positionData.get(i, 0), positionData.get(i, 1), positionData.get(i, 2));
             transformMatrix.transformPosition(pos);
             vertices.x(i, pos.x);
@@ -61,6 +68,10 @@ public class BridgedMesh implements Mesh {
             vertices.u(i, uvData.get(i, 0));
             vertices.v(i, uvData.get(i, 1));
         }
+        
+        vertices.ptr(block.ptr());
+        vertices.vertexCount(vertexCount);
+        vertices.nativeMemoryOwner(block);
         
         return vertices;
     }
@@ -99,7 +110,8 @@ public class BridgedMesh implements Mesh {
 
         @Override
         public void fill(long ptr, int count) {
-            for (int i = 0; i < indexCount(); i++) {
+            var writtenCount = Math.min(count, indexCount());
+            for (int i = 0; i < writtenCount; i++) {
                 MemoryUtil.memPutInt(ptr + i * 4L, indexData.getInt(i, 0));
             }
         }
