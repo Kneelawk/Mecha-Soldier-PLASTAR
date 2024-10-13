@@ -47,6 +47,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> {
         super.beginFrame(ctx);
         instance.setIdentityTransform()
             .translate(getVisualPosition(ctx.partialTick()))
+            .light(computePackedLight(ctx.partialTick()))
             .setChanged();
     }
 
