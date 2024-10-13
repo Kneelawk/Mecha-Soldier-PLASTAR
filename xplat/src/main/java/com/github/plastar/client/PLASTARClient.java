@@ -6,7 +6,7 @@ import dev.engine_room.flywheel.lib.visualization.SimpleEntityVisualizer;
 
 public class PLASTARClient {
     public static void init() {
-        SimpleEntityVisualizer.builder(PEntities.MECHA_ENTITY)
+        SimpleEntityVisualizer.builder(PEntities.MECHA_ENTITY.get())
             .factory(MechaEntityVisual::new)
             .apply();
     }

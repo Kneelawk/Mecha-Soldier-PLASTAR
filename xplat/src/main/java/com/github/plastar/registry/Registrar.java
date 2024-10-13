@@ -15,21 +15,21 @@ import static com.github.plastar.Constants.rl;
 
 public class Registrar<T> {
     private final ResourceKey<T> key;
-    private final Map<ResourceLocation, Supplier<T>> stuff = new Object2ObjectLinkedOpenHashMap<>();
+    private final Map<ResourceLocation, Supplier<? extends T>> stuff = new Object2ObjectLinkedOpenHashMap<>();
 
     public Registrar(ResourceKey<T> key) {this.key = key;}
 
-    public Supplier<T> register(String path, Supplier<T> ctor) {
+    public <T2 extends T> Supplier<T2> register(String path, Supplier<T2> ctor) {
         ResourceLocation name = rl(path);
         if (stuff.containsKey(name)) throw new IllegalArgumentException("Tried to register " + name + " twice!");
 
-        Supplier<T> memoized = new Supplier<>() {
+        Supplier<T2> memoized = new Supplier<>() {
             @Nullable
-            private T value;
+            private T2 value;
 
             @Override
-            public T get() {
-                T value = this.value;
+            public T2 get() {
+                T2 value = this.value;
                 if (value == null) {
                     this.value = value = ctor.get();
                 }

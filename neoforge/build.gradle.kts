@@ -4,6 +4,10 @@ plugins {
     id("com.kneelawk.kpublish")
 }
 
+configurations {
+    register("neoRuntimeLibs")
+}
+
 submodule {
     setLibsDirectory()
     applyXplatConnection(":xplat")
@@ -16,6 +20,7 @@ kpublish {
 
 dependencies {
     // TODO: ask Kneelawk how to do this with submodule
+    additionalRuntimeClasspath("de.javagl:jgltf-model:2.0.4")
     jarJar("de.javagl:jgltf-model:2.0.4")
     jarJar("de.javagl:jgltf-impl-v1:2.0.4")
     jarJar("de.javagl:jgltf-impl-v2:2.0.4")

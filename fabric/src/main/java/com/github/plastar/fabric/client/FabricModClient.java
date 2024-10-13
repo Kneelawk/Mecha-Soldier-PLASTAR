@@ -23,7 +23,7 @@ public class FabricModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         PLASTARClient.init();
-        EntityRendererRegistry.register(PEntities.MECHA_ENTITY, NoopRenderer::new);
+        EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), NoopRenderer::new);
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(
             new IdentifiableResourceReloadListener() {
                 @Override
