@@ -1,6 +1,8 @@
 package com.github.plastar.client;
 
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 import com.github.plastar.Constants;
 import com.github.plastar.Log;
@@ -18,10 +20,8 @@ import dev.engine_room.flywheel.lib.visual.component.ShadowComponent;
 
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 
 public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> {
-    private static final Material TEMP_MATERIAL = new Material(InventoryMenu.BLOCK_ATLAS, ResourceLocation.withDefaultNamespace("block/dirt"));
     private final TransformedInstance instance;
 
     public MechaEntityVisual(VisualizationContext ctx, MechaEntity entity, float partialTick) {
@@ -32,7 +32,8 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> {
             Log.LOG.warn("Failed to load model for mecha");
             instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, new SimpleModel(List.of())).createInstance();
         } else {
-            instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(TEMP_MATERIAL)).createInstance();
+            var material = new Material(Constants.ATLAS_ID, pickTexture(entity.getUUID()));
+            instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(material)).createInstance();
         }
 
         addComponent(new ShadowComponent(visualizationContext, entity).radius(0.7f));
@@ -40,6 +41,23 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> {
         addComponent(new HitboxComponent(visualizationContext, entity));
         
         instance.setChanged();
+    }
+    
+    private ResourceLocation pickTexture(UUID uuid) {
+        var random = new Random(uuid.hashCode());
+        var pattern = switch (random.nextInt(3)) {
+            case 0 -> "checker";
+            case 1 -> "striped";
+            case 2 -> "core";
+            default -> throw new IllegalStateException();
+        };
+        var palette = switch (random.nextInt(3)) {
+            case 0 -> "a";
+            case 1 -> "b";
+            case 2 -> "c";
+            default -> throw new IllegalStateException();
+        };
+        return Constants.rl("mecha/test_part/" + pattern + "_" + palette);
     }
 
     @Override

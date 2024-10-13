@@ -2,11 +2,12 @@
   "sources": [
     {
       "type": "paletted_permutations",
-      "textures": [ "plastar:mecha/test_part/checker", "plastar:mecha/test_part/striped" ],
+      "textures": [ "plastar:mecha/test_part/checker", "plastar:mecha/test_part/striped", "plastar:mecha/test_part/core" ],
       "palette_key": "plastar:mecha/palette_template",
       "permutations": {
-        "_a": "plastar:mecha/test_palette_a",
-        "_b": "plastar:mecha/test_palette_b"
+        "a": "plastar:mecha/test_palette_a",
+        "b": "plastar:mecha/test_palette_b",
+        "c": "plastar:mecha/test_palette_c"
       }
     }
   ]

@@ -1,18 +1,17 @@
 package com.github.plastar.mixin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.github.plastar.Constants;
-
-import net.minecraft.client.resources.model.ModelManager;
-
-import net.minecraft.resources.ResourceLocation;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.resources.ResourceLocation;
 
 @Mixin(ModelManager.class)
 public class ModelManagerMixin {
@@ -23,6 +22,6 @@ public class ModelManagerMixin {
 
     static {
         VANILLA_ATLASES = new HashMap<>(VANILLA_ATLASES);
-        VANILLA_ATLASES.put(Constants.rl("textures/atlas/mecha_parts.png"), Constants.rl("mecha_parts"));
+        VANILLA_ATLASES.put(Constants.ATLAS_ID, Constants.rl("mecha_parts"));
     }
 }
