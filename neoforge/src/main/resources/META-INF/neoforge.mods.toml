@@ -10,6 +10,9 @@ authors = "LemmaEOF, June, Snakefangox, MattiDragon, MerchantPug, Kneelawk"
 description = "Tiny Mecha Mod@"
 logoFile = "assets/${mod_id}/icon.png"
 
+[[mixins]]
+config = "plastar.mixins.json"
+
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "REQUIRED"

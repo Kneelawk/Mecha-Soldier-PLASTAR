@@ -1,0 +1,13 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [ "plastar:mecha/test_part/checker", "plastar:mecha/test_part/striped" ],
+      "palette_key": "plastar:mecha/palette_template",
+      "permutations": {
+        "_a": "plastar:mecha/test_palette_a",
+        "_b": "plastar:mecha/test_palette_b"
+      }
+    }
+  ]
+}
