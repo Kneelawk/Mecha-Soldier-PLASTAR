@@ -12,26 +12,20 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 /**
  * An individual part of a model kit.
- * TODO: record instead of interface?
  */
-public interface MechaPart {
-    Codec<MechaPart> CODEC =
+public record MechaPart(MechaSection section, List<AttributeModifier> stats, String pattern, String palette) {
+    public static final Codec<MechaPart> CODEC =
         RecordCodecBuilder.create(i -> i.group(
-                MechaSection.CODEC.fieldOf("section").forGetter(MechaPart::getSection),
-                AttributeModifier.CODEC.listOf().fieldOf("stats").forGetter(MechaPart::getStats))
-            .apply(i, MechaPart::create));
+                MechaSection.CODEC.fieldOf("section").forGetter(MechaPart::section),
+                AttributeModifier.CODEC.listOf().fieldOf("stats").forGetter(MechaPart::stats),
+                Codec.STRING.fieldOf("pattern").forGetter(MechaPart::pattern),
+                Codec.STRING.fieldOf("palette").forGetter(MechaPart::palette)
+            ).apply(i, MechaPart::new));
 
-    StreamCodec<FriendlyByteBuf, MechaPart> STREAM_CODEC = StreamCodec.composite(
-        MechaSection.STREAM_CODEC, MechaPart::getSection,
-        AttributeModifier.STREAM_CODEC.apply(ByteBufCodecs.list()), MechaPart::getStats,
-        MechaPart::create);
-
-    MechaSection getSection();
-
-    List<AttributeModifier> getStats();
-
-    static MechaPart create(MechaSection section, List<AttributeModifier> stats) {
-        // TODO: We'll need to figure out how this gets populated, if we do use a record this'll be much easier
-        throw new UnsupportedOperationException();
-    }
+    public static final StreamCodec<FriendlyByteBuf, MechaPart> STREAM_CODEC = StreamCodec.composite(
+        MechaSection.STREAM_CODEC, MechaPart::section,
+        AttributeModifier.STREAM_CODEC.apply(ByteBufCodecs.list()), MechaPart::stats,
+        ByteBufCodecs.STRING_UTF8, MechaPart::pattern,
+        ByteBufCodecs.STRING_UTF8, MechaPart::palette,
+        MechaPart::new);
 }

@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.github.plastar.Constants;
 import com.github.plastar.Log;
 import com.github.plastar.client.model.MechaModelManager;
+import com.github.plastar.data.MechaSection;
 import com.github.plastar.entity.MechaEntity;
 
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
@@ -32,7 +33,9 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> {
             Log.LOG.warn("Failed to load model for mecha");
             instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, new SimpleModel(List.of())).createInstance();
         } else {
-            var material = new Material(Constants.ATLAS_ID, pickTexture(entity.getUUID()));
+            var torso = entity.getMecha().parts().get(MechaSection.TORSO);
+            var texture = torso != null ? Constants.rl("mecha/test_part/" + torso.pattern() + "_" + torso.palette()) : pickTexture(entity.getUUID());
+            var material = new Material(Constants.ATLAS_ID, texture);
             instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(material)).createInstance();
         }
 
