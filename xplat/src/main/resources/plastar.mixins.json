@@ -2,8 +2,12 @@
   "required": true,
   "package": "com.github.plastar.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [ ],
-  "client": [ "ModelManagerMixin" ],
+  "mixins": [
+    "SimpleMaterialBuilderMixin"
+  ],
+  "client": [
+    "ModelManagerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
