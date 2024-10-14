@@ -20,11 +20,11 @@ import dev.engine_room.flywheel.lib.visual.component.FireComponent;
 import dev.engine_room.flywheel.lib.visual.component.HitboxComponent;
 import dev.engine_room.flywheel.lib.visual.component.ShadowComponent;
 
-import net.minecraft.client.resources.model.Material;
-
-import net.minecraft.util.Mth;
-
 import org.joml.Matrix4fStack;
+
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.util.Mth;
 
 public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implements SimpleTickableVisual {
     private final Matrix4fStack matrixStack = new Matrix4fStack(2);
@@ -66,11 +66,22 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
     public void beginFrame(DynamicVisual.Context ctx) {
         super.beginFrame(ctx);
         var partialTick = ctx.partialTick();
+        var overlay = LivingEntityRenderer.getOverlayCoords(entity, 0);
         
         matrixStack.identity();
         matrixStack.translate(getVisualPosition(partialTick));
         var bodyRot = 180 - Mth.rotLerp(partialTick, entity.yBodyRotO, entity.yBodyRot);
         matrixStack.rotateY(bodyRot * Mth.DEG_TO_RAD);
+        
+        if (entity.deathTime > 0) {
+            var fallProgress = ((float)entity.deathTime + partialTick - 1.0F) / 20.0F * 1.6F;
+            fallProgress = Mth.sqrt(fallProgress);
+            if (fallProgress > 1.0F) {
+                fallProgress = 1.0F;
+            }
+
+            matrixStack.rotateZ(fallProgress * 90 * Mth.DEG_TO_RAD);
+        }
         
         var limbSwingAmount = entity.walkAnimation.speed(partialTick);
         var limbSwing = entity.walkAnimation.position(partialTick);
@@ -116,6 +127,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
             instance.setIdentityTransform()
                 .setTransform(matrixStack)
                 .light(computePackedLight(partialTick))
+                .overlay(overlay)
                 .setChanged();
             matrixStack.popMatrix();
         }
