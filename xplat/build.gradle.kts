@@ -26,5 +26,5 @@ kpublish {
 }
 
 loom {
-    accessWidenerPath.set(file("platform-aw.accesswidener"))
+    accessWidenerPath.set(file("src/main/resources/common-aw.accesswidener"))
 }

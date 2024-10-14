@@ -7,6 +7,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.RegistryOps;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.Level;
 public class MechaEntity extends Mob {
     private static final EntityDataAccessor<Mecha> MECHA_DATA_ACCESSOR =
         SynchedEntityData.defineId(MechaEntity.class, PEntities.MECHA_DATA_SERIALIZER);
+    private Mecha lastMecha = getMecha();
 
     protected MechaEntity(EntityType<? extends Mob> entityType, Level level) {
         super(entityType, level);
@@ -28,6 +30,29 @@ public class MechaEntity extends Mob {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(MECHA_DATA_ACCESSOR, Mecha.DEFAULT);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (level() instanceof ServerLevel serverLevel) {
+            var registries = serverLevel.getServer().reloadableRegistries();
+            if (getMecha() != lastMecha) {
+                lastMecha.forEachAttributeModifier(registries, (attribute, modifier) -> {
+                    var instance = getAttribute(attribute);
+                    if (instance != null) {
+                        instance.removeModifier(modifier.id());
+                    }
+                });
+                lastMecha = getMecha();
+                lastMecha.forEachAttributeModifier(registries, (attribute, modifier) -> {
+                    var instance = getAttribute(attribute);
+                    if (instance != null) {
+                        instance.addTransientModifier(modifier);
+                    }
+                });
+            }
+        }
     }
 
     @Override

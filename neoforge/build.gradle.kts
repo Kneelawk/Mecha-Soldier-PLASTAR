@@ -28,3 +28,7 @@ dependencies {
     jarJar("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
     jarJar("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
 }
+
+neoForge {
+    accessTransformers.from(project(":xplat").file("src/main/resources/common-at.cfg"))
+}

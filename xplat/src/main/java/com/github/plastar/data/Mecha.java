@@ -3,15 +3,20 @@ package com.github.plastar.data;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.ReloadableServerRegistries;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 /**
  * A record holding all the data for a specific built instance of a Mecha Soldier kit.
@@ -33,4 +38,8 @@ public record Mecha(Component name, Map<MechaSection, MechaPart> parts) {
         Mecha::new);
 
     public static final Mecha DEFAULT = new Mecha(Component.empty(), Collections.emptyMap());
+
+    public void forEachAttributeModifier(ReloadableServerRegistries.Holder registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
+        parts.forEach((section, part) -> part.material().forEachAttributeModifier(registries, section, consumer));
+    }
 }
