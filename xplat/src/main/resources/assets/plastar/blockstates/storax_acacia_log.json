@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "axis=x,sappy=false": {
+      "model": "minecraft:block/acacia_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,sappy=false": {
+      "model": "minecraft:block/acacia_log"
+    },
+    "axis=z,sappy=false": {
+      "model": "minecraft:block/acacia_log_horizontal",
+      "x": 90
+    },
+    "axis=x,sappy=true": {
+      "model": "plastar:block/storax_acacia_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,sappy=true": {
+      "model": "plastar:block/storax_acacia_log"
+    },
+    "axis=z,sappy=true": {
+      "model": "plastar:block/storax_acacia_log_horizontal",
+      "x": 90
+    }
+  }
+}
