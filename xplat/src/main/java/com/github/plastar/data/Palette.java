@@ -10,6 +10,11 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.ReloadableServerRegistries;
 
+/**
+ * A color palette that can be applied to any part. 
+ * Loaded into a reloadable registry on the server and synced into {@link com.github.plastar.client.ClientPatternManager ClientPatternManager}.
+ * @param textureSuffix The suffix this palette applies to the pattern texture id
+ */
 public record Palette(String textureSuffix) {
     public static final Codec<Palette> CODEC = Codec.string(1, 32)
         .fieldOf("texture_suffix")

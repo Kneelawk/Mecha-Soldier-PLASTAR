@@ -8,7 +8,11 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 
 /**
- * An individual part of a model kit.
+ * A part of a mecha, consisting of its type, material and paintjob
+ * @param definition The resource key to the definition of this part
+ * @param material The material this part is made of
+ * @param pattern The resource key to the paint pattern applied to this part
+ * @param palette The resource key to the color palette of this part
  */
 public record MechaPart(ResourceKey<PartDefinition> definition, PartMaterial material, ResourceKey<Pattern> pattern, ResourceKey<Palette> palette) {
     public static final Codec<MechaPart> CODEC =

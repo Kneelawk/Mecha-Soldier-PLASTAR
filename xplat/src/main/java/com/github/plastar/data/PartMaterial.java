@@ -15,6 +15,10 @@ import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
+/**
+ * The material a part is made of.
+ * @param additive An additive that might have been added to the material.
+ */
 public record PartMaterial(Optional<ResourceKey<Additive>> additive) {
     //TODO: this is a regular codec now for use as a data component, should it be a map codec instead?
     public static final Codec<PartMaterial> CODEC =

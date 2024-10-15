@@ -1,5 +1,10 @@
 package com.github.plastar.data;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+
 import com.github.plastar.Constants;
 import com.github.plastar.network.PatternSyncPayload;
 import com.google.common.collect.ImmutableMap;
@@ -19,11 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public class PRegistries {
     private static final Gson GSON = new Gson();
