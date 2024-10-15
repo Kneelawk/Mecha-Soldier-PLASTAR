@@ -14,7 +14,7 @@ public class PItems {
 
     public static final Supplier<Item> STYROL = REGISTRAR.register("styrol", () -> new StyrolItem(new Item.Properties()));
     public static final Supplier<Item> POLYSTYRENE = REGISTRAR.register("polystyrene", () -> new PolystyreneItem(new Item.Properties()));
-    public static final Supplier<Item> STORAX_TREE_TAP = REGISTRAR.register("storax_tree_tap", () -> new StoraxTreeTapItem(new Item.Properties()));
+    public static final Supplier<Item> TREE_TAP = REGISTRAR.register("tree_tap", () -> new TreeTapItem(new Item.Properties()));
 
     public static void register() {
     }

@@ -2,8 +2,8 @@ package com.github.plastar.item;
 
 import net.minecraft.world.item.Item;
 
-public class StoraxTreeTapItem extends Item {
-    public StoraxTreeTapItem(Properties properties) {
+public class TreeTapItem extends Item {
+    public TreeTapItem(Properties properties) {
         super(properties);
     }
 }
