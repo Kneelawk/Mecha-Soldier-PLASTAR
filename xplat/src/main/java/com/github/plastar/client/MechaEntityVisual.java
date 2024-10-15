@@ -37,7 +37,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
         mecha = entity.getMecha();
         rebuildInstances();
 
-        addComponent(new ShadowComponent(visualizationContext, entity).radius(0.7f));
+        addComponent(new ShadowComponent(visualizationContext, entity).radius(0.5f));
         addComponent(new FireComponent(visualizationContext, entity));
         addComponent(new HitboxComponent(visualizationContext, entity));
     }

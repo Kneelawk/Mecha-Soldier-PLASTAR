@@ -16,7 +16,7 @@ import net.minecraft.world.entity.MobCategory;
 
 public class PEntities {
     public static final Supplier<EntityType<MechaEntity>> MECHA_ENTITY = register("mecha", () ->
-        EntityType.Builder.of(MechaEntity::new, MobCategory.CREATURE).build("mecha"));
+        EntityType.Builder.of(MechaEntity::new, MobCategory.CREATURE).sized(0.6f, 1f).build("mecha"));
 
     public static final EntityDataSerializer<Mecha> MECHA_DATA_SERIALIZER =
         EntityDataSerializer.forValueType(Mecha.STREAM_CODEC);
