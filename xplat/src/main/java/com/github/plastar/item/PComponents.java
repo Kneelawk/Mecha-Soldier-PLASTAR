@@ -1,7 +1,8 @@
-package com.github.plastar.data;
+package com.github.plastar.item;
 
 import com.github.plastar.PLASTARMod;
 
+import com.github.plastar.data.PartMaterial;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 

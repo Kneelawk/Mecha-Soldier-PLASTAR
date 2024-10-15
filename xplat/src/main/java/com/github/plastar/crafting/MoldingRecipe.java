@@ -1,7 +1,7 @@
 package com.github.plastar.crafting;
 
 import com.github.plastar.data.Additive;
-import com.github.plastar.data.PComponents;
+import com.github.plastar.item.PComponents;
 import com.github.plastar.data.PartMaterial;
 
 import com.mojang.serialization.MapCodec;
