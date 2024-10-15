@@ -1,8 +1,9 @@
 package com.github.plastar;
 
 import com.github.plastar.crafting.PRecipes;
-import com.github.plastar.item.PComponents;
 import com.github.plastar.entity.PEntities;
+import com.github.plastar.item.PComponents;
+import com.github.plastar.item.PItems;
 import com.github.plastar.registry.RegistrarSet;
 
 public class PLASTARMod {
@@ -12,6 +13,7 @@ public class PLASTARMod {
         PEntities.register();
         PComponents.register();
         PRecipes.register();
+        PItems.register();
     }
 
     public static void initSync() {

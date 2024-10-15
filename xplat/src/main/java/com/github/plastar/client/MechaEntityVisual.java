@@ -7,7 +7,12 @@ import com.github.plastar.Constants;
 import com.github.plastar.client.model.MechaModelManager;
 import com.github.plastar.data.Mecha;
 import com.github.plastar.data.MechaSection;
+import com.github.plastar.data.PRegistries;
+import com.github.plastar.data.Palette;
+import com.github.plastar.data.Pattern;
 import com.github.plastar.entity.MechaEntity;
+
+import org.jetbrains.annotations.Nullable;
 
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visual.TickableVisual;
@@ -24,6 +29,7 @@ import org.joml.Matrix4fStack;
 
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implements SimpleTickableVisual {
@@ -45,16 +51,27 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
     private void rebuildInstances() {
         instances.values().forEach(TransformedInstance::delete);
         instances.clear();
+        
+        var patternRegistry = entity.level().registryAccess().registryOrThrow(PRegistries.PATTERN);
+        var paletteRegistry = entity.level().registryAccess().registryOrThrow(PRegistries.PALETTE);
+        
         for (var entry : mecha.parts().entrySet()) {
             var section = entry.getKey();
             var part = entry.getValue();
             
             var model = MechaModelManager.INSTANCE.getModel(part.definition().location());
             if (model == null) continue;
-            var texture = ClientPatternManager.INSTANCE.getTexture(part.pattern(), part.palette());
+            var texture = getTexture(patternRegistry.get(part.pattern()), paletteRegistry.get(part.palette()));
             var material = new Material(Constants.ATLAS_ID, texture);
             instances.put(section, instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(material)).createInstance());
         }
+    }
+    
+    private static ResourceLocation getTexture(@Nullable Pattern pattern, @Nullable Palette palette) {
+        if (pattern == null || palette == null) {
+            return ResourceLocation.withDefaultNamespace("missingno");
+        }
+        return pattern.texture().withSuffix("_" + palette.textureSuffix());
     }
 
     @Override

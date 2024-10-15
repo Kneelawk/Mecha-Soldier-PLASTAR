@@ -18,7 +18,7 @@ import net.minecraft.core.RegistryCodecs;
 public record PartDefinition(HolderSet<Pattern> supportedPatterns, MechaSection section, List<SpecializedAttributeModifier> modifiers) {
     public static final Codec<PartDefinition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         RegistryCodecs.homogeneousList(PRegistries.PATTERN).fieldOf("supported_patterns").forGetter(PartDefinition::supportedPatterns),
-        MechaSection.CODEC.fieldOf("sections").forGetter(PartDefinition::section),
+        MechaSection.CODEC.fieldOf("section").forGetter(PartDefinition::section),
         SpecializedAttributeModifier.CODEC.listOf().optionalFieldOf("modifiers", List.of()).forGetter(PartDefinition::modifiers)
     ).apply(instance, PartDefinition::new));
 }

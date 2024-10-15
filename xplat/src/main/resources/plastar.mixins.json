@@ -3,7 +3,6 @@
   "package": "com.github.plastar.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ReloadableServerRegistriesMixin",
     "SimpleMaterialBuilderMixin"
   ],
   "client": [

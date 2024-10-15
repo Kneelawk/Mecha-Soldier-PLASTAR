@@ -6,10 +6,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
@@ -36,9 +36,8 @@ public record MechaPart(ResourceKey<PartDefinition> definition, PartMaterial mat
         ResourceKey.streamCodec(PRegistries.PALETTE), MechaPart::palette,
         MechaPart::new);
 
-    public void forEachAttributeModifier(ReloadableServerRegistries.Holder registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
-        registries.lookup()
-            .lookup(PRegistries.PART)
+    public void forEachAttributeModifier(HolderLookup.Provider registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
+        registries.lookup(PRegistries.PART)
             .flatMap(registry -> registry.get(definition))
             .map(Holder.Reference::value)
             .ifPresent(definition -> {

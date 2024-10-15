@@ -14,11 +14,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
@@ -48,7 +48,7 @@ public record Mecha(Map<MechaSection, MechaPart> parts) {
         }
     }).build());
 
-    public void forEachAttributeModifier(ReloadableServerRegistries.Holder registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
+    public void forEachAttributeModifier(HolderLookup.Provider registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
         parts.forEach((section, part) -> part.forEachAttributeModifier(registries, consumer));
     }
 }

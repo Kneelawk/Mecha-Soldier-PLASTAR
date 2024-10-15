@@ -7,11 +7,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
@@ -30,9 +30,8 @@ public record PartMaterial(Optional<ResourceKey<Additive>> additive) {
         PartMaterial::new
     );
     
-    public void forEachAttributeModifier(ReloadableServerRegistries.Holder registries, MechaSection section, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
-        registries.lookup()
-            .lookup(PRegistries.ADDITIVE)
+    public void forEachAttributeModifier(HolderLookup.Provider registries, MechaSection section, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
+        registries.lookup(PRegistries.ADDITIVE)
             .flatMap(it -> this.additive.flatMap(it::get))
             .filter(Holder::isBound)
             .map(Holder::value)
