@@ -1,11 +1,8 @@
 package com.github.plastar.data;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-
 import com.github.plastar.Constants;
+import com.github.plastar.network.PatternSyncPayload;
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -19,19 +16,37 @@ import net.minecraft.core.WritableRegistry;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class PRegistries {
     private static final Gson GSON = new Gson();
     public static final ResourceKey<Registry<Additive>> ADDITIVE = ResourceKey.createRegistryKey(Constants.rl("additive"));
+    public static final ResourceKey<Registry<Pattern>> PATTERN = ResourceKey.createRegistryKey(Constants.rl("pattern"));
+    public static final ResourceKey<Registry<Palette>> PALETTE = ResourceKey.createRegistryKey(Constants.rl("palette"));
 
     public static List<CompletableFuture<WritableRegistry<?>>> getModRegistryFutures(RegistryOps<JsonElement> registryOps,
                                                                               ResourceManager resourceManager,
                                                                               Executor backgroundExecutor) {
         return List.of(
-            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, ADDITIVE, Additive.CODEC)
+            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, ADDITIVE, Additive.CODEC),
+            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PATTERN, Pattern.CODEC),
+            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PALETTE, Palette.CODEC)
         );
+    }
+    
+    public static void syncData(ServerPlayer player) {
+        var registries = player.server.reloadableRegistries().get();
+        PatternSyncPayload.CHANNEL.send(player, new PatternSyncPayload(
+            ImmutableMap.copyOf(registries.registryOrThrow(PATTERN).entrySet()),
+            ImmutableMap.copyOf(registries.registryOrThrow(PALETTE).entrySet())
+        )); 
     }
     
     private static <T> CompletableFuture<WritableRegistry<?>> buildRegistryFuture(RegistryOps<JsonElement> registryOps,

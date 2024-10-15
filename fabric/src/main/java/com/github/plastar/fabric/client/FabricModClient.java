@@ -4,11 +4,14 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 import com.github.plastar.Constants;
+import com.github.plastar.client.ClientPatternManager;
 import com.github.plastar.client.PLASTARClient;
 import com.github.plastar.client.model.MechaModelManager;
 import com.github.plastar.entity.PEntities;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -24,6 +27,10 @@ public class FabricModClient implements ClientModInitializer {
     public void onInitializeClient() {
         PLASTARClient.init();
         EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), NoopRenderer::new);
+        
+        ClientPlayConnectionEvents.DISCONNECT.register((clientPacketListener, minecraft) -> ClientPatternManager.INSTANCE.clear());
+        ClientConfigurationConnectionEvents.DISCONNECT.register((clientPacketListener, minecraft) -> ClientPatternManager.INSTANCE.clear());
+        
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(
             new IdentifiableResourceReloadListener() {
                 @Override

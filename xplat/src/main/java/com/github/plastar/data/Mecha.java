@@ -1,11 +1,6 @@
 package com.github.plastar.data;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiConsumer;
-
+import com.github.plastar.Constants;
 import com.google.common.collect.ImmutableMap;
 
 import com.mojang.serialization.Codec;
@@ -18,9 +13,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiConsumer;
 
 /**
  * A record holding all the data for a specific built instance of a Mecha Soldier kit.
@@ -44,7 +46,11 @@ public record Mecha(Component name, Map<MechaSection, MechaPart> parts) {
     public static final Mecha DEFAULT = new Mecha(Component.empty(), Util.make(ImmutableMap.<MechaSection, MechaPart>builder(), builder -> {
         var sections = Arrays.asList(MechaSection.HEAD, MechaSection.TORSO, MechaSection.LEFT_ARM, MechaSection.RIGHT_ARM, MechaSection.LEFT_LEG, MechaSection.RIGHT_LEG);
         for (var section : sections) {
-            builder.put(section, new MechaPart(section, new PartMaterial(Optional.empty()), "striped", "a"));
+            builder.put(section, new MechaPart(
+                section, 
+                new PartMaterial(Optional.empty()), 
+                ResourceKey.create(PRegistries.PATTERN, Constants.rl("striped")), 
+                ResourceKey.create(PRegistries.PALETTE, Constants.rl("a"))));
         }
     }).build());
 

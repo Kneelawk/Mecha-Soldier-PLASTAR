@@ -48,7 +48,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
         for (var part : mecha.parts().values()) {
             var model = MechaModelManager.INSTANCE.getModel(Constants.rl(part.section().getSerializedName()));
             if (model == null) continue;
-            var texture = Constants.rl("mecha/test_part/" + part.pattern() + "_" + part.palette());
+            var texture = ClientPatternManager.INSTANCE.getTexture(part.pattern(), part.palette());
             var material = new Material(Constants.ATLAS_ID, texture);
             instances.put(part.section(), instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(material)).createInstance());
         }
