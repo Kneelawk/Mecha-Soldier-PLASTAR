@@ -49,6 +49,6 @@ public record Mecha(Map<MechaSection, MechaPart> parts) {
     }).build());
 
     public void forEachAttributeModifier(ReloadableServerRegistries.Holder registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
-        parts.forEach((section, part) -> part.material().forEachAttributeModifier(registries, section, consumer));
+        parts.forEach((section, part) -> part.forEachAttributeModifier(registries, consumer));
     }
 }

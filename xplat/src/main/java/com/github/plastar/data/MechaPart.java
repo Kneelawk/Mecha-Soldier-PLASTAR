@@ -1,11 +1,17 @@
 package com.github.plastar.data;
 
+import java.util.function.BiConsumer;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.core.Holder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.ReloadableServerRegistries;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 /**
  * A part of a mecha, consisting of its type, material and paintjob
@@ -29,4 +35,15 @@ public record MechaPart(ResourceKey<PartDefinition> definition, PartMaterial mat
         ResourceKey.streamCodec(PRegistries.PATTERN), MechaPart::pattern,
         ResourceKey.streamCodec(PRegistries.PALETTE), MechaPart::palette,
         MechaPart::new);
+
+    public void forEachAttributeModifier(ReloadableServerRegistries.Holder registries, BiConsumer<Holder<Attribute>, AttributeModifier> consumer) {
+        registries.lookup()
+            .lookup(PRegistries.PART)
+            .flatMap(registry -> registry.get(definition))
+            .map(Holder.Reference::value)
+            .ifPresent(definition -> {
+                definition.modifiers().forEach(modifier -> consumer.accept(modifier.attribute(), modifier.modifier()));
+                material.forEachAttributeModifier(registries, definition.section(), consumer);
+            });
+    }
 }

@@ -8,20 +8,19 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
 /**
  * A ingredient that can be mixed into the plastic of a part
+ *
  * @param ingredient The recipe ingredient that leads to this additive
- * @param modifiers A list of attribute modifiers this additive causes
+ * @param modifiers  A list of attribute modifiers this additive causes
  */
-public record Additive(Ingredient ingredient, List<AdditiveAttributeModifier> modifiers) {
+public record Additive(Ingredient ingredient, List<SpecializedAttributeModifier> modifiers) {
     public static final Codec<Additive> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(Additive::ingredient),
-        AdditiveAttributeModifier.CODEC.listOf().fieldOf("modifiers").forGetter(Additive::modifiers)
+        SpecializedAttributeModifier.CODEC.listOf().fieldOf("modifiers").forGetter(Additive::modifiers)
     ).apply(instance, Additive::new));
 
     public static boolean isAdditive(ItemStack stack, HolderLookup.Provider lookup) {
@@ -32,17 +31,5 @@ public record Additive(Ingredient ingredient, List<AdditiveAttributeModifier> mo
     public static Optional<Holder.Reference<Additive>> getAdditive(ItemStack stack, HolderLookup.Provider lookup) {
         HolderLookup.RegistryLookup<Additive> registry = lookup.lookupOrThrow(PRegistries.ADDITIVE);
         return registry.listElements().filter(holder -> holder.value().ingredient.test(stack)).findFirst();
-    }
-
-    /**
-     * A modifier to a specific attribute
-     * @param attribute The attribute to modify
-     * @param modifier The modifier to apply
-     */
-    public record AdditiveAttributeModifier(Holder<Attribute> attribute, AttributeModifier modifier) {
-        public static final Codec<AdditiveAttributeModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Attribute.CODEC.fieldOf("attribute").forGetter(AdditiveAttributeModifier::attribute),
-            AttributeModifier.MAP_CODEC.forGetter(AdditiveAttributeModifier::modifier)
-        ).apply(instance, AdditiveAttributeModifier::new));
     }
 }
