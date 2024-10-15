@@ -3,6 +3,7 @@ package com.github.plastar.data;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -16,8 +17,9 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 public record PartMaterial(Optional<ResourceKey<Additive>> additive) {
-    public static final MapCodec<PartMaterial> CODEC =
-        RecordCodecBuilder.mapCodec(i -> i.group(
+    //TODO: this is a regular codec now for use as a data component, should it be a map codec instead?
+    public static final Codec<PartMaterial> CODEC =
+        RecordCodecBuilder.create(i -> i.group(
             ResourceKey.codec(Additive.REGISTRY_KEY).optionalFieldOf("additive").forGetter(PartMaterial::additive)
         ).apply(i, PartMaterial::new));
     public static final StreamCodec<FriendlyByteBuf, PartMaterial> STREAM_CODEC = StreamCodec.composite(
