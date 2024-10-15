@@ -30,15 +30,16 @@ public class PRegistries {
     public static final ResourceKey<Registry<Additive>> ADDITIVE = ResourceKey.createRegistryKey(Constants.rl("additive"));
     public static final ResourceKey<Registry<Pattern>> PATTERN = ResourceKey.createRegistryKey(Constants.rl("pattern"));
     public static final ResourceKey<Registry<Palette>> PALETTE = ResourceKey.createRegistryKey(Constants.rl("palette"));
-
+    public static final ResourceKey<Registry<PartDefinition>> PART = ResourceKey.createRegistryKey(Constants.rl("part"));
+    
     public static List<CompletableFuture<WritableRegistry<?>>> getModRegistryFutures(RegistryOps<JsonElement> registryOps,
                                                                               ResourceManager resourceManager,
                                                                               Executor backgroundExecutor) {
-        return List.of(
-            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, ADDITIVE, Additive.CODEC),
-            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PATTERN, Pattern.CODEC),
-            buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PALETTE, Palette.CODEC)
-        );
+        var additiveFuture = buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, ADDITIVE, Additive.CODEC);
+        var patternFuture = buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PATTERN, Pattern.CODEC);
+        var paletteFuture = buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PALETTE, Palette.CODEC);
+        var partFuture = buildRegistryFuture(registryOps, resourceManager, backgroundExecutor, PART, PartDefinition.CODEC, patternFuture);
+        return List.of(additiveFuture, patternFuture, paletteFuture, partFuture);
     }
     
     public static void syncData(ServerPlayer player) {
@@ -50,15 +51,17 @@ public class PRegistries {
     }
     
     private static <T> CompletableFuture<WritableRegistry<?>> buildRegistryFuture(RegistryOps<JsonElement> registryOps,
-                                                                                 ResourceManager resourceManager,
-                                                                                 Executor backgroundExecutor,
-                                                                                 ResourceKey<Registry<T>> registryKey,
-                                                                                 Codec<T> codec) {
-        return CompletableFuture.supplyAsync(() -> {
+                                                                                  ResourceManager resourceManager,
+                                                                                  Executor backgroundExecutor,
+                                                                                  ResourceKey<Registry<T>> registryKey,
+                                                                                  Codec<T> codec,
+                                                                                  CompletableFuture<?>... dependencies) {
+        return CompletableFuture.allOf(dependencies).thenApplyAsync(__ -> {
             var writableRegistry = new MappedRegistry<>(registryKey, Lifecycle.stable());
             var files = new HashMap<ResourceLocation, JsonElement>();
             var path = Constants.MOD_ID + "/" + registryKey.location().getPath();
             SimpleJsonResourceReloadListener.scanDirectory(resourceManager, path, GSON, files);
+            
             files.forEach(
                 (resourceLocation, jsonElement) -> codec.parse(registryOps, jsonElement)
                     .ifSuccess(object -> writableRegistry.register(

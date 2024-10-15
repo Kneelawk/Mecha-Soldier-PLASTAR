@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "plastar:checker",
+    "plastar:core",
+    "plastar:striped"
+  ]
+}

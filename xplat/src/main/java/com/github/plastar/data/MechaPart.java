@@ -10,17 +10,17 @@ import net.minecraft.resources.ResourceKey;
 /**
  * An individual part of a model kit.
  */
-public record MechaPart(MechaSection section, PartMaterial material, ResourceKey<Pattern> pattern, ResourceKey<Palette> palette) {
+public record MechaPart(ResourceKey<PartDefinition> definition, PartMaterial material, ResourceKey<Pattern> pattern, ResourceKey<Palette> palette) {
     public static final Codec<MechaPart> CODEC =
         RecordCodecBuilder.create(i -> i.group(
-            MechaSection.CODEC.fieldOf("section").forGetter(MechaPart::section),
+            ResourceKey.codec(PRegistries.PART).fieldOf("part").forGetter(MechaPart::definition),
             PartMaterial.CODEC.fieldOf("material").forGetter(MechaPart::material),
             ResourceKey.codec(PRegistries.PATTERN).fieldOf("pattern").forGetter(MechaPart::pattern),
             ResourceKey.codec(PRegistries.PALETTE).fieldOf("palette").forGetter(MechaPart::palette)
         ).apply(i, MechaPart::new));
 
     public static final StreamCodec<FriendlyByteBuf, MechaPart> STREAM_CODEC = StreamCodec.composite(
-        MechaSection.STREAM_CODEC, MechaPart::section,
+        ResourceKey.streamCodec(PRegistries.PART), MechaPart::definition,
         PartMaterial.STREAM_CODEC, MechaPart::material,
         ResourceKey.streamCodec(PRegistries.PATTERN), MechaPart::pattern,
         ResourceKey.streamCodec(PRegistries.PALETTE), MechaPart::palette,

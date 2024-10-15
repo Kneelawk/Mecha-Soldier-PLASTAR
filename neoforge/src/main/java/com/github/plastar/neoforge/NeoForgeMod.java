@@ -34,7 +34,7 @@ public class NeoForgeMod {
         modBus.addListener((RegisterPayloadHandlersEvent event) -> PNetworking.register(new KNetRegistrarNeoForge(event.registrar("1"))));
         modBus.addListener((EntityAttributeCreationEvent event) -> event.put(PEntities.MECHA_ENTITY.get(), MechaEntity.createAttributes().build()));
 
-        NeoForge.EVENT_BUS.addListener((OnDatapackSyncEvent event) -> event.getRelevantPlayers().forEach(player -> PRegistries.syncData(player)));
+        NeoForge.EVENT_BUS.addListener((OnDatapackSyncEvent event) -> event.getRelevantPlayers().forEach(PRegistries::syncData));
     }
 
     private void onInit(FMLCommonSetupEvent event) {
