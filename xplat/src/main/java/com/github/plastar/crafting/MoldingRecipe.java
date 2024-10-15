@@ -23,7 +23,8 @@ public record MoldingRecipe(Ingredient sap, ItemStack result) implements Recipe<
     @Override
     public boolean matches(MoldingRecipeInput input, Level level) {
         if (level instanceof ServerLevel server) {
-            return sap.test(input.sap()) && Additive.isAdditive(input.additive(), server.getServer().reloadableRegistries().get());
+            var isValidAdditive = Additive.isAdditive(input.additive(), server.getServer().reloadableRegistries().get());
+            return sap.test(input.sap()) && (input.additive().isEmpty() || isValidAdditive);
         }
         return false;
     }

@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 public record MoldingRecipeInput(ItemStack sap, ItemStack additive) implements RecipeInput {
     @Override
     public ItemStack getItem(int index) {
-        return index == 0? sap : additive;
+        return index == 0 ? sap : additive;
     }
 
     @Override
