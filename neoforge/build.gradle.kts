@@ -4,10 +4,6 @@ plugins {
     id("com.kneelawk.kpublish")
 }
 
-configurations {
-    register("neoRuntimeLibs")
-}
-
 submodule {
     setLibsDirectory()
     applyXplatConnection(":xplat")
@@ -19,8 +15,8 @@ kpublish {
 }
 
 dependencies {
-    // TODO: ask Kneelawk how to do this with submodule
     additionalRuntimeClasspath("de.javagl:jgltf-model:2.0.4")
+    // TODO: ask Kneelawk how to do this with submodule
     jarJar("de.javagl:jgltf-model:2.0.4")
     jarJar("de.javagl:jgltf-impl-v1:2.0.4")
     jarJar("de.javagl:jgltf-impl-v2:2.0.4")
@@ -32,3 +28,13 @@ dependencies {
 neoForge {
     accessTransformers.from(project(":xplat").file("src/main/resources/common-at.cfg"))
 }
+
+//sourceSets.main {
+//    resources.srcDir(project(":xplat").file("src/main/generated"))
+//}
+
+// For some reason the above doesn't make gradle detect file changes to invalidate the task
+// So we have to manually tell gradle that the task uses datagen files
+//tasks.processResources {
+//    inputs.dir(project(":xplat").file("src/main/generated"))
+//}

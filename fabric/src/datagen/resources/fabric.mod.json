@@ -1,0 +1,10 @@
+{
+  "id": "plastar-datagen",
+  "version": "1",
+  "schemaVersion": 1,
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.github.plastar.datagen.PLASTARDatagen"
+    ]
+  }
+}

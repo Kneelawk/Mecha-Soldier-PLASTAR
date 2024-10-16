@@ -30,5 +30,11 @@ dependencies {
 }
 
 loom {
-    accessWidenerPath.set(project(":xplat").file("src/main/resources/common-aw.accesswidener"))
+    accessWidenerPath = project(":xplat").file("src/main/resources/common-aw.accesswidener")
+}
+
+fabricApi.configureDataGeneration { 
+    outputDirectory = project(":xplat").file("src/main/generated")
+    addToResources = false
+    createSourceSet = true
 }

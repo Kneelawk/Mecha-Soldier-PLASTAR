@@ -28,3 +28,7 @@ kpublish {
 loom {
     accessWidenerPath.set(file("src/main/resources/common-aw.accesswidener"))
 }
+
+sourceSets.main {
+    resources.srcDir(project(":xplat").file("src/main/generated"))
+}
