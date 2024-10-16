@@ -3,5 +3,14 @@
   "item.plastar.polystyrene": "Polystyrene",
   "item.plastar.tree_tap": "Storax Tree Tap",
   "item.plastar.mecha": "PLASTAR Mecha (Name WIP?)",
+  "item.plastar.mecha.tooltip.parts_header": "Parts:",
+  "item.plastar.mecha.tooltip.attribute_header": "Stats:",
+  "plastar.part.plastar.head": "Test Head",
+  "plastar.part.plastar.torso": "Test Torso",
+  "plastar.part.plastar.left_arm": "Test Left Arm",
+  "plastar.part.plastar.right_arm": "Test Right Arm",
+  "plastar.part.plastar.left_leg": "Test Left Leg",
+  "plastar.part.plastar.right_leg": "Test Right Leg",
+  
   "block.plastar.storax_acacia_log": "Storax-filled Acacia Log"
 }

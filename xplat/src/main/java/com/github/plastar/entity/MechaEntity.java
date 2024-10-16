@@ -85,6 +85,7 @@ public class MechaEntity extends Mob {
             } else {
                 player.getInventory().placeItemBackInInventory(stack);
             }
+            discard();
             return InteractionResult.SUCCESS;
         }
         
