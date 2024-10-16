@@ -21,6 +21,7 @@ public class PLASTARDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(DynamicRegistryProvider::new);
         pack.addProvider(PatternTagProvider::new);
         pack.addProvider(BlockTagsProvider::new);
+        pack.addProvider(ModelProvider::new);
     }
 
     @Override

@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_column",
   "textures": {
     "end": "plastar:block/storax_acacia_log_top",
-    "side": "plastar:block/storax_acacia_log"
+    "side": "plastar:block/storax_acacia_log_side"
   }
 }
