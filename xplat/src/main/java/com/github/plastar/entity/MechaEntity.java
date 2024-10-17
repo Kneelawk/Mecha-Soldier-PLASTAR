@@ -76,7 +76,7 @@ public class MechaEntity extends Mob {
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (player.isShiftKeyDown()) {
             var stack = PItems.MECHA.get().getDefaultInstance();
-            CustomData.update(DataComponents.CUSTOM_DATA, stack, compound -> {
+            CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, compound -> {
                 compound.put("mecha", Mecha.CODEC.encodeStart(RegistryOps.create(NbtOps.INSTANCE, registryAccess()), getMecha()).getOrThrow());
                 compound.putFloat("Health", getHealth());
             });

@@ -10,6 +10,7 @@ import com.github.plastar.entity.PEntities;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.NbtOps;
@@ -17,6 +18,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,20 +43,28 @@ public class MechaItem extends Item {
         var clickedPos = context.getClickedPos();
         var side = context.getClickedFace();
         var state = level.getBlockState(clickedPos);
+        var player = context.getPlayer();
 
         var spawnPos = state.getCollisionShape(level, clickedPos).isEmpty() ? clickedPos : clickedPos.relative(side);
 
-        if (PEntities.MECHA_ENTITY.get().spawn(
+        var spawned = PEntities.MECHA_ENTITY.get().spawn(
             serverLevel,
-            stack,
-            context.getPlayer(),
+            EntityType.appendDefaultStackConfig(
+                entity -> stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).loadInto(entity),
+                serverLevel,
+                stack,
+                player),
             spawnPos,
             MobSpawnType.BUCKET,
             true,
             !Objects.equals(clickedPos, spawnPos) && side == Direction.UP
-        ) != null) {
+        );
+        if (spawned != null) {
+            if (player != null) {
+                spawned.lookAt(EntityAnchorArgument.Anchor.EYES, player.getEyePosition());
+            }
             stack.shrink(1);
-            level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, clickedPos);
+            level.gameEvent(player, GameEvent.ENTITY_PLACE, clickedPos);
         }
 
         return InteractionResult.CONSUME;
@@ -63,7 +73,7 @@ public class MechaItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents,
                                 TooltipFlag tooltipFlag) {
-        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        var customData = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY);
 
         var registries = context.registries();
         if (registries == null) return;

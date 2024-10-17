@@ -67,7 +67,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
         }
     }
     
-    private static ResourceLocation getTexture(@Nullable Pattern pattern, @Nullable Palette palette) {
+    public static ResourceLocation getTexture(@Nullable Pattern pattern, @Nullable Palette palette) {
         if (pattern == null || palette == null) {
             return ResourceLocation.withDefaultNamespace("missingno");
         }

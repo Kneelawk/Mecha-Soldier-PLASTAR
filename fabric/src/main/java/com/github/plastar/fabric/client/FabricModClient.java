@@ -4,11 +4,14 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 import com.github.plastar.Constants;
+import com.github.plastar.client.MechaItemRenderer;
 import com.github.plastar.client.PLASTARClient;
 import com.github.plastar.client.model.MechaModelManager;
 import com.github.plastar.entity.PEntities;
+import com.github.plastar.item.PItems;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -24,6 +27,7 @@ public class FabricModClient implements ClientModInitializer {
     public void onInitializeClient() {
         PLASTARClient.init();
         EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), NoopRenderer::new);
+        BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA.get(), new MechaItemRenderer()::renderByItem);
         
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(
             new IdentifiableResourceReloadListener() {
