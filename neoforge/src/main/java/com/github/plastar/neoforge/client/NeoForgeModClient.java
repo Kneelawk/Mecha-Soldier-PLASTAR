@@ -22,6 +22,9 @@ public class NeoForgeModClient {
         modBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(PLASTARClient::init));
         modBus.addListener((EntityRenderersEvent.RegisterRenderers event) -> event.registerEntityRenderer(PEntities.MECHA_ENTITY.get(), NoopRenderer::new));
         modBus.addListener((RegisterClientReloadListenersEvent event) -> event.registerReloadListener(MechaModelManager.INSTANCE));
-        modBus.addListener((RegisterClientExtensionsEvent event) -> event.registerItem(new MechaItemClientExtensions(), PItems.MECHA.get()));
+        modBus.addListener((RegisterClientExtensionsEvent event) -> {
+            event.registerItem(new MechaItemClientExtensions(), PItems.MECHA.get());
+            event.registerItem(new MechaPartItemClientExtensions(), PItems.MECHA_PART.get());
+        });
     }
 }

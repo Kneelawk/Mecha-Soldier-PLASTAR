@@ -10,7 +10,6 @@ import dev.engine_room.flywheel.lib.memory.MemoryBlock;
 import dev.engine_room.flywheel.lib.vertex.DefaultVertexList;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +24,7 @@ public class ItemModel {
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         poseStack.translate(0.5, 0, 0.5);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90));
+//        poseStack.mulPose(Axis.YP.rotationDegrees(90));
         for (var mesh : meshes) {
             var vertexConsumer = buffer.getBuffer(PRenderTypes.MECHA_ENTITY.apply(mesh.texture));
             var indices = mesh.indices;

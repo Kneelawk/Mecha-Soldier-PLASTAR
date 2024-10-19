@@ -1,5 +1,7 @@
 {
   "model_metadata": {
-    "pivot": [2, 3, 0]
+    "pivot": [2, 3, 0],
+    "item_model_offset": [-2, 6, 0],
+    "item_model_scale": 2
   }
 }
