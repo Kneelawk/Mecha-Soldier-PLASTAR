@@ -43,7 +43,11 @@ public class MechaModelManager extends SimplePreparableReloadListener<Map<Resour
             try (var in = entry.getValue().open()) {
                 var asset = ASSET_READER.readWithoutReferences(in);
                 blockbenchBugWorkaround(asset);
-                var prepared = ModelConverter.convert(GltfModels.create(asset));
+                var metadata = entry.getValue()
+                    .metadata()
+                    .getSection(ModelMetadata.Serializer.INSTANCE)
+                    .orElse(ModelMetadata.DEFAULT);
+                var prepared = ModelConverter.convert(GltfModels.create(asset), metadata);
                 result.put(FILE_TO_ID_CONVERTER.fileToId(entry.getKey()), prepared);
             } catch (IOException | JsonParseException e) {
                 throw new RuntimeException("Failed to load plastar model at " + entry.getKey(), e);

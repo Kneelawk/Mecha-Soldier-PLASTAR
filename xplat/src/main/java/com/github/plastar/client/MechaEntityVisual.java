@@ -26,6 +26,7 @@ import dev.engine_room.flywheel.lib.visual.component.HitboxComponent;
 import dev.engine_room.flywheel.lib.visual.component.ShadowComponent;
 
 import org.joml.Matrix4fStack;
+import org.joml.Vector3f;
 
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.resources.model.Material;
@@ -35,6 +36,7 @@ import net.minecraft.util.Mth;
 public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implements SimpleTickableVisual {
     private final Matrix4fStack matrixStack = new Matrix4fStack(2);
     private final Map<MechaSection, TransformedInstance> instances = new EnumMap<>(MechaSection.class);
+    private final Map<MechaSection, Vector3f> pivots = new EnumMap<>(MechaSection.class);
     private Mecha mecha;
 
     public MechaEntityVisual(VisualizationContext ctx, MechaEntity entity, float partialTick) {
@@ -51,6 +53,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
     private void rebuildInstances() {
         instances.values().forEach(TransformedInstance::delete);
         instances.clear();
+        pivots.clear();
         
         var patternRegistry = entity.level().registryAccess().registryOrThrow(PRegistries.PATTERN);
         var paletteRegistry = entity.level().registryAccess().registryOrThrow(PRegistries.PALETTE);
@@ -64,6 +67,7 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
             var texture = getTexture(patternRegistry.get(part.pattern()), paletteRegistry.get(part.palette()));
             var material = new Material(Constants.ATLAS_ID, texture);
             instances.put(section, instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(material)).createInstance());
+            pivots.put(section, model.getMetadata().pivot().toVector3f().div(16f));
         }
     }
     
@@ -108,41 +112,27 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
 
         for (var entry : instances.entrySet()) {
             var instance = entry.getValue();
+            var pivot = pivots.get(entry.getKey());
             matrixStack.pushMatrix();
+            matrixStack.translate(pivot);
             switch (entry.getKey()) {
                 case HEAD -> {
                     var headRot = 180 - Mth.rotLerp(partialTick, entity.yHeadRotO, entity.yHeadRot);
                     var netHeadRot = Mth.wrapDegrees(headRot - bodyRot);
                     matrixStack.rotateY(netHeadRot * Mth.DEG_TO_RAD);
-                    matrixStack.translate(0, 13 / 16f, 0);
                     matrixStack.rotateX(-Mth.lerp(partialTick, entity.xRotO, entity.getXRot()) * Mth.DEG_TO_RAD);
-                    matrixStack.translate(0, -13 / 16f, 0);
                 }
-                case TORSO -> {}
-                case LEFT_ARM -> {
-                    matrixStack.translate(5 / 16f, 12 / 16f, 0);
+                case TORSO, BACKPACK -> {}
+                case LEFT_ARM, SHIELD -> 
                     matrixStack.rotateX(Mth.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F);
-                    matrixStack.translate(-5 / 16f, -12 / 16f, 0);
-                }
-                case RIGHT_ARM -> {
-                    matrixStack.translate(-5 / 16f, 12 / 16f, 0);
+                case RIGHT_ARM, WEAPON ->
                     matrixStack.rotateX(Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F);
-                    matrixStack.translate(5 / 16f, -12 / 16f, 0);
-                }
-                case LEFT_LEG -> {
-                    matrixStack.translate(2 / 16f, 3 / 16f, 0);
+                case LEFT_LEG ->
                     matrixStack.rotateX(Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-                    matrixStack.translate(-2 / 16f, -3 / 16f, 0);
-                }
-                case RIGHT_LEG -> {
-                    matrixStack.translate(-2 / 16f, 3 / 16f, 0);
+                case RIGHT_LEG -> 
                     matrixStack.rotateX(Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-                    matrixStack.translate(2 / 16f, -3 / 16f, 0);
-                }
-                case BACKPACK -> {}
-                case WEAPON -> {}
-                case SHIELD -> {}
             }
+            matrixStack.translate(-pivot.x, -pivot.y, -pivot.z);
             
             instance.setIdentityTransform()
                 .setTransform(matrixStack)

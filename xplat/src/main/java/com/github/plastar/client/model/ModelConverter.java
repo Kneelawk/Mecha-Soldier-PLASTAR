@@ -7,7 +7,7 @@ import de.javagl.jgltf.model.GltfModel;
 import org.joml.Matrix4f;
 
 public class ModelConverter {
-    public static PreparedModel convert(GltfModel model) {
+    public static PreparedModel convert(GltfModel model, ModelMetadata metadata) {
         var meshes = new ArrayList<BridgedMesh>();
         for (var nodeModel : model.getNodeModels()) {
             var meshModels = nodeModel.getMeshModels();
@@ -22,6 +22,6 @@ public class ModelConverter {
             }
         }
         
-        return new PreparedModel(meshes);
+        return new PreparedModel(meshes, metadata);
     }
 }

@@ -19,9 +19,11 @@ public final class PreparedModel {
     private final Map<Material, ItemModel> itemModelCache = new HashMap<>();
 
     private final List<BridgedMesh> meshes;
+    private final ModelMetadata metadata;
 
-    public PreparedModel(List<BridgedMesh> meshes) {
+    public PreparedModel(List<BridgedMesh> meshes, ModelMetadata metadata) {
         this.meshes = meshes;
+        this.metadata = metadata;
     }
 
     public Model getModel(Material material) {
@@ -30,6 +32,10 @@ public final class PreparedModel {
 
     public ItemModel getItemModel(Material material) {
         return itemModelCache.computeIfAbsent(material, this::configureItem);
+    }
+
+    public ModelMetadata getMetadata() {
+        return metadata;
     }
 
     private Model configure(Material mcMaterial) {
