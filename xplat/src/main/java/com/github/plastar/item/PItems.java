@@ -16,8 +16,8 @@ public class PItems {
     public static final Supplier<Item> MECHA = REGISTRAR.register("mecha", () -> new MechaItem(new Item.Properties()));
     public static final Supplier<Item> MECHA_PART = REGISTRAR.register("mecha_part", () -> new MechaPartItem(new Item.Properties().component(PComponents.PART_SNIPS.get(), 4)));
 
-    public static final Supplier<Item> STYROL = REGISTRAR.register("styrol", () -> new StyrolItem(new Item.Properties()));
-    public static final Supplier<Item> POLYSTYRENE = REGISTRAR.register("polystyrene", () -> new PolystyreneItem(new Item.Properties()));
+    public static final Supplier<Item> STYROL = REGISTRAR.register("styrol", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> POLYSTYRENE = REGISTRAR.register("polystyrene", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> TREE_TAP = REGISTRAR.register("tree_tap", () -> new TreeTapItem(new Item.Properties()));
 
     public static final Supplier<Item> NIPPERS = REGISTRAR.register("nippers", () -> new NippersItem(new Item.Properties().stacksTo(1)));
