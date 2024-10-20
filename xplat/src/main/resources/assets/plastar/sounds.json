@@ -1,0 +1,10 @@
+{
+  "runner_snip": {
+    "sounds": ["plastar:runner_snip1","plastar:runner_snip2","plastar:runner_snip3"],
+    "subtitle": "subtitle.plastar.runner_snip"
+  },
+  "runner_drop": {
+    "sounds": ["plastar:runner_drop"],
+    "subtitle": "subtitle.plastar.runner_drop"
+  }
+}

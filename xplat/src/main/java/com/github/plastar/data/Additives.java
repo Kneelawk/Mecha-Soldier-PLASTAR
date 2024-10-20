@@ -21,16 +21,17 @@ public class Additives {
     private static ResourceKey<Additive> key(String path) {
         return ResourceKey.create(PRegistries.ADDITIVE, Constants.rl(path));
     }
-    
+
     public static void bootstrap(BootstrapContext<Additive> context) {
-        register(context, REDSTONE, Ingredient.of(Items.REDSTONE))
+        //TODO: proper default pattern/palette when we have them
+        register(context, REDSTONE, Ingredient.of(Items.REDSTONE), Patterns.CORE, Palettes.A)
             .addAdditiveModifier(Attributes.ATTACK_SPEED, 1)
             .addAdditiveModifier(Attributes.MOVEMENT_SPEED, 1);
     }
     
-    private static Builder register(BootstrapContext<Additive> context, ResourceKey<Additive> key, Ingredient ingredient) {
+    private static Builder register(BootstrapContext<Additive> context, ResourceKey<Additive> key, Ingredient ingredient, ResourceKey<Pattern> pattern, ResourceKey<Palette> palette) {
         var builder = new Builder(key.location());
-        context.register(key, new Additive(ingredient, builder.modifiers));
+        context.register(key, new Additive(ingredient, builder.modifiers, pattern, palette));
         return builder;
     }
 

@@ -42,7 +42,7 @@ public record Mecha(Map<MechaSection, MechaPart> parts) {
         for (var section : sections) {
             builder.put(section, new MechaPart(
                 ResourceKey.create(PRegistries.PART, Constants.rl(section.getSerializedName())), 
-                new PartMaterial(Optional.empty()), 
+                Optional.empty(),
                 ResourceKey.create(PRegistries.PATTERN, Constants.rl("striped")), 
                 ResourceKey.create(PRegistries.PALETTE, Constants.rl("a"))));
         }

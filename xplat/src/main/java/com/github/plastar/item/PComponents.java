@@ -4,14 +4,16 @@ import java.util.function.Supplier;
 
 import com.github.plastar.PLASTARMod;
 import com.github.plastar.data.MechaPart;
-import com.github.plastar.data.PartMaterial;
+
+import com.mojang.serialization.Codec;
 
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 
 public class PComponents {
     public static Supplier<DataComponentType<MechaPart>> MECHA_PART = register("mecha_part", () -> DataComponentType.<MechaPart>builder().persistent(MechaPart.CODEC).networkSynchronized(MechaPart.STREAM_CODEC).build());
-    public static Supplier<DataComponentType<PartMaterial>> PART_MATERIAL = register("part_material", () -> DataComponentType.<PartMaterial>builder().persistent(PartMaterial.CODEC).networkSynchronized(PartMaterial.STREAM_CODEC).build());
+    public static Supplier<DataComponentType<Integer>> PART_SNIPS = register("part_snips", () -> DataComponentType.<Integer>builder().persistent(Codec.intRange(1, 8)).networkSynchronized(ByteBufCodecs.fromCodec(Codec.intRange(1, 8))).build());
 
     public static void register() {
 

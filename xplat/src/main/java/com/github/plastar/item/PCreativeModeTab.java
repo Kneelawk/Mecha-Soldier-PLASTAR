@@ -8,7 +8,6 @@ import com.github.plastar.PLASTARMod;
 import com.github.plastar.data.MechaPart;
 import com.github.plastar.data.PRegistries;
 import com.github.plastar.data.Palette;
-import com.github.plastar.data.PartMaterial;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -27,6 +26,7 @@ public class PCreativeModeTab {
                 output.accept(PItems.TREE_TAP.get());
                 output.accept(PItems.STYROL.get());
                 output.accept(PItems.POLYSTYRENE.get());
+                output.accept(PItems.NIPPERS.get());
                 output.accept(PItems.MECHA.get());
                 
                 var paletteRegistry = parameters.holders().lookupOrThrow(PRegistries.PALETTE);
@@ -37,7 +37,7 @@ public class PCreativeModeTab {
                     .forEach(partDefinition -> {
                         var pattern = partDefinition.value().supportedPatterns().stream().findFirst().flatMap(Holder::unwrapKey);
                         if (pattern.isEmpty()) return;
-                        var part = new MechaPart(partDefinition.key(), new PartMaterial(Optional.empty()), pattern.get(), palette);
+                        var part = new MechaPart(partDefinition.key(), Optional.empty(), pattern.get(), palette);
                         var stack = PItems.MECHA_PART.get().getDefaultInstance();
                         stack.set(PComponents.MECHA_PART.get(), part);
                         output.accept(stack);

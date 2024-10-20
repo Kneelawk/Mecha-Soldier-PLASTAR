@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
-public abstract class PRecipes {
+public class PRecipes {
     private static final Registrar<RecipeType<?>> TYPE_REGISTRAR = PLASTARMod.REGISTRARS.get(Registries.RECIPE_TYPE);
     private static final Registrar<RecipeSerializer<?>> SERIALIZER_REGISTRAR = PLASTARMod.REGISTRARS.get(Registries.RECIPE_SERIALIZER);
     

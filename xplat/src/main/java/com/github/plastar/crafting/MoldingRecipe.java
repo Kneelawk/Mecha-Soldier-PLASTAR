@@ -1,16 +1,23 @@
 package com.github.plastar.crafting;
 
+import java.util.Optional;
+
 import com.github.plastar.data.Additive;
-import com.github.plastar.data.PartMaterial;
+import com.github.plastar.data.MechaPart;
+import com.github.plastar.data.PRegistries;
+import com.github.plastar.data.Palettes;
+import com.github.plastar.data.PartDefinition;
+import com.github.plastar.data.Patterns;
 import com.github.plastar.item.PComponents;
+import com.github.plastar.item.PItems;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -19,7 +26,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record MoldingRecipe(Ingredient sap, ItemStack result) implements Recipe<MoldingRecipeInput> {
+public record MoldingRecipe(Ingredient sap, ResourceKey<PartDefinition> result) implements Recipe<MoldingRecipeInput> {
+    private static final ItemStack PART_STACK = PItems.MECHA_PART.get().getDefaultInstance();
+
     @Override
     public boolean matches(MoldingRecipeInput input, Level level) {
         if (level instanceof ServerLevel server) {
@@ -31,9 +40,15 @@ public record MoldingRecipe(Ingredient sap, ItemStack result) implements Recipe<
 
     @Override
     public ItemStack assemble(MoldingRecipeInput input, HolderLookup.Provider registries) {
-        ItemStack ret = result.copy();
+        ItemStack ret = PART_STACK.copy();
         var additive = Additive.getAdditive(input.additive(), registries);
-        ret.set(PComponents.PART_MATERIAL.get(), new PartMaterial(additive.flatMap(Holder::unwrapKey)));
+        if (additive.isPresent()) {
+            Additive real = additive.get().value();
+            ret.set(PComponents.MECHA_PART.get(), new MechaPart(result, additive.get().unwrapKey(), real.defaultPattern(), real.defaultPalette()));
+        } else {
+            //TODO: change to monochrome palette when we have the real one
+            ret.set(PComponents.MECHA_PART.get(), new MechaPart(result, Optional.empty(), Patterns.CORE, Palettes.A));
+        }
         return ret;
     }
 
@@ -44,7 +59,7 @@ public record MoldingRecipe(Ingredient sap, ItemStack result) implements Recipe<
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
-        return result;
+        return PART_STACK;
     }
 
     @Override
@@ -60,11 +75,11 @@ public record MoldingRecipe(Ingredient sap, ItemStack result) implements Recipe<
     public static class Serializer implements RecipeSerializer<MoldingRecipe> {
         private static final MapCodec<MoldingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Ingredient.CODEC.fieldOf("sap").forGetter(MoldingRecipe::sap),
-            ItemStack.CODEC.fieldOf("result").forGetter(MoldingRecipe::result)
+            ResourceKey.codec(PRegistries.PART).fieldOf("result").forGetter(MoldingRecipe::result)
         ).apply(instance, MoldingRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, MoldingRecipe> STREAM_CODEC = StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC, MoldingRecipe::sap,
-            ItemStack.STREAM_CODEC, MoldingRecipe::result,
+            ResourceKey.streamCodec(PRegistries.PART), MoldingRecipe::result,
             MoldingRecipe::new
         );
         
