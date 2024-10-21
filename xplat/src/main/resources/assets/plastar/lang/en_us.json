@@ -18,5 +18,10 @@
   
   "block.plastar.storax_acacia_log": "Storax-filled Acacia Log",
 
-  "itemGroup.plastar.main": "PLASTAR Mecha Soldier"
+  "itemGroup.plastar.main": "PLASTAR Mecha Soldier",
+
+  "advancement.plastar.sap_tapping.title": "Sap Tapping",
+  "advancement.plastar.sap_tapping.description": "Obtain Styrol from a storax-filled acacia tree",
+  "advancement.plastar.polymerisation.title": "Polymerisation",
+  "advancement.plastar.polymerisation.description": "Heat Styrol into a durable new material"
 }
