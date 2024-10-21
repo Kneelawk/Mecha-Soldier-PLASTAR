@@ -19,6 +19,15 @@ submodule {
         "dev.engine_room.flywheel:flywheel-$platform-$flywheel_mc_version:$flywheel_version"
     }
     xplatExternalDependency { "de.javagl:jgltf-model:2.0.4" }
+    val smart_brain_lib_version: String by project
+    val smart_brain_lib_mc_version: String by project
+    xplatExternalDependency { 
+        val platform = when (it) {
+            "xplat-intermediary" -> "fabric" // The common artifact is mojmap, so we use the fabric one
+            else -> it
+        }
+        "net.tslat.smartbrainlib:SmartBrainLib-$platform-$smart_brain_lib_mc_version:$smart_brain_lib_version"
+    }
 }
 
 kpublish {
