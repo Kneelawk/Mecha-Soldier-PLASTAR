@@ -56,10 +56,6 @@ public class TreeTapItem extends Item {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockPos, itemStack);
             }
 
-            double e = blockPos.getY() - player.getY();
-            double d = blockPos.getX() - player.getX();
-            double f = blockPos.getZ() - player.getZ();
-
             ItemStack styrolStack = new ItemStack(PItems.STYROL.get());
             styrolStack.setCount(level.getRandom().nextIntBetweenInclusive(3,6));
             ItemEntity styrolStackEntity =
