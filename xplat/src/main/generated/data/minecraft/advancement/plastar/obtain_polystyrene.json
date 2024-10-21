@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:plastar/obtain_styrol",
+  "criteria": {
+    "obtain_polystyrene": {
+      "conditions": {
+        "items": [
+          {
+            "items": "plastar:polystyrene"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.plastar.polymerisation.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "plastar:polystyrene"
+    },
+    "title": {
+      "translate": "advancement.plastar.polymerisation.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_polystyrene"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

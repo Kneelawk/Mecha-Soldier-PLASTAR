@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "obtain_styrol": {
+      "conditions": {
+        "items": [
+          {
+            "items": "plastar:styrol"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancement.plastar.sap_tapping.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "plastar:styrol"
+    },
+    "title": {
+      "translate": "advancement.plastar.sap_tapping.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_styrol"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "plastar:polystyrene"
+    ]
+  },
+  "sends_telemetry_event": true
+}
