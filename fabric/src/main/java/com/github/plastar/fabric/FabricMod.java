@@ -6,13 +6,18 @@ import com.github.plastar.entity.MechaEntity;
 import com.github.plastar.entity.PEntities;
 import com.github.plastar.network.PNetworking;
 
+import com.github.plastar.world.feature.PPlacedFeatures;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.network.syncher.EntityDataSerializers;
 
 import com.kneelawk.knet.fabric.api.KNetRegistrarFabric;
+import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class FabricMod implements ModInitializer {
     @Override
@@ -24,5 +29,6 @@ public class FabricMod implements ModInitializer {
         PNetworking.register(new KNetRegistrarFabric());
         FabricDefaultAttributeRegistry.register(PEntities.MECHA_ENTITY.get(), MechaEntity.createAttributes());
         PRegistries.registerCustomDynamicRegistries(DynamicRegistries::registerSynced);
+        BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_SAVANNA_TREE), GenerationStep.Decoration.VEGETAL_DECORATION, PPlacedFeatures.STORAX_ACACIA);
     }
 }

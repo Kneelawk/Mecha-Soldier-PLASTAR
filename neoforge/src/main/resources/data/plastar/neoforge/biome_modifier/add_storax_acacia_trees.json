@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_tree/savanna",
+  "features": "plastar:storax_acacia",
+  "step": "vegetal_decoration"
+}

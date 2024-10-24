@@ -8,6 +8,7 @@ import com.github.plastar.item.PCreativeModeTab;
 import com.github.plastar.item.PItems;
 import com.github.plastar.registry.RegistrarSet;
 import com.github.plastar.sound.PSounds;
+import com.github.plastar.world.feature.PTreeDecoratorTypes;
 
 public class PLASTARMod {
     public static final RegistrarSet REGISTRARS = new RegistrarSet();
@@ -20,6 +21,7 @@ public class PLASTARMod {
         PItems.register();
         PCreativeModeTab.register();
         PSounds.register();
+        PTreeDecoratorTypes.register();
     }
 
     public static void initSync() {
