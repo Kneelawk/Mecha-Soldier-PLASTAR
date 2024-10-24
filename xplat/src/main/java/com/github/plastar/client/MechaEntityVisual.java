@@ -12,6 +12,8 @@ import com.github.plastar.data.Palette;
 import com.github.plastar.data.Pattern;
 import com.github.plastar.entity.MechaEntity;
 
+import net.minecraft.client.Minecraft;
+
 import org.jetbrains.annotations.Nullable;
 
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
@@ -132,6 +134,8 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
                 case RIGHT_LEG -> 
                     matrixStack.rotateX(Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
             }
+            // Turn on to debug pivots
+            // matrixStack.rotateY(Minecraft.getInstance().level.getGameTime() + ctx.partialTick());
             matrixStack.translate(-pivot.x, -pivot.y, -pivot.z);
             
             instance.setIdentityTransform()
