@@ -20,6 +20,13 @@ public class Parts {
     public static final ResourceKey<PartDefinition> RIGHT_ARM = key("right_arm");
     public static final ResourceKey<PartDefinition> LEFT_LEG = key("left_leg");
     public static final ResourceKey<PartDefinition> RIGHT_LEG = key("right_leg");
+    
+    public static final ResourceKey<PartDefinition> MODEL_A_HEAD = key("model_a/head");
+    public static final ResourceKey<PartDefinition> MODEL_A_TORSO = key("model_a/torso");
+    public static final ResourceKey<PartDefinition> MODEL_A_LEFT_ARM = key("model_a/left_arm");
+    public static final ResourceKey<PartDefinition> MODEL_A_RIGHT_ARM = key("model_a/right_arm");
+    public static final ResourceKey<PartDefinition> MODEL_A_LEFT_LEG = key("model_a/left_leg");
+    public static final ResourceKey<PartDefinition> MODEL_A_RIGHT_LEG = key("model_a/right_leg");
 
     private static ResourceKey<PartDefinition> key(String path) {
         return ResourceKey.create(PRegistries.PART, Constants.rl(path));
@@ -32,6 +39,12 @@ public class Parts {
         register(context, RIGHT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_ARM);
         register(context, LEFT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_LEG);
         register(context, RIGHT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_LEG);
+        register(context, MODEL_A_HEAD, Patterns.Tags.TEST_PATTERNS, MechaSection.HEAD);
+        register(context, MODEL_A_TORSO, Patterns.Tags.TEST_PATTERNS, MechaSection.TORSO);
+        register(context, MODEL_A_LEFT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_ARM);
+        register(context, MODEL_A_RIGHT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_ARM);
+        register(context, MODEL_A_LEFT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_LEG);
+        register(context, MODEL_A_RIGHT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_LEG);
     }
     
     private static Builder register(BootstrapContext<PartDefinition> context, ResourceKey<PartDefinition> key, 

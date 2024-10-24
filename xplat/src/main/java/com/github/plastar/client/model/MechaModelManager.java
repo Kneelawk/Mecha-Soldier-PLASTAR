@@ -73,7 +73,9 @@ public class MechaModelManager extends SimplePreparableReloadListener<Map<Resour
         // Blockbench doesn't correctly set the uri, and we don't care about it,
         // but the model parser does, so we set a bogus value as a workaround
         if (gltfAsset instanceof GltfAssetV2 v2) {
-            for (var texture : v2.getGltf().getTextures()) {
+            var textures = v2.getGltf().getTextures();
+            if (textures == null) return;
+            for (var texture : textures) {
                 var image = v2.getGltf().getImages().get(texture.getSource());
                 if (image.getUri() == null && image.getBufferView() == null) {
                     image.setUri("img_fix_hack:" + texture.getName());
