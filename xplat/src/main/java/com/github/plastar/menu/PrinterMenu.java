@@ -71,9 +71,9 @@ public class PrinterMenu extends AbstractContainerMenu {
         this.resultContainer = new ResultContainer();
         this.access = access;
         this.level = playerInventory.player.level();
-        this.sapSlot = this.addSlot(new Slot(this.container, 0, 20, 33));
-        this.additiveSlot = this.addSlot(new Slot(this.container, 1, 20, 33));
-        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 2, 143, 33) {
+        this.sapSlot = this.addSlot(new Slot(this.container, 0, 12, 45));
+        this.additiveSlot = this.addSlot(new Slot(this.container, 1, 32, 45));
+        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 2, 145, 57) {
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
