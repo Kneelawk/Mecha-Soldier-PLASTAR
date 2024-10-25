@@ -16,9 +16,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -26,20 +28,20 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record MoldingRecipe(Ingredient sap, ResourceKey<PartDefinition> result) implements Recipe<MoldingRecipeInput> {
+public record PrintingRecipe(Ingredient sap, int sapCount, ResourceKey<PartDefinition> result) implements Recipe<PrintingRecipeInput> {
     private static final ItemStack PART_STACK = PItems.MECHA_PART.get().getDefaultInstance();
 
     @Override
-    public boolean matches(MoldingRecipeInput input, Level level) {
+    public boolean matches(PrintingRecipeInput input, Level level) {
         if (level instanceof ServerLevel server) {
             var isValidAdditive = Additive.isAdditive(input.additive(), server.getServer().reloadableRegistries().get());
-            return sap.test(input.sap()) && (input.additive().isEmpty() || isValidAdditive);
+            return sap.test(input.sap()) && input.sap().getCount() >= sapCount && (input.additive().isEmpty() || isValidAdditive);
         }
         return false;
     }
 
     @Override
-    public ItemStack assemble(MoldingRecipeInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(PrintingRecipeInput input, HolderLookup.Provider registries) {
         ItemStack ret = PART_STACK.copy();
         var additive = Additive.getAdditive(input.additive(), registries);
         if (additive.isPresent()) {
@@ -64,32 +66,34 @@ public record MoldingRecipe(Ingredient sap, ResourceKey<PartDefinition> result) 
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return PRecipes.MOLDING_SERIALIZER.get();
+        return PRecipes.PRINTING_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return PRecipes.MOLDING.get();
+        return PRecipes.PRINTING.get();
     }
     
-    public static class Serializer implements RecipeSerializer<MoldingRecipe> {
-        private static final MapCodec<MoldingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Ingredient.CODEC.fieldOf("sap").forGetter(MoldingRecipe::sap),
-            ResourceKey.codec(PRegistries.PART).fieldOf("result").forGetter(MoldingRecipe::result)
-        ).apply(instance, MoldingRecipe::new));
-        private static final StreamCodec<RegistryFriendlyByteBuf, MoldingRecipe> STREAM_CODEC = StreamCodec.composite(
-            Ingredient.CONTENTS_STREAM_CODEC, MoldingRecipe::sap,
-            ResourceKey.streamCodec(PRegistries.PART), MoldingRecipe::result,
-            MoldingRecipe::new
+    public static class Serializer implements RecipeSerializer<PrintingRecipe> {
+        private static final MapCodec<PrintingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Ingredient.CODEC.fieldOf("sap").forGetter(PrintingRecipe::sap),
+            ExtraCodecs.POSITIVE_INT.fieldOf("sap_count").forGetter(PrintingRecipe::sapCount),
+            ResourceKey.codec(PRegistries.PART).fieldOf("result").forGetter(PrintingRecipe::result)
+        ).apply(instance, PrintingRecipe::new));
+        private static final StreamCodec<RegistryFriendlyByteBuf, PrintingRecipe> STREAM_CODEC = StreamCodec.composite(
+            Ingredient.CONTENTS_STREAM_CODEC, PrintingRecipe::sap,
+            ByteBufCodecs.VAR_INT, PrintingRecipe::sapCount,
+            ResourceKey.streamCodec(PRegistries.PART), PrintingRecipe::result,
+            PrintingRecipe::new
         );
         
         @Override
-        public MapCodec<MoldingRecipe> codec() {
+        public MapCodec<PrintingRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, MoldingRecipe> streamCodec() {
+        public StreamCodec<RegistryFriendlyByteBuf, PrintingRecipe> streamCodec() {
             return STREAM_CODEC;
         }
     }

@@ -14,8 +14,8 @@ public class PRecipes {
     private static final Registrar<RecipeType<?>> TYPE_REGISTRAR = PLASTARMod.REGISTRARS.get(Registries.RECIPE_TYPE);
     private static final Registrar<RecipeSerializer<?>> SERIALIZER_REGISTRAR = PLASTARMod.REGISTRARS.get(Registries.RECIPE_SERIALIZER);
     
-    public static final Supplier<RecipeType<MoldingRecipe>> MOLDING = TYPE_REGISTRAR.register("molding", RecipeTypeImpl::new);
-    public static final Supplier<RecipeSerializer<MoldingRecipe>> MOLDING_SERIALIZER = SERIALIZER_REGISTRAR.register("molding", MoldingRecipe.Serializer::new);
+    public static final Supplier<RecipeType<PrintingRecipe>> PRINTING = TYPE_REGISTRAR.register("printing", RecipeTypeImpl::new);
+    public static final Supplier<RecipeSerializer<PrintingRecipe>> PRINTING_SERIALIZER = SERIALIZER_REGISTRAR.register("printing", PrintingRecipe.Serializer::new);
     
     public static void register() {
     }
