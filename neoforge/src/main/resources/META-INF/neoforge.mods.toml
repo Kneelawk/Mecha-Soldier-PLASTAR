@@ -16,16 +16,23 @@ config = "plastar.mixins.json"
 [[accessTransformers]]
 file = "common-at.cfg"
 
-[[dependencies.${mod_id}]]
+[[dependencies.${ mod_id }]]
 modId = "neoforge"
 type = "REQUIRED"
 versionRange = "[21.0,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.${ mod_id }]]
 modId = "flywheel"
 type = "REQUIRED"
 versionRange = "[1.0.0-beta,2)"
 ordering = "NONE"
 side = "CLIENT"
+
+[[dependencies.${ mod_id }]]
+modId = "smartbrainlib"
+type = "REQUIRED"
+versionRange = "[1.8,)"
+ordering = "NONE"
+side = "BOTH"
