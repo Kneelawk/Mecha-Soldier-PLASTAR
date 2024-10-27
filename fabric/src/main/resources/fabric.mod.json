@@ -36,6 +36,7 @@
     "fabricloader": ">=0.15.0",
     "fabric-api": "*",
     "flywheel": ">=1- <2",
+    "smartbrainlib": ">=1.8",
     "minecraft": ">=1.21- <1.22-",
     "java": ">=17"
   },

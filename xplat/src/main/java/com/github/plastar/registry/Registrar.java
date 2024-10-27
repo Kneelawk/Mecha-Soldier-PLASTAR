@@ -14,10 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 import static com.github.plastar.Constants.rl;
 
 public class Registrar<T> {
-    private final ResourceKey<T> key;
+    private final ResourceKey<? extends Registry<? extends T>> key;
     private final Map<ResourceLocation, Supplier<? extends T>> stuff = new Object2ObjectLinkedOpenHashMap<>();
 
-    public Registrar(ResourceKey<T> key) {this.key = key;}
+    public Registrar(ResourceKey<? extends Registry<? extends T>> key) {this.key = key;}
 
     public <T2 extends T> Supplier<T2> register(String path, Supplier<T2> ctor) {
         ResourceLocation name = rl(path);
