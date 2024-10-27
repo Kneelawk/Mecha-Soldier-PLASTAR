@@ -49,21 +49,21 @@ public class Parts {
         register(context, TEST_LEFT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_LEG);
         register(context, TEST_RIGHT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_LEG);
 
-        register(context, EMMA_HEAD, Patterns.Tags.TEST_PATTERNS, MechaSection.HEAD);
-        register(context, EMMA_TORSO, Patterns.Tags.TEST_PATTERNS, MechaSection.TORSO);
-        register(context, EMMA_LEFT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_ARM);
-        register(context, EMMA_RIGHT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_ARM);
-        register(context, EMMA_LEFT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_LEG);
-        register(context, EMMA_RIGHT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_LEG);
-        register(context, EMMA_BACKPACK, Patterns.Tags.TEST_PATTERNS, MechaSection.BACKPACK);
+        register(context, EMMA_HEAD, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.HEAD);
+        register(context, EMMA_TORSO, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.TORSO);
+        register(context, EMMA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_ARM);
+        register(context, EMMA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_ARM);
+        register(context, EMMA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_LEG);
+        register(context, EMMA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_LEG);
+        register(context, EMMA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.BACKPACK);
 
-        register(context, HAMA_HEAD, Patterns.Tags.TEST_PATTERNS, MechaSection.HEAD);
-        register(context, HAMA_TORSO, Patterns.Tags.TEST_PATTERNS, MechaSection.TORSO);
-        register(context, HAMA_LEFT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_ARM);
-        register(context, HAMA_RIGHT_ARM, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_ARM);
-        register(context, HAMA_LEFT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.LEFT_LEG);
-        register(context, HAMA_RIGHT_LEG, Patterns.Tags.TEST_PATTERNS, MechaSection.RIGHT_LEG);
-        register(context, HAMA_BACKPACK, Patterns.Tags.TEST_PATTERNS, MechaSection.BACKPACK);
+        register(context, HAMA_HEAD, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.HEAD);
+        register(context, HAMA_TORSO, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.TORSO);
+        register(context, HAMA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_ARM);
+        register(context, HAMA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_ARM);
+        register(context, HAMA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_LEG);
+        register(context, HAMA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_LEG);
+        register(context, HAMA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.BACKPACK);
     }
     
     private static Builder register(BootstrapContext<PartDefinition> context, ResourceKey<PartDefinition> key, 

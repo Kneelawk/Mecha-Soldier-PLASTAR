@@ -20,5 +20,7 @@ public class PatternTagProvider extends FabricTagProvider<Pattern> {
     protected void addTags(HolderLookup.Provider wrapperLookup) {
         tag(Patterns.Tags.TEST_PATTERNS)
             .add(Patterns.CORE, Patterns.CHECKER, Patterns.STRIPED);
+        tag(Patterns.Tags.BASE_SET_PATTERNS)
+            .add(Patterns.STRIPY, Patterns.SHINY);
     }
 }
