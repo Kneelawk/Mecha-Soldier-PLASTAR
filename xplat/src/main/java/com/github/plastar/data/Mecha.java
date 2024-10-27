@@ -41,7 +41,7 @@ public record Mecha(Map<MechaSection, MechaPart> parts) {
         var sections = Arrays.asList(MechaSection.HEAD, MechaSection.TORSO, MechaSection.LEFT_ARM, MechaSection.RIGHT_ARM, MechaSection.LEFT_LEG, MechaSection.RIGHT_LEG);
         for (var section : sections) {
             builder.put(section, new MechaPart(
-                ResourceKey.create(PRegistries.PART, Constants.rl(section.getSerializedName())), 
+                ResourceKey.create(PRegistries.PART, Constants.rl("test/" + section.getSerializedName())), 
                 Optional.empty(),
                 ResourceKey.create(PRegistries.PATTERN, Constants.rl("striped")), 
                 ResourceKey.create(PRegistries.PALETTE, Constants.rl("a"))));
