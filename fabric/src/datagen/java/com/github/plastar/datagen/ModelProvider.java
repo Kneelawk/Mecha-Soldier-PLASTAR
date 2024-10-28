@@ -53,6 +53,7 @@ public class ModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators generators) {
         generators.generateFlatItem(PItems.POLYSTYRENE.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(PItems.STYROL.get(), ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(PItems.TREE_TAP.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(PItems.TREE_TAP.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        generators.generateFlatItem(PItems.NIPPERS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 }

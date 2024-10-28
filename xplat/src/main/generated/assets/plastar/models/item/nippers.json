@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "plastar:item/tree_tap"
+    "layer0": "plastar:item/nippers"
   }
 }
