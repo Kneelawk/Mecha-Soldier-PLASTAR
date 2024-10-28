@@ -1,6 +1,7 @@
 {
   "values": [
     "plastar:base_sets/stripy",
-    "plastar:base_sets/shiny"
+    "plastar:base_sets/shiny",
+    "plastar:base_sets/flame"
   ]
 }

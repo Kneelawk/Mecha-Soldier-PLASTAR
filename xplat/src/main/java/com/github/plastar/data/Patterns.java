@@ -12,6 +12,7 @@ public class Patterns {
     public static final ResourceKey<Pattern> STRIPED = key("striped");
     public static final ResourceKey<Pattern> STRIPY = key("base_sets/stripy");
     public static final ResourceKey<Pattern> SHINY = key("base_sets/shiny");
+    public static final ResourceKey<Pattern> FLAME = key("base_sets/flame");
     
     private static ResourceKey<Pattern> key(String path) {
         return ResourceKey.create(PRegistries.PATTERN, Constants.rl(path));
@@ -23,6 +24,7 @@ public class Patterns {
         context.register(CORE, new Pattern(Constants.rl("mecha/test_part/core")));
         context.register(STRIPY, new Pattern(Constants.rl("mecha/base_sets/stripy")));
         context.register(SHINY, new Pattern(Constants.rl("mecha/base_sets/shiny")));
+        context.register(FLAME, new Pattern(Constants.rl("mecha/base_sets/flame")));
     }
     
     public static class Tags {

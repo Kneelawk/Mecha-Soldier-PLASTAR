@@ -21,6 +21,6 @@ public class PatternTagProvider extends FabricTagProvider<Pattern> {
         tag(Patterns.Tags.TEST_PATTERNS)
             .add(Patterns.CORE, Patterns.CHECKER, Patterns.STRIPED);
         tag(Patterns.Tags.BASE_SET_PATTERNS)
-            .add(Patterns.STRIPY, Patterns.SHINY);
+            .add(Patterns.STRIPY, Patterns.SHINY, Patterns.FLAME);
     }
 }
