@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "plastar:block/mecha_assembler_bottom",
+    "east": "plastar:block/mecha_assembler_side",
+    "north": "plastar:block/mecha_assembler_front",
+    "particle": "plastar:block/mecha_assembler_front",
+    "south": "plastar:block/mecha_assembler_side",
+    "up": "plastar:block/mecha_assembler_top",
+    "west": "plastar:block/mecha_assembler_front"
+  }
+}
