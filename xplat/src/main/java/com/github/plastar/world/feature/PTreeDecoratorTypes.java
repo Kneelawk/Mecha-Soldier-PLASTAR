@@ -11,7 +11,6 @@ public class PTreeDecoratorTypes {
     public static final Supplier<TreeDecoratorType<StoraxLogTreeDecorator>> STORAX_LOG = register("storax_log", () -> StoraxLogTreeDecorator.TYPE);
 
     public static void register() {
-
     }
 
     private static <T extends TreeDecorator> Supplier<TreeDecoratorType<T>> register(String key, Supplier<TreeDecoratorType<T>> treeDecoratorType) {

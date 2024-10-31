@@ -6,6 +6,11 @@ import com.github.plastar.data.Palettes;
 import com.github.plastar.data.Parts;
 import com.github.plastar.data.Patterns;
 
+import com.github.plastar.world.feature.PConfiguredFeatures;
+import com.github.plastar.world.feature.PPlacedFeatures;
+
+import net.minecraft.core.registries.Registries;
+
 import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -31,6 +36,9 @@ public class PLASTARDatagen implements DataGeneratorEntrypoint {
         registryBuilder.add(PRegistries.PATTERN, Patterns::bootstrap);
         registryBuilder.add(PRegistries.PART, Parts::bootstrap);
         registryBuilder.add(PRegistries.ADDITIVE, Additives::bootstrap);
+
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, PConfiguredFeatures::bootstrap);
+        registryBuilder.add(Registries.PLACED_FEATURE, PPlacedFeatures::bootstrap);
     }
 
     @Override
