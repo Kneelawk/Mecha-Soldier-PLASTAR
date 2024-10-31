@@ -8,6 +8,7 @@ import com.github.plastar.client.MechaItemRenderer;
 import com.github.plastar.client.MechaPartItemRenderer;
 import com.github.plastar.client.PLASTARClient;
 import com.github.plastar.client.model.MechaModelManager;
+import com.github.plastar.client.screen.PMenuScreens;
 import com.github.plastar.entity.PEntities;
 import com.github.plastar.item.PItems;
 
@@ -17,6 +18,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -30,6 +32,7 @@ public class FabricModClient implements ClientModInitializer {
         EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), NoopRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA.get(), new MechaItemRenderer()::renderByItem);
         BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA_PART.get(), new MechaPartItemRenderer()::renderByItem);
+        PMenuScreens.register(MenuScreens::register);
         
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(
             new IdentifiableResourceReloadListener() {

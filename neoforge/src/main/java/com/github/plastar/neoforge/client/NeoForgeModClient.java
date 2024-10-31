@@ -3,6 +3,7 @@ package com.github.plastar.neoforge.client;
 import com.github.plastar.Constants;
 import com.github.plastar.client.PLASTARClient;
 import com.github.plastar.client.model.MechaModelManager;
+import com.github.plastar.client.screen.PMenuScreens;
 import com.github.plastar.entity.PEntities;
 import com.github.plastar.item.PItems;
 
@@ -12,6 +13,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -26,5 +28,6 @@ public class NeoForgeModClient {
             event.registerItem(new MechaItemClientExtensions(), PItems.MECHA.get());
             event.registerItem(new MechaPartItemClientExtensions(), PItems.MECHA_PART.get());
         });
+        modBus.addListener((RegisterMenuScreensEvent event) -> PMenuScreens.register(event::register));
     }
 }

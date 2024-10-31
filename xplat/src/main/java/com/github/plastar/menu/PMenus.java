@@ -14,4 +14,8 @@ public class PMenus {
     public static final Registrar<MenuType<?>> REGISTRAR = PLASTARMod.REGISTRARS.get(Registries.MENU);
 
     public static final Supplier<MenuType<PrinterMenu>> PRINTER = REGISTRAR.register("printer", () -> new MenuType<>(PrinterMenu::new, FeatureFlagSet.of()));
+    public static final Supplier<MenuType<MechaAssemblerMenu>> MECHA_ASSEMBLER = REGISTRAR.register("mecha_assembler", () -> new MenuType<>(MechaAssemblerMenu::new, FeatureFlagSet.of()));
+    
+    public static void register() {
+    }
 }

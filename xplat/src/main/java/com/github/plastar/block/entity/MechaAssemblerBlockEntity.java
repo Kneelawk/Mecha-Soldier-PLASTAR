@@ -1,6 +1,8 @@
 package com.github.plastar.block.entity;
 
 import com.github.plastar.block.PBlocks;
+import com.github.plastar.menu.AssemblerSlotIds;
+import com.github.plastar.menu.MechaAssemblerMenu;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -12,11 +14,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class MechaAssemblerBlockEntity extends BaseContainerBlockEntity {
-    private NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
+    private NonNullList<ItemStack> items = NonNullList.withSize(AssemblerSlotIds.SLOT_COUNT, ItemStack.EMPTY);
     
     public MechaAssemblerBlockEntity(BlockPos pos, BlockState blockState) {
         super(PBlockEntities.MECHA_ASSEMBLER.get(), pos, blockState);
@@ -39,12 +40,12 @@ public class MechaAssemblerBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-        return null;
+        return new MechaAssemblerMenu(containerId, inventory, this);
     }
 
     @Override
     public int getContainerSize() {
-        return 6;
+        return AssemblerSlotIds.SLOT_COUNT;
     }
 
     @Override
