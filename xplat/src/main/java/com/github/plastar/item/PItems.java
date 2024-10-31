@@ -24,6 +24,7 @@ public class PItems {
 
     /* Block Items */
     public static final Supplier<BlockItem> STORAX_ACACIA_LOG = REGISTRAR.register("storax_acacia_log", () -> new BlockItem(PBlocks.STORAX_ACACIA_LOG.get(), new Item.Properties()));
+    public static final Supplier<BlockItem> MECHA_ASSEMBLER = REGISTRAR.register("mecha_assembler", () -> new BlockItem(PBlocks.MECHA_ASSEMBLER.get(), new Item.Properties()));
 
     public static void register() {
     }

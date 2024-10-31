@@ -27,8 +27,9 @@ public class PCreativeModeTab {
                 output.accept(PItems.STYROL.get());
                 output.accept(PItems.POLYSTYRENE.get());
                 output.accept(PItems.NIPPERS.get());
+                output.accept(PItems.MECHA_ASSEMBLER.get());
                 output.accept(PItems.MECHA.get());
-                
+
                 var paletteRegistry = parameters.holders().lookupOrThrow(PRegistries.PALETTE);
                 var palette = getPalette(paletteRegistry);
 
