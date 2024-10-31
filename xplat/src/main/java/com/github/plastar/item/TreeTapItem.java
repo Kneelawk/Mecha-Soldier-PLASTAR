@@ -5,8 +5,6 @@ import java.util.Optional;
 import com.github.plastar.block.PBlocks;
 import com.github.plastar.block.StoraxAcaciaLogBlock;
 
-import net.minecraft.network.chat.Component;
-
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.advancements.CriteriaTriggers;
@@ -42,7 +40,7 @@ public class TreeTapItem extends Item {
         BlockState blockState = level.getBlockState(blockPos);
 
         if (player == null) return InteractionResult.PASS;
-        if (!blockState.is(PBlocks.STORAX_ACACIA_LOG_BLOCK.get())) return InteractionResult.PASS;
+        if (!blockState.is(PBlocks.STORAX_ACACIA_LOG.get())) return InteractionResult.PASS;
         if (playerHasShieldUseIntent(context)) return InteractionResult.PASS;
         if (!blockState.getValue(StoraxAcaciaLogBlock.SAPPY)) return InteractionResult.PASS;
 
@@ -86,8 +84,8 @@ public class TreeTapItem extends Item {
     }
 
     private Optional<BlockState> getTapped(BlockState untappedState) {
-        if (untappedState.getBlock().defaultBlockState().is(PBlocks.STORAX_ACACIA_LOG_BLOCK.get())) {
-            return Optional.of(PBlocks.STORAX_ACACIA_LOG_BLOCK.get().defaultBlockState()
+        if (untappedState.getBlock().defaultBlockState().is(PBlocks.STORAX_ACACIA_LOG.get())) {
+            return Optional.of(PBlocks.STORAX_ACACIA_LOG.get().defaultBlockState()
                 .setValue(RotatedPillarBlock.AXIS, untappedState.getValue(RotatedPillarBlock.AXIS)));
         } else {
             return Optional.empty();

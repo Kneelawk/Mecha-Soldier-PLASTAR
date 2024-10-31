@@ -17,6 +17,6 @@ public class BlockTagsProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
-        tag(BlockTags.ACACIA_LOGS).add(reverseLookup(PBlocks.STORAX_ACACIA_LOG_BLOCK.get()));
+        tag(BlockTags.ACACIA_LOGS).add(reverseLookup(PBlocks.STORAX_ACACIA_LOG.get()));
     }
 }

@@ -27,7 +27,7 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
-        generateSappyLog(generators, PBlocks.STORAX_ACACIA_LOG_BLOCK.get(), Blocks.ACACIA_LOG);
+        generateSappyLog(generators, PBlocks.STORAX_ACACIA_LOG.get(), Blocks.ACACIA_LOG);
     }
 
     private static void generateSappyLog(BlockModelGenerators generators, Block block, Block baseBlock) {

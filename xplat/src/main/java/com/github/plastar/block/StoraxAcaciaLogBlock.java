@@ -2,7 +2,6 @@ package com.github.plastar.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -42,7 +41,7 @@ public class StoraxAcaciaLogBlock extends RotatedPillarBlock {
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isLoaded(pos)) return;
         if (random.nextIntBetweenInclusive(1,4) != 1) return;
-        level.setBlockAndUpdate(pos, PBlocks.STORAX_ACACIA_LOG_BLOCK.get().defaultBlockState());
+        level.setBlockAndUpdate(pos, PBlocks.STORAX_ACACIA_LOG.get().defaultBlockState());
     }
 
     @Override

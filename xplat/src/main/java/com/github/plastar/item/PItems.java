@@ -23,7 +23,7 @@ public class PItems {
     public static final Supplier<Item> NIPPERS = REGISTRAR.register("nippers", () -> new NippersItem(new Item.Properties().stacksTo(1)));
 
     /* Block Items */
-    public static final Supplier<BlockItem> STORAX_ACACIA_LOG = REGISTRAR.register("storax_acacia_log", () -> new BlockItem(PBlocks.STORAX_ACACIA_LOG_BLOCK.get(), new Item.Properties()));
+    public static final Supplier<BlockItem> STORAX_ACACIA_LOG = REGISTRAR.register("storax_acacia_log", () -> new BlockItem(PBlocks.STORAX_ACACIA_LOG.get(), new Item.Properties()));
 
     public static void register() {
     }

@@ -1,6 +1,7 @@
 package com.github.plastar;
 
 import com.github.plastar.block.PBlocks;
+import com.github.plastar.block.entity.PBlockEntities;
 import com.github.plastar.crafting.PRecipes;
 import com.github.plastar.entity.PEntities;
 import com.github.plastar.item.PComponents;
@@ -18,6 +19,7 @@ public class PLASTARMod {
         PComponents.register();
         PRecipes.register();
         PBlocks.register();
+        PBlockEntities.register();
         PItems.register();
         PCreativeModeTab.register();
         PSounds.register();

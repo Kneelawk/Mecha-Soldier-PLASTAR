@@ -22,13 +22,13 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        add(PBlocks.STORAX_ACACIA_LOG_BLOCK.get(),
+        add(PBlocks.STORAX_ACACIA_LOG.get(),
             createSilkTouchDispatchTable(
-                PBlocks.STORAX_ACACIA_LOG_BLOCK.get(),
-                applyExplosionCondition(PBlocks.STORAX_ACACIA_LOG_BLOCK.get(), LootItem.lootTableItem(Items.ACACIA_LOG))
+                PBlocks.STORAX_ACACIA_LOG.get(),
+                applyExplosionCondition(PBlocks.STORAX_ACACIA_LOG.get(), LootItem.lootTableItem(Items.ACACIA_LOG))
             ).withPool(LootPool.lootPool()
                 .when(this.doesNotHaveSilkTouch())
-                .add(applyExplosionDecay(PBlocks.STORAX_ACACIA_LOG_BLOCK.get(), LootItem.lootTableItem(PItems.STYROL.get())
+                .add(applyExplosionDecay(PBlocks.STORAX_ACACIA_LOG.get(), LootItem.lootTableItem(PItems.STYROL.get())
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))))));
     }
 }

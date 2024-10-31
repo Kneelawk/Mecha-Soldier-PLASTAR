@@ -21,7 +21,7 @@ public class StoraxLogTreeDecorator extends TreeDecorator {
     public void place(Context context) {
         int count = context.random().nextFloat() < 0.4 ? 2 : 1;
         for (int i = 0; i < count; ++i) {
-            context.setBlock(context.logs().get(context.random().nextInt(context.logs().size())), PBlocks.STORAX_ACACIA_LOG_BLOCK.get().defaultBlockState());
+            context.setBlock(context.logs().get(context.random().nextInt(context.logs().size())), PBlocks.STORAX_ACACIA_LOG.get().defaultBlockState());
         }
     }
 }
