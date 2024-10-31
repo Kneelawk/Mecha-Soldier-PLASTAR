@@ -2,13 +2,16 @@
   "item.plastar.styrol": "Styrol",
   "item.plastar.polystyrene": "Polystyrene",
   "item.plastar.tree_tap": "Storax Tree Tap",
+  "item.plastar.nippers": "Nippers",
   "item.plastar.mecha_part": "Mecha Part",
   "item.plastar.mecha_part.tooltip.pattern": "Pattern: %s",
   "item.plastar.mecha_part.tooltip.palette": "Palette: %s",
-  "item.plastar.mecha": "PLASTAR Mecha (Name WIP?)",
+  "item.plastar.mecha": "PLASTAR Mecha",
   "item.plastar.mecha.tooltip.parts_header": "Parts:",
   "item.plastar.mecha.tooltip.attribute_header": "Stats:",
-  
+
+  "block.plastar.mecha_assembler": "Mecha Assembler",
+
   "plastar.part.plastar.head": "Test Head",
   "plastar.part.plastar.torso": "Test Torso",
   "plastar.part.plastar.left_arm": "Test Left Arm",
@@ -19,6 +22,8 @@
   "block.plastar.storax_acacia_log": "Storax-filled Acacia Log",
 
   "itemGroup.plastar.main": "PLASTAR Mecha Soldier",
+
+  "tooltip.nippers.description": "Right click runners while holding this item",
 
   "advancement.plastar.sap_tapping.title": "Sap Tapping",
   "advancement.plastar.sap_tapping.description": "Obtain Styrol from a storax-filled acacia tree",

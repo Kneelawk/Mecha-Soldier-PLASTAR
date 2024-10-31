@@ -2,6 +2,7 @@ package com.github.plastar.item;
 
 import com.github.plastar.sound.PSounds;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
@@ -9,6 +10,9 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+
+import java.util.List;
 
 public class NippersItem extends Item {
     public NippersItem(Properties properties) {
@@ -33,4 +37,10 @@ public class NippersItem extends Item {
         return super.overrideStackedOnOther(stack, slot, action, player);
     }
 
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents,
+                                TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        tooltipComponents.add(Component.translatable("tooltip.nippers.description").withColor(7977658));
+    }
 }
