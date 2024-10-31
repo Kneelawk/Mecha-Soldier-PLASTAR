@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "plastar:polystyrene"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "#L#",
+    "GRG",
+    "iCi"
+  ],
+  "result": {
+    "count": 1,
+    "id": "plastar:mecha_assembler"
+  }
+}

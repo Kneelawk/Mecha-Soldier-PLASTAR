@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_part": {
+      "conditions": {
+        "items": [
+          {
+            "items": "plastar:mecha_part"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "plastar:mecha_assembler"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_part"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "plastar:mecha_assembler"
+    ]
+  }
+}

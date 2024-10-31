@@ -1,23 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "O": {
+      "tag": "minecraft:planks"
+    }
+  },
   "pattern": [
     " / ",
     "#O#",
     "   "
   ],
-  "key": {
-    "#": {
-      "tag": "minecraft:stone_tool_materials"
-    },
-    "O": {
-      "tag": "minecraft:planks"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
-  },
   "result": {
-    "id": "plastar:tree_tap",
-    "count": 1
+    "count": 1,
+    "id": "plastar:tree_tap"
   }
 }

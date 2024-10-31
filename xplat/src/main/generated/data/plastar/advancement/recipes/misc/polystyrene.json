@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_storol": {
+      "conditions": {
+        "items": [
+          {
+            "items": "plastar:styrol"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "plastar:polystyrene"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_storol"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "plastar:polystyrene"
+    ]
+  }
+}
