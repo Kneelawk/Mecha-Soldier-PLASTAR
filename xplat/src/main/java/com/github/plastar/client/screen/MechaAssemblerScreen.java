@@ -1,5 +1,6 @@
 package com.github.plastar.client.screen;
 
+import com.github.plastar.Constants;
 import com.github.plastar.menu.MechaAssemblerMenu;
 
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MechaAssemblerScreen extends AbstractContainerScreen<MechaAssemblerMenu> {
-    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
+    private static final ResourceLocation TEXTURE_LOCATION = Constants.rl("textures/gui/container/mecha_assembler.png");
     
     public MechaAssemblerScreen(MechaAssemblerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
