@@ -15,6 +15,8 @@ import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -28,6 +30,7 @@ public class ModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
         generateSappyLog(generators, PBlocks.STORAX_ACACIA_LOG.get(), Blocks.ACACIA_LOG);
+        generateAssembler(generators);
     }
 
     private static void generateSappyLog(BlockModelGenerators generators, Block block, Block baseBlock) {
@@ -47,6 +50,19 @@ public class ModelProvider extends FabricModelProvider {
                         .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
                         .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90);
                 })));
+    }
+
+    private static void generateAssembler(BlockModelGenerators generators) {
+        var textureMapping = new TextureMapping()
+            .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_front"))
+            .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_bottom"))
+            .put(TextureSlot.UP, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_top"))
+            .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_front"))
+            .put(TextureSlot.WEST, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_front"))
+            .put(TextureSlot.EAST, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_side"))
+            .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(PBlocks.MECHA_ASSEMBLER.get(), "_side"));
+        generators.blockStateOutput
+            .accept(BlockModelGenerators.createSimpleBlock(PBlocks.MECHA_ASSEMBLER.get(), ModelTemplates.CUBE.create(PBlocks.MECHA_ASSEMBLER.get(), textureMapping, generators.modelOutput)));
     }
 
     @Override
