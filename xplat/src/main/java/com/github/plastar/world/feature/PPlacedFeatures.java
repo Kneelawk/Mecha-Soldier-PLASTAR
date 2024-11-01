@@ -1,7 +1,8 @@
 package com.github.plastar.world.feature;
 
-import com.github.plastar.Constants;
+import java.util.List;
 
+import com.github.plastar.Constants;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.core.Vec3i;
@@ -23,8 +24,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 
-import java.util.List;
-
 public class PPlacedFeatures {
     public static final ResourceKey<PlacedFeature> STORAX_ACACIA =
         ResourceKey.create(Registries.PLACED_FEATURE, Constants.rl("storax_acacia"));
@@ -36,7 +35,19 @@ public class PPlacedFeatures {
             context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(PConfiguredFeatures.STORAX_ACACIA),
             List.of(
                 BlockPredicateFilter.forPredicate(
-                    BlockPredicate.wouldSurvive(Blocks.ACACIA_SAPLING.defaultBlockState(), Vec3i.ZERO))
+                    BlockPredicate.allOf(
+                        BlockPredicate.wouldSurvive(Blocks.ACACIA_SAPLING.defaultBlockState(), Vec3i.ZERO),
+                        BlockPredicate.solid(new Vec3i(0, -1, 0)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0),
+                            List.of(
+                                Blocks.GRASS_BLOCK,
+                                Blocks.DIRT,
+                                Blocks.COARSE_DIRT,
+                                Blocks.PODZOL,
+                                Blocks.ROOTED_DIRT
+                            ))
+                    )
+                )
             )));
 
         var tree_density = SimpleWeightedRandomList.<IntProvider>builder()
