@@ -17,6 +17,5 @@ public class AdvancementsProvider extends FabricAdvancementProvider {
     @Override
     public void generateAdvancement(HolderLookup.Provider registryLookup, Consumer<AdvancementHolder> consumer) {
         new PAdvancements().accept(consumer);
-        new PAdvancementsRecipeOnly().accept(consumer);
     }
 }
