@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:plastar/obtain_styrol",
+  "parent": "minecraft:plastar/root",
   "criteria": {
     "obtain_polystyrene": {
       "conditions": {

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "minecraft:acacia_checked",
+    "features": [
+      {
+        "chance": 1.0,
+        "feature": "plastar:storax_acacia"
+      }
+    ]
+  }
+}

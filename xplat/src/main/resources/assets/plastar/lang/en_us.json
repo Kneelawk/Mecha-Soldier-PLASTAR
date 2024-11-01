@@ -25,8 +25,8 @@
 
   "tooltip.nippers.description": "Right click runners while holding this item",
 
-  "advancement.plastar.sap_tapping.title": "Sap Tapping",
-  "advancement.plastar.sap_tapping.description": "Obtain Styrol from a storax-filled acacia tree",
+  "advancement.plastar.root.title": "Mecha Soldier PLASTAR",
+  "advancement.plastar.root.description": "Obtain Styrol from a storax-filled acacia tree",
   "advancement.plastar.polymerisation.title": "Polymerisation",
   "advancement.plastar.polymerisation.description": "Heat Styrol into a durable new material"
 }

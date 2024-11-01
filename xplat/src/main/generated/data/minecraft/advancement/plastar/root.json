@@ -14,14 +14,14 @@
   "display": {
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
-      "translate": "advancement.plastar.sap_tapping.description"
+      "translate": "advancement.plastar.root.description"
     },
     "icon": {
       "count": 1,
       "id": "plastar:styrol"
     },
     "title": {
-      "translate": "advancement.plastar.sap_tapping.title"
+      "translate": "advancement.plastar.root.title"
     }
   },
   "requirements": [

@@ -20,11 +20,11 @@ public class PAdvancements implements Consumer<Consumer<AdvancementHolder>> {
 
     @Override
     public void accept(Consumer<AdvancementHolder> advancementHolderConsumer) {
-        AdvancementHolder obtainStyrolAdvancement = Advancement.Builder.advancement()
+        AdvancementHolder rootAdvancement = Advancement.Builder.advancement()
             .display(
                 PItems.STYROL.get(),
-                Component.translatable("advancement.plastar.sap_tapping.title"),
-                Component.translatable("advancement.plastar.sap_tapping.description"),
+                Component.translatable("advancement.plastar.root.title"),
+                Component.translatable("advancement.plastar.root.description"),
                 ResourceLocation.fromNamespaceAndPath("minecraft","textures/gui/advancements/backgrounds/adventure.png"), // Background image used
                 AdvancementType.TASK,
                 true,
@@ -33,9 +33,9 @@ public class PAdvancements implements Consumer<Consumer<AdvancementHolder>> {
             )
             .addCriterion("obtain_styrol", InventoryChangeTrigger.TriggerInstance.hasItems(PItems.STYROL.get()))
             .rewards(AdvancementRewards.Builder.recipe(rl("polystyrene")))
-            .save(advancementHolderConsumer, "plastar" + "/obtain_styrol");
+            .save(advancementHolderConsumer, "plastar" + "/root");
 
-        AdvancementHolder obtainPolystyreneAdvancement = Advancement.Builder.advancement().parent(obtainStyrolAdvancement)
+        AdvancementHolder obtainPolystyreneAdvancement = Advancement.Builder.advancement().parent(rootAdvancement)
             .display(
                 PItems.POLYSTYRENE.get(),
                 Component.translatable("advancement.plastar.polymerisation.title"),
