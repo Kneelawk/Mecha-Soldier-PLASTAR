@@ -29,12 +29,8 @@ neoForge {
     accessTransformers.from(project(":xplat").file("src/main/resources/common-at.cfg"))
 }
 
-//sourceSets.main {
-//    resources.srcDir(project(":xplat").file("src/main/generated"))
-//}
-
-// For some reason the above doesn't make gradle detect file changes to invalidate the task
-// So we have to manually tell gradle that the task uses datagen files
-//tasks.processResources {
-//    inputs.dir(project(":xplat").file("src/main/generated"))
-//}
+// Hack to disable junit tests (which we don't use) in order to
+// prevent the scanner from crashing due to it not respecting AWs
+tasks.named<Test>("test") {
+    exclude("**")
+}

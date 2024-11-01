@@ -38,3 +38,9 @@ fabricApi.configureDataGeneration {
     addToResources = false
     createSourceSet = true
 }
+
+// Hack to disable junit tests (which we don't use) in order to
+// prevent the scanner from crashing due to it not respecting AWs
+tasks.named<Test>("test") {
+    exclude("**")
+}
