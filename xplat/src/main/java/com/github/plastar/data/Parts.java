@@ -36,6 +36,14 @@ public class Parts {
     public static final ResourceKey<PartDefinition> HAMA_LEFT_LEG = key("hama/left_leg");
     public static final ResourceKey<PartDefinition> HAMA_RIGHT_LEG = key("hama/right_leg");
     public static final ResourceKey<PartDefinition> HAMA_BACKPACK = key("hama/backpack");
+    
+    public static final ResourceKey<PartDefinition> MAPLE_HEAD = key("maple/head");
+    public static final ResourceKey<PartDefinition> MAPLE_TORSO = key("maple/torso");
+    public static final ResourceKey<PartDefinition> MAPLE_LEFT_ARM = key("maple/left_arm");
+    public static final ResourceKey<PartDefinition> MAPLE_RIGHT_ARM = key("maple/right_arm");
+    public static final ResourceKey<PartDefinition> MAPLE_LEFT_LEG = key("maple/left_leg");
+    public static final ResourceKey<PartDefinition> MAPLE_RIGHT_LEG = key("maple/right_leg");
+    public static final ResourceKey<PartDefinition> MAPLE_BACKPACK = key("maple/backpack");
 
     private static ResourceKey<PartDefinition> key(String path) {
         return ResourceKey.create(PRegistries.PART, Constants.rl(path));
@@ -64,6 +72,14 @@ public class Parts {
         register(context, HAMA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_LEG);
         register(context, HAMA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_LEG);
         register(context, HAMA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.BACKPACK);
+
+        register(context, MAPLE_HEAD, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.HEAD);
+        register(context, MAPLE_TORSO, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.TORSO);
+        register(context, MAPLE_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_ARM);
+        register(context, MAPLE_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_ARM);
+        register(context, MAPLE_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.LEFT_LEG);
+        register(context, MAPLE_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.RIGHT_LEG);
+        register(context, MAPLE_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, MechaSection.BACKPACK);
     }
     
     private static Builder register(BootstrapContext<PartDefinition> context, ResourceKey<PartDefinition> key, 
