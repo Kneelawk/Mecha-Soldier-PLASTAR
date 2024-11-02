@@ -3,17 +3,14 @@ package com.github.plastar.item;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import com.github.plastar.Constants;
 import com.github.plastar.PLASTARMod;
 import com.github.plastar.data.MechaPart;
 import com.github.plastar.data.PRegistries;
-import com.github.plastar.data.Palette;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
+import com.github.plastar.data.Palettes;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 
 public class PCreativeModeTab {
@@ -30,15 +27,12 @@ public class PCreativeModeTab {
                 output.accept(PItems.MECHA_ASSEMBLER.get());
                 output.accept(PItems.MECHA.get());
 
-                var paletteRegistry = parameters.holders().lookupOrThrow(PRegistries.PALETTE);
-                var palette = getPalette(paletteRegistry);
-
                 var partRegistry = parameters.holders().lookupOrThrow(PRegistries.PART);
                 partRegistry.listElements()
                     .forEach(partDefinition -> {
-                        var pattern = partDefinition.value().supportedPatterns().stream().findFirst().flatMap(Holder::unwrapKey);
+                        var pattern = partDefinition.value().defaultPattern().unwrapKey();
                         if (pattern.isEmpty()) return;
-                        var part = new MechaPart(partDefinition.key(), Optional.empty(), pattern.get(), palette);
+                        var part = new MechaPart(partDefinition.key(), Optional.empty(), pattern.get(), Palettes.UNPAINTED);
                         var stack = PItems.MECHA_PART.get().getDefaultInstance();
                         stack.set(PComponents.MECHA_PART.get(), part);
                         output.accept(stack);
@@ -47,16 +41,5 @@ public class PCreativeModeTab {
             .build());
     
     public static void register() {
-    }
-
-    private static ResourceKey<Palette> getPalette(HolderLookup.RegistryLookup<Palette> paletteRegistry) {
-        var palette = ResourceKey.create(PRegistries.PALETTE, Constants.rl("a"));
-        if (paletteRegistry.get(palette).isEmpty()) {
-            var optional = paletteRegistry.listElementIds().findFirst();
-            if (optional.isPresent()) {
-                return optional.get();
-            }
-        }
-        return palette;
     }
 }
