@@ -30,7 +30,7 @@ public class Additives {
     
     private static Builder register(BootstrapContext<Additive> context, ResourceKey<Additive> key, Ingredient ingredient, ResourceKey<Palette> palette) {
         var builder = new Builder(key.location());
-        context.register(key, new Additive(ingredient, builder.modifiers, palette));
+        context.register(key, new Additive(ingredient, builder.modifiers, context.lookup(PRegistries.PALETTE).getOrThrow(palette)));
         return builder;
     }
 

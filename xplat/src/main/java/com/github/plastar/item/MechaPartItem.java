@@ -1,12 +1,12 @@
 package com.github.plastar.item;
 
+import java.util.List;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-
-import java.util.List;
 
 public class MechaPartItem extends Item {
     public MechaPartItem(Properties properties) {
@@ -19,7 +19,7 @@ public class MechaPartItem extends Item {
         if (part == null) {
             return super.getName(stack);
         } else {
-            return Component.translatable(part.definition().location().toLanguageKey("plastar.part"));
+            return Component.translatable(part.definition().unwrapKey().orElseThrow().location().toLanguageKey("plastar.part"));
         }
     }
 
@@ -31,11 +31,11 @@ public class MechaPartItem extends Item {
         
         tooltipComponents.add(Component.translatable(
             "item.plastar.mecha_part.tooltip.pattern", 
-            Component.translatable(part.pattern().location().toLanguageKey("plastar.pattern"))
+            Component.translatable(part.pattern().unwrapKey().orElseThrow().location().toLanguageKey("plastar.pattern"))
         ).withStyle(ChatFormatting.GRAY));
         tooltipComponents.add(Component.translatable(
             "item.plastar.mecha_part.tooltip.palette", 
-            Component.translatable(part.palette().location().toLanguageKey("plastar.palette"))
+            Component.translatable(part.palette().unwrapKey().orElseThrow().location().toLanguageKey("plastar.palette"))
         ).withStyle(ChatFormatting.GRAY));
     }
 }

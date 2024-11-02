@@ -1,13 +1,15 @@
 package com.github.plastar.crafting;
 
+import java.util.function.Function;
+
 import com.github.plastar.data.Additive;
 import com.github.plastar.data.MechaPart;
 import com.github.plastar.data.PRegistries;
 import com.github.plastar.data.Palettes;
 import com.github.plastar.data.PartDefinition;
-import com.github.plastar.data.Patterns;
 import com.github.plastar.item.PComponents;
 import com.github.plastar.item.PItems;
+import com.github.plastar.registry.RegistryUtil;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -43,16 +45,14 @@ public record PrintingRecipe(Ingredient sap, int sapCount, ResourceKey<PartDefin
     public ItemStack assemble(PrintingRecipeInput input, HolderLookup.Provider registries) {
         var partRegistry = registries.lookupOrThrow(PRegistries.PART);
         
-        var pattern = partRegistry.get(result)
-            .map(Holder::value)
-            .map(PartDefinition::defaultPattern)
-            .flatMap(Holder::unwrapKey)
-            .orElse(Patterns.UNPAINTED);
+        var part = RegistryUtil.getPreferred(result, partRegistry);
         var additive = Additive.getAdditive(input.additive(), registries);
-        var palette = additive.map(Holder::value).map(Additive::defaultPalette).orElse(Palettes.UNPAINTED);
+        var palette = additive.map(Holder::value)
+            .map(Additive::defaultPalette)
+            .orElseGet(() -> RegistryUtil.getPreferred(Palettes.UNPAINTED, registries.lookupOrThrow(PRegistries.PALETTE)));
 
         var stack = PART_STACK.copy();
-        stack.set(PComponents.MECHA_PART.get(), new MechaPart(result, additive.flatMap(Holder::unwrapKey), pattern, palette));
+        stack.set(PComponents.MECHA_PART.get(), new MechaPart(part, additive.map(Function.identity()), part.value().defaultPattern(), palette));
         return stack;
     }
 

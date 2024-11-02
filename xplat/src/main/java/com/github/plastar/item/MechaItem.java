@@ -87,11 +87,12 @@ public class MechaItem extends Item {
                 for (var section : MechaSection.values()) {
                     var part = mecha.parts().get(section);
                     if (part == null) continue;
-                    tooltipComponents.add(CommonComponents.space().append(Component.translatable(part.definition().location().toLanguageKey("plastar.part"))));
+                    var partLocation = part.definition().unwrapKey().orElseThrow().location();
+                    tooltipComponents.add(CommonComponents.space().append(Component.translatable(partLocation.toLanguageKey("plastar.part"))));
                 }
 
                 var needsHeader = new MutableBoolean(true);
-                mecha.forEachAttributeModifier(registries, (attribute, modifier) -> {
+                mecha.forEachAttributeModifier((attribute, modifier) -> {
                     if (needsHeader.booleanValue()) {
                         tooltipComponents.add(Component.empty());
                         tooltipComponents.add(Component.translatable("item.plastar.mecha.tooltip.attribute_header").withStyle(ChatFormatting.GRAY));

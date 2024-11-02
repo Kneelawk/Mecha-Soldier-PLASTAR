@@ -7,12 +7,9 @@ import com.github.plastar.Constants;
 import com.github.plastar.client.model.MechaModelManager;
 import com.github.plastar.data.Mecha;
 import com.github.plastar.data.MechaSection;
-import com.github.plastar.data.PRegistries;
 import com.github.plastar.data.Palette;
 import com.github.plastar.data.Pattern;
 import com.github.plastar.entity.MechaEntity;
-
-import net.minecraft.client.Minecraft;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -57,19 +54,16 @@ public class MechaEntityVisual extends ComponentEntityVisual<MechaEntity> implem
         instances.clear();
         pivots.clear();
         
-        var patternRegistry = entity.level().registryAccess().registryOrThrow(PRegistries.PATTERN);
-        var paletteRegistry = entity.level().registryAccess().registryOrThrow(PRegistries.PALETTE);
-        
         for (var entry : mecha.parts().entrySet()) {
             var section = entry.getKey();
             var part = entry.getValue();
             
-            var model = MechaModelManager.INSTANCE.getModel(part.definition().location());
-            if (model == null) continue;
-            var texture = getTexture(patternRegistry.get(part.pattern()), paletteRegistry.get(part.palette()));
+            var model = part.definition().unwrapKey().flatMap(MechaModelManager.INSTANCE::getModel);
+            if (model.isEmpty()) continue;
+            var texture = getTexture(part.pattern().value(), part.palette().value());
             var material = new Material(Constants.ATLAS_ID, texture);
-            instances.put(section, instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.getModel(material)).createInstance());
-            pivots.put(section, model.getMetadata().pivot().toVector3f().div(16f));
+            instances.put(section, instancerProvider().instancer(InstanceTypes.TRANSFORMED, model.get().getModel(material)).createInstance());
+            pivots.put(section, model.get().getMetadata().pivot().toVector3f().div(16f));
         }
     }
     

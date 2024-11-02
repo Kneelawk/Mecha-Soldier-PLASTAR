@@ -6,12 +6,9 @@ import java.util.EnumMap;
 import com.github.plastar.data.Mecha;
 import com.github.plastar.data.MechaPart;
 import com.github.plastar.data.MechaSection;
-import com.github.plastar.data.PRegistries;
-import com.github.plastar.data.PartDefinition;
 import com.github.plastar.item.PComponents;
 import com.github.plastar.item.PItems;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -75,9 +72,7 @@ public class MechaAssemblerMenu extends AbstractContainerMenu {
             var part = stack.get(PComponents.MECHA_PART.get());
             if (part == null) break moveToInput;
             
-            var definition = player.level().registryAccess().registryOrThrow(PRegistries.PART).get(part.definition());
-            if (definition == null) break moveToInput;
-            
+            var definition = part.definition().value();
             var targetSlot = switch (definition.section()) {
                 case HEAD -> AssemblerSlotIds.HEAD;
                 case TORSO -> AssemblerSlotIds.TORSO;
@@ -122,8 +117,7 @@ public class MechaAssemblerMenu extends AbstractContainerMenu {
 
     private void updateResult() {
         var registries = inventory.player.level().registryAccess();
-        var partDefs = registries.registryOrThrow(PRegistries.PART);
-        
+
         var validMecha = true;
         for (var section : AssemblerSlotIds.REQUIRED_SECTIONS) {
             var stack = container.getItem(AssemblerSlotIds.getSlot(section));
@@ -138,7 +132,7 @@ public class MechaAssemblerMenu extends AbstractContainerMenu {
             if (section == null) throw new IllegalStateException();
             
             var stack = container.getItem(slot);
-            if (!stack.isEmpty() && !isValidPartForSection(section, stack, partDefs)) {
+            if (!stack.isEmpty() && !isValidPartForSection(section, stack)) {
                 validMecha = false;
                 break;
             }
@@ -157,9 +151,7 @@ public class MechaAssemblerMenu extends AbstractContainerMenu {
             var part = stack.get(PComponents.MECHA_PART.get());
             if (part == null) continue;
             
-            var partDef = partDefs.get(part.definition());
-            if (partDef == null) continue;
-            
+            var partDef = part.definition().value();
             parts.put(partDef.section(), part);
         }
         var mecha = new Mecha(Collections.unmodifiableMap(parts));
@@ -172,14 +164,11 @@ public class MechaAssemblerMenu extends AbstractContainerMenu {
         resultContainer.setItem(0, resultStack);
     }
 
-    private static boolean isValidPartForSection(MechaSection section, ItemStack stack,
-                                                 Registry<PartDefinition> partDefs) {
+    private static boolean isValidPartForSection(MechaSection section, ItemStack stack) {
         var part = stack.get(PComponents.MECHA_PART.get());
         if (stack.isEmpty()) return false;
         if (part == null) return false;
-        var partDef = partDefs.get(part.definition());
-        if (partDef == null) return false;
-
+        var partDef = part.definition().value();
         return partDef.section() == section;
     }
 

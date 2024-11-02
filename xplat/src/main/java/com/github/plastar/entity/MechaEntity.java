@@ -28,7 +28,6 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -56,7 +55,7 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(MECHA_DATA_ACCESSOR, Mecha.DEFAULT);
+        builder.define(MECHA_DATA_ACCESSOR, Mecha.getDefault(level().registryAccess()));
     }
 
     @Override
@@ -99,22 +98,20 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
     @Override
     public void tick() {
         super.tick();
-        if (level() instanceof ServerLevel serverLevel) {
-            if (getMecha() != lastMecha) {
-                lastMecha.forEachAttributeModifier(serverLevel.registryAccess(), (attribute, modifier) -> {
-                    var instance = getAttribute(attribute);
-                    if (instance != null) {
-                        instance.removeModifier(modifier.id());
-                    }
-                });
-                lastMecha = getMecha();
-                lastMecha.forEachAttributeModifier(serverLevel.registryAccess(), (attribute, modifier) -> {
-                    var instance = getAttribute(attribute);
-                    if (instance != null) {
-                        instance.addTransientModifier(modifier);
-                    }
-                });
-            }
+        if (!level().isClientSide && getMecha() != lastMecha) {
+            lastMecha.forEachAttributeModifier((attribute, modifier) -> {
+                var instance = getAttribute(attribute);
+                if (instance != null) {
+                    instance.removeModifier(modifier.id());
+                }
+            });
+            lastMecha = getMecha();
+            lastMecha.forEachAttributeModifier((attribute, modifier) -> {
+                var instance = getAttribute(attribute);
+                if (instance != null) {
+                    instance.addTransientModifier(modifier);
+                }
+            });
         }
     }
 

@@ -3,7 +3,6 @@ package com.github.plastar.client;
 import com.github.plastar.Constants;
 import com.github.plastar.client.model.MechaModelManager;
 import com.github.plastar.data.Mecha;
-import com.github.plastar.data.PRegistries;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -32,24 +31,22 @@ public class MechaItemRenderer extends BlockEntityWithoutLevelRenderer {
         if (level == null) return;
         
         var registries = level.registryAccess();
-        var patternRegistry = registries.registryOrThrow(PRegistries.PATTERN);
-        var paletteRegistry = registries.registryOrThrow(PRegistries.PALETTE);
 
         var mecha = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)
             .read(registries.createSerializationContext(NbtOps.INSTANCE), Mecha.CODEC.fieldOf("mecha"))
             .result()
-            .orElse(Mecha.DEFAULT);
+            .orElseGet(() -> Mecha.getDefault(registries));
         
         for (var entry : mecha.parts().entrySet()) {
             var part = entry.getValue();
 
-            var preparedModel = MechaModelManager.INSTANCE.getModel(part.definition().location());
-            if (preparedModel == null) continue;
+            var preparedModel = part.definition().unwrapKey().flatMap(MechaModelManager.INSTANCE::getModel);
+            if (preparedModel.isEmpty()) continue;
 
-            var texture = MechaEntityVisual.getTexture(patternRegistry.get(part.pattern()), paletteRegistry.get(part.palette()));
+            var texture = MechaEntityVisual.getTexture(part.pattern().value(), part.palette().value());
             var material = new Material(Constants.ATLAS_ID, texture);
 
-            preparedModel.getItemModel(material).render(poseStack, bufferSource, packedLight, packedOverlay);
+            preparedModel.get().getItemModel(material).render(poseStack, bufferSource, packedLight, packedOverlay);
         }
     }
 }

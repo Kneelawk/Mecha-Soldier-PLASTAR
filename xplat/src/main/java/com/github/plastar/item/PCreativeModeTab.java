@@ -6,8 +6,8 @@ import java.util.function.Supplier;
 import com.github.plastar.PLASTARMod;
 import com.github.plastar.data.MechaPart;
 import com.github.plastar.data.PRegistries;
-
 import com.github.plastar.data.Palettes;
+import com.github.plastar.registry.RegistryUtil;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -28,11 +28,11 @@ public class PCreativeModeTab {
                 output.accept(PItems.MECHA.get());
 
                 var partRegistry = parameters.holders().lookupOrThrow(PRegistries.PART);
+                var palette = RegistryUtil.getPreferred(Palettes.UNPAINTED, parameters.holders().lookupOrThrow(PRegistries.PALETTE));
                 partRegistry.listElements()
                     .forEach(partDefinition -> {
-                        var pattern = partDefinition.value().defaultPattern().unwrapKey();
-                        if (pattern.isEmpty()) return;
-                        var part = new MechaPart(partDefinition.key(), Optional.empty(), pattern.get(), Palettes.UNPAINTED);
+                        var pattern = partDefinition.value().defaultPattern();
+                        var part = new MechaPart(partDefinition, Optional.empty(), pattern, palette);
                         var stack = PItems.MECHA_PART.get().getDefaultInstance();
                         stack.set(PComponents.MECHA_PART.get(), part);
                         output.accept(stack);

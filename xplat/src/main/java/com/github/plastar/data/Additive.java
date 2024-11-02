@@ -8,7 +8,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -18,11 +18,11 @@ import net.minecraft.world.item.crafting.Ingredient;
  * @param ingredient The recipe ingredient that leads to this additive
  * @param modifiers  A list of attribute modifiers this additive causes
  */
-public record Additive(Ingredient ingredient, List<SpecializedAttributeModifier> modifiers, ResourceKey<Palette> defaultPalette) {
+public record Additive(Ingredient ingredient, List<SpecializedAttributeModifier> modifiers, Holder<Palette> defaultPalette) {
     public static final Codec<Additive> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(Additive::ingredient),
         SpecializedAttributeModifier.CODEC.listOf().fieldOf("modifiers").forGetter(Additive::modifiers),
-        ResourceKey.codec(PRegistries.PALETTE).fieldOf("default_palette").forGetter(Additive::defaultPalette)
+        RegistryFixedCodec.create(PRegistries.PALETTE).fieldOf("default_palette").forGetter(Additive::defaultPalette)
     ).apply(instance, Additive::new));
 
     public static boolean isAdditive(ItemStack stack, HolderLookup.Provider lookup) {

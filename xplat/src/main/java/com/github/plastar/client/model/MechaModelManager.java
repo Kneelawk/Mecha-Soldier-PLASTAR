@@ -3,10 +3,10 @@ package com.github.plastar.client.model;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
+import com.github.plastar.data.PartDefinition;
 import com.google.gson.JsonParseException;
-
-import org.jetbrains.annotations.Nullable;
 
 import de.javagl.jgltf.model.GltfModels;
 import de.javagl.jgltf.model.io.GltfAsset;
@@ -14,6 +14,7 @@ import de.javagl.jgltf.model.io.GltfAssetReader;
 import de.javagl.jgltf.model.io.v2.GltfAssetV2;
 
 import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
@@ -62,10 +63,9 @@ public class MechaModelManager extends SimplePreparableReloadListener<Map<Resour
                          ProfilerFiller profiler) {
         models = object;
     }
-    
-    @Nullable
-    public PreparedModel getModel(ResourceLocation location) {
-        return models.get(location);
+
+    public Optional<PreparedModel> getModel(ResourceKey<PartDefinition> location) {
+        return Optional.ofNullable(models.get(location.location()));
     }
 
     private static void blockbenchBugWorkaround(GltfAsset gltfAsset) {
