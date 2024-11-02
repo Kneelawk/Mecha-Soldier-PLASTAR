@@ -20,13 +20,7 @@ dependencies {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }
-    // TODO: ask Kneelawk how to do this with submodule
-    include("de.javagl:jgltf-model:2.0.4")
-    include("de.javagl:jgltf-impl-v1:2.0.4")
-    include("de.javagl:jgltf-impl-v2:2.0.4")
-    include("com.fasterxml.jackson.core:jackson-core:2.13.1")
-    include("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
-    include("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
+    include(project(path = ":xplat", configuration = "includeTransitive"))
 }
 
 loom {
