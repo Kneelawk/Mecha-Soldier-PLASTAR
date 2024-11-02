@@ -15,9 +15,15 @@ public class MechaAssemblerScreen extends AbstractContainerScreen<MechaAssembler
     public MechaAssemblerScreen(MechaAssemblerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
+    
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        renderTooltip(guiGraphics, mouseX, mouseY);
+    }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        guiGraphics.blit(TEXTURE_LOCATION, this.leftPos, (this.height - this.imageHeight) / 2, 0, 0, this.imageWidth, this.imageHeight);
+        guiGraphics.blit(TEXTURE_LOCATION, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 }
