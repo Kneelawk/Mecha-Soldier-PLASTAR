@@ -62,6 +62,7 @@ public class MechaItem extends Item {
         if (spawned != null) {
             if (player != null) {
                 spawned.lookAt(EntityAnchorArgument.Anchor.EYES, player.getEyePosition());
+                spawned.setOwnerUUID(player.getUUID());
             }
             stack.shrink(1);
             level.gameEvent(player, GameEvent.ENTITY_PLACE, clickedPos);
@@ -77,25 +78,28 @@ public class MechaItem extends Item {
 
         var registries = context.registries();
         if (registries == null) return;
-        
+
         customData.read(registries.createSerializationContext(NbtOps.INSTANCE), Mecha.CODEC.fieldOf("mecha"))
             .ifSuccess(mecha -> {
                 if (!mecha.parts().isEmpty()) {
                     tooltipComponents.add(Component.empty());
-                    tooltipComponents.add(Component.translatable("item.plastar.mecha.tooltip.parts_header").withStyle(ChatFormatting.GRAY));
+                    tooltipComponents.add(Component.translatable("item.plastar.mecha.tooltip.parts_header")
+                        .withStyle(ChatFormatting.GRAY));
                 }
                 for (var section : MechaSection.values()) {
                     var part = mecha.parts().get(section);
                     if (part == null) continue;
                     var partLocation = part.definition().unwrapKey().orElseThrow().location();
-                    tooltipComponents.add(CommonComponents.space().append(Component.translatable(partLocation.toLanguageKey("plastar.part"))));
+                    tooltipComponents.add(CommonComponents.space()
+                        .append(Component.translatable(partLocation.toLanguageKey("plastar.part"))));
                 }
 
                 var needsHeader = new MutableBoolean(true);
                 mecha.forEachAttributeModifier((attribute, modifier) -> {
                     if (needsHeader.booleanValue()) {
                         tooltipComponents.add(Component.empty());
-                        tooltipComponents.add(Component.translatable("item.plastar.mecha.tooltip.attribute_header").withStyle(ChatFormatting.GRAY));
+                        tooltipComponents.add(Component.translatable("item.plastar.mecha.tooltip.attribute_header")
+                            .withStyle(ChatFormatting.GRAY));
                         needsHeader.setFalse();
                     }
                     stack.addModifierTooltip(tooltipComponents::add, null, attribute, modifier);
