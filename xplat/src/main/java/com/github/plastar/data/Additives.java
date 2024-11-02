@@ -24,7 +24,7 @@ public class Additives {
 
     public static void bootstrap(BootstrapContext<Additive> context) {
         //TODO: proper default pattern/palette when we have them
-        register(context, REDSTONE, Ingredient.of(Items.REDSTONE), Patterns.CORE, Palettes.A)
+        register(context, REDSTONE, Ingredient.of(Items.REDSTONE), Patterns.UNPAINTED, Palettes.UNPAINTED)
             .addAdditiveModifier(Attributes.ATTACK_SPEED, 1)
             .addAdditiveModifier(Attributes.MOVEMENT_SPEED, 1);
     }

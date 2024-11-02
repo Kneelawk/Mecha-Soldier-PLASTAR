@@ -7,6 +7,7 @@ import com.github.plastar.data.MechaPart;
 import com.github.plastar.data.PRegistries;
 import com.github.plastar.data.Palettes;
 import com.github.plastar.data.PartDefinition;
+import com.github.plastar.data.Pattern;
 import com.github.plastar.data.Patterns;
 import com.github.plastar.item.PComponents;
 import com.github.plastar.item.PItems;
@@ -14,6 +15,7 @@ import com.github.plastar.item.PItems;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -42,14 +44,20 @@ public record PrintingRecipe(Ingredient sap, int sapCount, ResourceKey<PartDefin
 
     @Override
     public ItemStack assemble(PrintingRecipeInput input, HolderLookup.Provider registries) {
+        var partRegistry = registries.lookupOrThrow(PRegistries.PART);
+        
         ItemStack ret = PART_STACK.copy();
         var additive = Additive.getAdditive(input.additive(), registries);
         if (additive.isPresent()) {
             Additive real = additive.get().value();
             ret.set(PComponents.MECHA_PART.get(), new MechaPart(result, additive.get().unwrapKey(), real.defaultPattern(), real.defaultPalette()));
         } else {
-            //TODO: change to monochrome palette when we have the real one
-            ret.set(PComponents.MECHA_PART.get(), new MechaPart(result, Optional.empty(), Patterns.CORE, Palettes.A));
+            var defaultPattern = partRegistry.get(result)
+                .map(Holder::value)
+                .map(PartDefinition::defaultPattern)
+                .flatMap(Holder::unwrapKey)
+                .orElse(Patterns.UNPAINTED);
+            ret.set(PComponents.MECHA_PART.get(), new MechaPart(result, Optional.empty(), defaultPattern, Palettes.UNPAINTED));
         }
         return ret;
     }

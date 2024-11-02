@@ -1,4 +1,5 @@
 {
+  "default_pattern": "plastar:base_sets/unpainted",
   "section": "head",
   "supported_patterns": "#plastar:base_set_patterns"
 }

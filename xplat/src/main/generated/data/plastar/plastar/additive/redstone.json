@@ -1,6 +1,6 @@
 {
-  "default_palette": "plastar:a",
-  "default_pattern": "plastar:core",
+  "default_palette": "plastar:unpainted",
+  "default_pattern": "plastar:base_sets/unpainted",
   "ingredient": {
     "item": "minecraft:redstone"
   },

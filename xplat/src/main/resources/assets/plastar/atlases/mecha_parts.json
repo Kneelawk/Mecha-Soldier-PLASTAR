@@ -2,18 +2,18 @@
   "sources": [
     {
       "type": "paletted_permutations",
-      "textures": [ 
-        "plastar:mecha/test_part/checker", 
-        "plastar:mecha/test_part/striped", 
-        "plastar:mecha/test_part/core", 
+      "textures": [
         "plastar:mecha/base_sets/stripy",
-        "plastar:mecha/base_sets/shiny"
+        "plastar:mecha/base_sets/shiny",
+        "plastar:mecha/base_sets/flame",
+        "plastar:mecha/base_sets/unpainted"
       ],
       "palette_key": "plastar:mecha/palette_template",
       "permutations": {
-        "a": "plastar:mecha/test_palette_a",
-        "b": "plastar:mecha/test_palette_b",
-        "c": "plastar:mecha/test_palette_c"
+        "a": "plastar:mecha/palette/test_palette_a",
+        "b": "plastar:mecha/palette/test_palette_b",
+        "c": "plastar:mecha/palette/test_palette_c",
+        "unpainted": "plastar:mecha/palette/unpainted"
       }
     }
   ]
