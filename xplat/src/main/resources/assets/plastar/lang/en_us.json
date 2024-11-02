@@ -3,6 +3,7 @@
   "item.plastar.polystyrene": "Polystyrene",
   "item.plastar.tree_tap": "Storax Tree Tap",
   "item.plastar.nippers": "Nippers",
+  "tooltip.nippers.description": "Right click runners while holding this item",
   "item.plastar.mecha_part": "Mecha Part",
   "item.plastar.mecha_part.tooltip.pattern": "Pattern: %s",
   "item.plastar.mecha_part.tooltip.palette": "Palette: %s",
@@ -11,20 +12,42 @@
   "item.plastar.mecha.tooltip.attribute_header": "Stats:",
 
   "block.plastar.mecha_assembler": "Mecha Assembler",
-
-  "plastar.part.plastar.head": "Test Head",
-  "plastar.part.plastar.torso": "Test Torso",
-  "plastar.part.plastar.left_arm": "Test Left Arm",
-  "plastar.part.plastar.right_arm": "Test Right Arm",
-  "plastar.part.plastar.left_leg": "Test Left Leg",
-  "plastar.part.plastar.right_leg": "Test Right Leg",
-  
   "block.plastar.storax_acacia_log": "Storax-filled Acacia Log",
 
+  "plastar.part.plastar.emma/head": "Head (Emma)",
+  "plastar.part.plastar.emma/torso": "Torso (Emma)",
+  "plastar.part.plastar.emma/left_arm": "Left Arm (Emma)",
+  "plastar.part.plastar.emma/right_arm": "Right Arm (Emma)",
+  "plastar.part.plastar.emma/left_leg": "Left Leg (Emma)",
+  "plastar.part.plastar.emma/right_leg": "Right Leg (Emma)",
+  "plastar.part.plastar.emma/backpack": "Backpack (Emma)",
+  "plastar.part.plastar.hama/head": "Head (Hama)",
+  "plastar.part.plastar.hama/torso": "Torso (Hama)",
+  "plastar.part.plastar.hama/left_arm": "Left Arm (Hama)",
+  "plastar.part.plastar.hama/right_arm": "Right Arm (Hama)",
+  "plastar.part.plastar.hama/left_leg": "Left Leg (Hama)",
+  "plastar.part.plastar.hama/right_leg": "Right Leg (Hama)",
+  "plastar.part.plastar.hama/backpack": "Backpack (Hama)",
+  "plastar.part.plastar.maple/head": "Head (Maple)",
+  "plastar.part.plastar.maple/torso": "Torso (Maple)",
+  "plastar.part.plastar.maple/left_arm": "Left Arm (Maple)",
+  "plastar.part.plastar.maple/right_arm": "Right Arm (Maple)",
+  "plastar.part.plastar.maple/left_leg": "Left Leg (Maple)",
+  "plastar.part.plastar.maple/right_leg": "Right Leg (Maple)",
+  "plastar.part.plastar.maple/backpack": "Backpack (Maple)",
+  
+  "plastar.pattern.plastar.base_sets/flame": "Flame",
+  "plastar.pattern.plastar.base_sets/shiny": "Shiny",
+  "plastar.pattern.plastar.base_sets/stripy": "Stripy",
+  "plastar.pattern.plastar.base_sets/unpainted": "Unpainted",
+  
+  "plastar.palette.plastar.unpainted": "Unpainted",
+  "plastar.palette.plastar.a": "Palette A",
+  "plastar.palette.plastar.b": "Palette B",
+  "plastar.palette.plastar.c": "Palette C",
+  
   "itemGroup.plastar.main": "PLASTAR Mecha Soldier",
-
-  "tooltip.nippers.description": "Right click runners while holding this item",
-
+  
   "advancement.plastar.root.title": "Mecha Soldier PLASTAR",
   "advancement.plastar.root.description": "Obtain Styrol from a storax-filled acacia tree",
   "advancement.plastar.polymerisation.title": "Polymerisation",
