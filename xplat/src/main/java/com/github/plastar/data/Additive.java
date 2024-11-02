@@ -18,11 +18,10 @@ import net.minecraft.world.item.crafting.Ingredient;
  * @param ingredient The recipe ingredient that leads to this additive
  * @param modifiers  A list of attribute modifiers this additive causes
  */
-public record Additive(Ingredient ingredient, List<SpecializedAttributeModifier> modifiers, ResourceKey<Pattern> defaultPattern, ResourceKey<Palette> defaultPalette) {
+public record Additive(Ingredient ingredient, List<SpecializedAttributeModifier> modifiers, ResourceKey<Palette> defaultPalette) {
     public static final Codec<Additive> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(Additive::ingredient),
         SpecializedAttributeModifier.CODEC.listOf().fieldOf("modifiers").forGetter(Additive::modifiers),
-        ResourceKey.codec(PRegistries.PATTERN).fieldOf("default_pattern").forGetter(Additive::defaultPattern),
         ResourceKey.codec(PRegistries.PALETTE).fieldOf("default_palette").forGetter(Additive::defaultPalette)
     ).apply(instance, Additive::new));
 

@@ -23,15 +23,14 @@ public class Additives {
     }
 
     public static void bootstrap(BootstrapContext<Additive> context) {
-        //TODO: proper default pattern/palette when we have them
-        register(context, REDSTONE, Ingredient.of(Items.REDSTONE), Patterns.UNPAINTED, Palettes.UNPAINTED)
+        register(context, REDSTONE, Ingredient.of(Items.REDSTONE), Palettes.UNPAINTED)
             .addAdditiveModifier(Attributes.ATTACK_SPEED, 1)
             .addAdditiveModifier(Attributes.MOVEMENT_SPEED, 1);
     }
     
-    private static Builder register(BootstrapContext<Additive> context, ResourceKey<Additive> key, Ingredient ingredient, ResourceKey<Pattern> pattern, ResourceKey<Palette> palette) {
+    private static Builder register(BootstrapContext<Additive> context, ResourceKey<Additive> key, Ingredient ingredient, ResourceKey<Palette> palette) {
         var builder = new Builder(key.location());
-        context.register(key, new Additive(ingredient, builder.modifiers, pattern, palette));
+        context.register(key, new Additive(ingredient, builder.modifiers, palette));
         return builder;
     }
 
