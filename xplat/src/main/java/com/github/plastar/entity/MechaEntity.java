@@ -62,7 +62,7 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.25).add(Attributes.ATTACK_DAMAGE, 2.0).add(Attributes.ENTITY_INTERACTION_RANGE, 10);
+        return createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.25).add(Attributes.ATTACK_DAMAGE, 2.0).add(Attributes.ENTITY_INTERACTION_RANGE, 0);
     }
 
     @Override
