@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "plastar:block/printer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "plastar:block/printer"
+    },
+    "facing=south": {
+      "model": "plastar:block/printer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "plastar:block/printer",
+      "y": 270
+    }
+  }
+}

@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 import com.github.plastar.Constants;
+import com.github.plastar.block.PBlocks;
 import com.github.plastar.client.MechaItemRenderer;
 import com.github.plastar.client.MechaPartItemRenderer;
 import com.github.plastar.client.PLASTARClient;
@@ -13,12 +14,14 @@ import com.github.plastar.entity.PEntities;
 import com.github.plastar.item.PItems;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -32,6 +35,7 @@ public class FabricModClient implements ClientModInitializer {
         EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), NoopRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA.get(), new MechaItemRenderer()::renderByItem);
         BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA_PART.get(), new MechaPartItemRenderer()::renderByItem);
+        BlockRenderLayerMap.INSTANCE.putBlock(PBlocks.PRINTER.get(), RenderType.cutoutMipped());
         PMenuScreens.register(MenuScreens::register);
         
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(

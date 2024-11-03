@@ -16,7 +16,7 @@ public class PBlocks {
     public static final Supplier<Block> MECHA_ASSEMBLER = REGISTRAR.register("mecha_assembler", () -> 
         new MechaAssemblerBlock(BlockBehaviour.Properties.of()));
     public static final Supplier<Block> PRINTER = REGISTRAR.register("printer", () ->
-        new PrinterBlock(BlockBehaviour.Properties.of()));
+        new PrinterBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static void register() {
     }
