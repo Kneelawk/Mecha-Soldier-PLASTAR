@@ -7,7 +7,7 @@
   ],
   "textures": {
     "0": "plastar:block/printer",
-    "particle": "plastar:block/printer"
+    "particle": "plastar:block/mecha_assembler_front"
   },
   "render_type": "minecraft:cutout_mipped_all",
   "elements": [
