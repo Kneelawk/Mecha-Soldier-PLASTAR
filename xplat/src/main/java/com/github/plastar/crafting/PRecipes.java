@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 
 public class PRecipes {
     private static final Registrar<RecipeType<?>> TYPE_REGISTRAR = PLASTARMod.REGISTRARS.get(Registries.RECIPE_TYPE);
@@ -16,6 +17,8 @@ public class PRecipes {
     
     public static final Supplier<RecipeType<PrintingRecipe>> PRINTING = TYPE_REGISTRAR.register("printing", RecipeTypeImpl::new);
     public static final Supplier<RecipeSerializer<PrintingRecipe>> PRINTING_SERIALIZER = SERIALIZER_REGISTRAR.register("printing", PrintingRecipe.Serializer::new);
+    
+    public static final Supplier<RecipeSerializer<CardPunchingRecipe>> CARD_PUNCHING_SERIALIZER = SERIALIZER_REGISTRAR.register("card_punching", () -> new SimpleCraftingRecipeSerializer<>(CardPunchingRecipe::new));
     
     public static void register() {
     }

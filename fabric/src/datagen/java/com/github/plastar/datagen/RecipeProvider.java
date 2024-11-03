@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 import com.github.plastar.block.PBlocks;
+import com.github.plastar.crafting.CardPunchingRecipe;
 import com.github.plastar.crafting.PrintingRecipe;
-import com.github.plastar.data.PartDefinition;
 import com.github.plastar.data.Parts;
 import com.github.plastar.item.PItems;
 
@@ -13,14 +13,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import static com.github.plastar.Constants.rl;
@@ -72,6 +71,8 @@ public class RecipeProvider extends FabricRecipeProvider {
             200)
             .unlockedBy("has_storol", has(PItems.STYROL.get()))
             .save(output);
+        
+        output.accept(rl("card_punching"), new CardPunchingRecipe(CraftingBookCategory.MISC), null);
         
         // TODO: Individual costs and stuff
         var parts = Arrays.asList(

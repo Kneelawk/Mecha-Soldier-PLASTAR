@@ -9,7 +9,12 @@
   "item.plastar.mecha_part.tooltip.palette": "Palette: %s",
   "item.plastar.mecha": "PLASTAR Mecha",
   "item.plastar.punch_card": "Punch Card",
+  "item.plastar.punch_card.tooltip.program_empty": "Program Empty",
+  "item.plastar.punch_card.tooltip.stay_within_2d": "Stay Within: (%s, %s) to (%s, %s)",
   "item.plastar.zoning_tool": "PLASTAR Zoning Tool",
+  "item.plastar.zoning_tool.tooltip.no_selection": "No Selection",
+  "item.plastar.zoning_tool.tooltip.selected_position": "Partial Selection: (%s, %s, %s)",
+  "item.plastar.zoning_tool.tooltip.selected_area_2d": "Selected Area: (%s, %s) to (%s, %s)",
   "item.plastar.mecha.tooltip.parts_header": "Parts:",
   "item.plastar.mecha.tooltip.attribute_header": "Stats:",
 
@@ -38,19 +43,19 @@
   "plastar.part.plastar.maple/left_leg": "Left Leg (Maple)",
   "plastar.part.plastar.maple/right_leg": "Right Leg (Maple)",
   "plastar.part.plastar.maple/backpack": "Backpack (Maple)",
-  
+
   "plastar.pattern.plastar.base_sets/flame": "Flame",
   "plastar.pattern.plastar.base_sets/shiny": "Shiny",
   "plastar.pattern.plastar.base_sets/stripy": "Stripy",
   "plastar.pattern.plastar.base_sets/unpainted": "Unpainted",
-  
+
   "plastar.palette.plastar.unpainted": "Unpainted",
   "plastar.palette.plastar.a": "Palette A",
   "plastar.palette.plastar.b": "Palette B",
   "plastar.palette.plastar.c": "Palette C",
-  
+
   "itemGroup.plastar.main": "PLASTAR Mecha Soldier",
-  
+
   "advancement.plastar.root.title": "Mecha Soldier PLASTAR",
   "advancement.plastar.root.description": "Obtain Styrol from a storax-filled acacia tree",
   "advancement.plastar.polymerisation.title": "Polymerisation",
