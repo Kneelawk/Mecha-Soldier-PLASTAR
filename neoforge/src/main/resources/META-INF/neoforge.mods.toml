@@ -6,7 +6,7 @@ license = "MIT"
 modId = "${mod_id}"
 version = "${version}"
 displayName = "Mecha Soldier PLASTAR"
-authors = "LemmaEOF, June, Snakefangox, MattiDragon, MerchantPug, Kneelawk"
+authors = "LemmaEOF, Khazoda, Snakefangox, MattiDragon, MerchantPug, Kneelawk"
 description = "Tiny Mecha Mod@"
 logoFile = "assets/${mod_id}/icon.png"
 
