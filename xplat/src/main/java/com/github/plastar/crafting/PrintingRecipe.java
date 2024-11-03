@@ -34,11 +34,8 @@ public record PrintingRecipe(Ingredient sap, int sapCount, ResourceKey<PartDefin
 
     @Override
     public boolean matches(PrintingRecipeInput input, Level level) {
-        if (level instanceof ServerLevel server) {
-            var isValidAdditive = Additive.isAdditive(input.additive(), server.getServer().reloadableRegistries().get());
-            return sap.test(input.sap()) && input.sap().getCount() >= sapCount && (input.additive().isEmpty() || isValidAdditive);
-        }
-        return false;
+        var isValidAdditive = Additive.isAdditive(input.additive(), level.registryAccess());
+        return sap.test(input.sap()) && input.sap().getCount() >= sapCount && (input.additive().isEmpty() || isValidAdditive);
     }
 
     @Override
