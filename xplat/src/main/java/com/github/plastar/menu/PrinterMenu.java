@@ -73,7 +73,7 @@ public class PrinterMenu extends AbstractContainerMenu {
         this.level = playerInventory.player.level();
         this.sapSlot = this.addSlot(new Slot(this.container, 0, 12, 45));
         this.additiveSlot = this.addSlot(new Slot(this.container, 1, 32, 45));
-        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 2, 145, 57) {
+        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 2, 145, 33) {
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
