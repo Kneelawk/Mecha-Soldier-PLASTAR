@@ -27,13 +27,11 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
 
     private static final int SCROLLER_WIDTH = 12;
     private static final int SCROLLER_HEIGHT = 15;
-    private static final int RECIPES_COLUMNS = 4;
-    private static final int RECIPES_ROWS = 3;
-    private static final int RECIPES_IMAGE_SIZE_WIDTH = 16;
-    private static final int RECIPES_IMAGE_SIZE_HEIGHT = 18;
+    private static final int RECIPES_COUNT = 12;
     private static final int SCROLLER_FULL_HEIGHT = 54;
-    private static final int RECIPES_X = 52;
+    private static final int RECIPES_X = 58;
     private static final int RECIPES_Y = 14;
+    private static final int SCROLLBAR_OFFSET = 67;
 
     private float scrollOffset;
     private boolean scrolling;
@@ -56,12 +54,12 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         guiGraphics.blit(BG_LOCATION, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
-        int recipesLeft = this.leftPos + 58;
-        int recipesTop = this.topPos + 14;
+        int recipesLeft = this.leftPos + RECIPES_X;
+        int recipesTop = this.topPos + RECIPES_Y;
         int scrollbarPos = (int) (41 * scrollOffset);
         ResourceLocation resourceLocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(resourceLocation, recipesLeft + 67, recipesTop + scrollbarPos, 12, 15);
-        int elementIdx = this.startIndex + 12;
+        guiGraphics.blitSprite(resourceLocation, recipesLeft + SCROLLBAR_OFFSET, recipesTop + scrollbarPos, SCROLLER_WIDTH, SCROLLER_HEIGHT);
+        int elementIdx = this.startIndex + RECIPES_COUNT;
         renderButtons(guiGraphics, mouseX, mouseY, recipesLeft, recipesTop, elementIdx);
         renderRecipes(guiGraphics, recipesLeft, recipesTop, elementIdx);
     }
@@ -105,9 +103,9 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         this.scrolling = false;
         if (this.displayRecipes) {
-            int recipesLeft = this.leftPos + 52;
-            int recipesTop = this.topPos + 14;
-            int recipesIdx = this.startIndex + 12;
+            int recipesLeft = this.leftPos + RECIPES_X;
+            int recipesTop = this.topPos + RECIPES_Y;
+            int recipesIdx = this.startIndex + RECIPES_COUNT;
 
             for (int l = this.startIndex; l < recipesIdx; l++) {
                 int m = l - this.startIndex;
@@ -121,6 +119,7 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
                 }
             }
 
+            // TODO: This math is wrong
             recipesLeft = this.leftPos + 119;
             recipesTop = this.topPos + 9;
             if (mouseX >= (double)recipesLeft && mouseX < (double)(recipesLeft + 12) && mouseY >= (double)recipesTop && mouseY < (double)(recipesTop + 54)) {
@@ -134,8 +133,8 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
         if (this.scrolling && this.isScrollBarActive()) {
-            int i = this.topPos + 14;
-            int j = i + 54;
+            int i = this.topPos + RECIPES_Y;
+            int j = i + SCROLLER_FULL_HEIGHT;
             this.scrollOffset = ((float)mouseY - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
             this.scrollOffset = Mth.clamp(this.scrollOffset, 0.0F, 1.0F);
             this.startIndex = (int)((double)(this.scrollOffset * (float)this.getOffscreenRows()) + 0.5) * 4;
