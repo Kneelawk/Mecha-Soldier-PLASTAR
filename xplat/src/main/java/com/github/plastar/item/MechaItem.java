@@ -3,18 +3,10 @@ package com.github.plastar.item;
 import java.util.List;
 import java.util.Objects;
 
-import com.github.plastar.Constants;
 import com.github.plastar.Log;
 import com.github.plastar.data.Mecha;
 import com.github.plastar.data.MechaSection;
 import com.github.plastar.entity.PEntities;
-
-import net.minecraft.core.dispenser.BlockSource;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
-
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.block.DispenserBlock;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
@@ -22,6 +14,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -34,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class MechaItem extends Item {
@@ -45,7 +41,15 @@ public class MechaItem extends Item {
             try {
                 PEntities.MECHA_ENTITY.get().spawn(blockSource.level(),
                     EntityType.appendDefaultStackConfig(
-                        entity -> stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).loadInto(entity),
+                        entity -> {
+                            var data = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag();
+                            // Remove unwanted keys to prevent force-op
+                            data.getAllKeys()
+                                .stream()
+                                .filter(key -> !key.equals("mecha") && !key.equals("Health"))
+                                .forEach(data::remove);
+                            entity.load(data);
+                        },
                         blockSource.level(),
                         stack,
                         null),
