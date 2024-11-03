@@ -8,14 +8,14 @@
   "item.plastar.mecha_part.tooltip.pattern": "Pattern: %s",
   "item.plastar.mecha_part.tooltip.palette": "Palette: %s",
   "item.plastar.mecha": "PLASTAR Mecha",
+  "item.plastar.punch_card": "Punch Card",
+  "item.plastar.zoning_tool": "PLASTAR Zoning Tool",
   "item.plastar.mecha.tooltip.parts_header": "Parts:",
   "item.plastar.mecha.tooltip.attribute_header": "Stats:",
-  "item.plastar.punch_card": "Punchcard",
-  "item.plastar.cartographer": "Cartographer",
 
   "block.plastar.mecha_assembler": "Mecha Assembler",
   "block.plastar.storax_acacia_log": "Storax-filled Acacia Log",
-  "block.plastar.printer": "3D Printer",
+  "block.plastar.printer": "Part Printer",
 
   "plastar.part.plastar.emma/head": "Head (Emma)",
   "plastar.part.plastar.emma/torso": "Torso (Emma)",

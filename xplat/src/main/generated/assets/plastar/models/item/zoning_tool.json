@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "plastar:item/cartographer"
+    "layer0": "plastar:item/zoning_tool"
   }
 }

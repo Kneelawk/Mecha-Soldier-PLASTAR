@@ -2,8 +2,8 @@ package com.github.plastar.item;
 
 import net.minecraft.world.item.Item;
 
-public class CartographerItem extends Item {
-    public CartographerItem(Properties properties) {
+public class ZoningToolItem extends Item {
+    public ZoningToolItem(Properties properties) {
         super(properties);
     }
     
