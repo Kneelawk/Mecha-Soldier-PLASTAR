@@ -37,7 +37,7 @@
     "fabric-api": "*",
     "flywheel": ">=1- <2",
     "smartbrainlib": ">=1.8",
-    "minecraft": ">=1.21- <1.22-",
+    "minecraft": ">=1.21- <1.21.3-",
     "java": ">=17"
   },
   "custom": {

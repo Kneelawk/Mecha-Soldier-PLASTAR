@@ -19,7 +19,7 @@ file = "common-at.cfg"
 [[dependencies.${ mod_id }]]
 modId = "neoforge"
 type = "REQUIRED"
-versionRange = "[21.0,)"
+versionRange = "[21.0,21.2)"
 ordering = "NONE"
 side = "BOTH"
 
