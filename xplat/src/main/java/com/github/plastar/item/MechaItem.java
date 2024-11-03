@@ -3,9 +3,18 @@ package com.github.plastar.item;
 import java.util.List;
 import java.util.Objects;
 
+import com.github.plastar.Constants;
+import com.github.plastar.Log;
 import com.github.plastar.data.Mecha;
 import com.github.plastar.data.MechaSection;
 import com.github.plastar.entity.PEntities;
+
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.block.DispenserBlock;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
@@ -28,8 +37,36 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class MechaItem extends Item {
+    private static final DispenseItemBehavior DISPENSE_BEHAVIOUR = new DefaultDispenseItemBehavior() {
+        @Override
+        public ItemStack execute(BlockSource blockSource, ItemStack stack) {
+            var direction = blockSource.state().getValue(DispenserBlock.FACING);
+
+            try {
+                PEntities.MECHA_ENTITY.get().spawn(blockSource.level(),
+                    EntityType.appendDefaultStackConfig(
+                        entity -> stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).loadInto(entity),
+                        blockSource.level(),
+                        stack,
+                        null),
+                    blockSource.pos().relative(direction),
+                    MobSpawnType.DISPENSER,
+                    direction != Direction.UP,
+                    false);
+            } catch (Exception var6) {
+                Log.LOG.error("Error while dispensing mecha from dispenser at {}", blockSource.pos(), var6);
+                return ItemStack.EMPTY;
+            }
+
+            stack.shrink(1);
+            blockSource.level().gameEvent(null, GameEvent.ENTITY_PLACE, blockSource.pos());
+            return stack;
+        }
+    };
+    
     public MechaItem(Properties properties) {
         super(properties);
+        DispenserBlock.registerBehavior(this, DISPENSE_BEHAVIOUR);
     }
 
     @Override
