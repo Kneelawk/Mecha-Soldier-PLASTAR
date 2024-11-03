@@ -30,6 +30,7 @@ public class PCreativeModeTab {
                 output.accept(PItems.POLYSTYRENE.get());
                 output.accept(PItems.NIPPERS.get());
                 output.accept(PItems.MECHA_ASSEMBLER.get());
+                output.accept(PItems.PRINTER.get());
                 output.accept(PItems.PUNCH_CARD.get());
                 output.accept(PItems.CARTOGRAPHER.get());
                 

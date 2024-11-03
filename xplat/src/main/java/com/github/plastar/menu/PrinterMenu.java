@@ -171,7 +171,6 @@ public class PrinterMenu extends AbstractContainerMenu {
         if (!sapStack.isEmpty()) {
             this.recipes = this.level.getRecipeManager().getRecipesFor(PRecipes.PRINTING.get(), createRecipeInput(container), this.level);
         }
-
     }
 
     void setupResultSlot() {

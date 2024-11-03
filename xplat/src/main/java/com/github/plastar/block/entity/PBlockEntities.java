@@ -17,6 +17,10 @@ public class PBlockEntities {
     public static final Supplier<BlockEntityType<MechaAssemblerBlockEntity>> MECHA_ASSEMBLER = 
         REGISTRAR.register("mecha_assembler", () -> makeType(MechaAssemblerBlockEntity::new,
             PBlocks.MECHA_ASSEMBLER.get()));
+    public static final Supplier<BlockEntityType<PrinterBlockEntity>> PRINTER =
+        REGISTRAR.register("printer", () -> makeType(PrinterBlockEntity::new,
+            PBlocks.PRINTER.get()));
+
 
     private static <T extends BlockEntity> BlockEntityType<T> makeType(BlockEntityType.BlockEntitySupplier<T> factory, Block... blocks) {
         // We can actually safely pass null here

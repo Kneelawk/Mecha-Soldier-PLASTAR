@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.MenuType;
 public class PMenuScreens {
     public static void register(MenuScreenConsumer consumer) {
         consumer.register(PMenus.MECHA_ASSEMBLER.get(), MechaAssemblerScreen::new);
+        consumer.register(PMenus.PRINTER.get(), PrinterScreen::new);
     }
     
     public interface MenuScreenConsumer {
