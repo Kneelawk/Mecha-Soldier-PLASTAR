@@ -1,0 +1,8 @@
+{
+  "type": "plastar:printing",
+  "result": "plastar:maple/backpack",
+  "sap": {
+    "item": "plastar:polystyrene"
+  },
+  "sap_count": 4
+}

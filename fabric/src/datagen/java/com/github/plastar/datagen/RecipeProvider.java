@@ -1,9 +1,11 @@
 package com.github.plastar.datagen;
 
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 import com.github.plastar.block.PBlocks;
 import com.github.plastar.crafting.PrintingRecipe;
+import com.github.plastar.data.PartDefinition;
 import com.github.plastar.data.Parts;
 import com.github.plastar.item.PItems;
 
@@ -16,6 +18,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -69,7 +72,21 @@ public class RecipeProvider extends FabricRecipeProvider {
             200)
             .unlockedBy("has_storol", has(PItems.STYROL.get()))
             .save(output);
+        
+        // TODO: Individual costs and stuff
+        var parts = Arrays.asList(
+            Parts.EMMA_HEAD, Parts.EMMA_TORSO, Parts.EMMA_LEFT_ARM, Parts.EMMA_RIGHT_ARM,
+            Parts.EMMA_LEFT_LEG, Parts.EMMA_RIGHT_LEG, Parts.EMMA_BACKPACK,
+            
+            Parts.HAMA_HEAD, Parts.HAMA_TORSO, Parts.HAMA_LEFT_ARM, Parts.HAMA_RIGHT_ARM,
+            Parts.HAMA_LEFT_LEG, Parts.HAMA_RIGHT_LEG, Parts.HAMA_BACKPACK,
+            
+            Parts.MAPLE_HEAD, Parts.MAPLE_TORSO, Parts.MAPLE_LEFT_ARM, Parts.MAPLE_RIGHT_ARM, 
+            Parts.MAPLE_LEFT_LEG, Parts.MAPLE_RIGHT_LEG, Parts.MAPLE_BACKPACK
+        );
 
-        output.accept(rl("left_emma_leg"), new PrintingRecipe(Ingredient.of(PItems.POLYSTYRENE.get()), 4, Parts.EMMA_LEFT_LEG), null);
+        for (var part : parts) {
+            output.accept(part.location(), new PrintingRecipe(Ingredient.of(PItems.POLYSTYRENE.get()), 4, part), null);
+        }
     }
 }
