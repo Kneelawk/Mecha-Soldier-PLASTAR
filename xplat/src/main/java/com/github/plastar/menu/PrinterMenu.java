@@ -160,7 +160,7 @@ public class PrinterMenu extends AbstractContainerMenu {
         }
     }
 
-    private static PrintingRecipeInput createRecipeInput(Container container) {
+    public static PrintingRecipeInput createRecipeInput(Container container) {
         return new PrintingRecipeInput(container.getItem(0), container.getItem(1));
     }
 

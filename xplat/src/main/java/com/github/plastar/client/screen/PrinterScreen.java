@@ -1,7 +1,8 @@
 package com.github.plastar.client.screen;
 
-import com.github.plastar.Constants;
+import java.util.List;
 
+import com.github.plastar.Constants;
 import com.github.plastar.crafting.PrintingRecipe;
 import com.github.plastar.menu.PrinterMenu;
 
@@ -15,8 +16,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.crafting.RecipeHolder;
-
-import java.util.List;
 
 public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
     private static final ResourceLocation BG_LOCATION = Constants.rl("textures/gui/container/printer.png");
@@ -68,6 +67,9 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
     }
 
     private void renderButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
+        var input = PrinterMenu.createRecipeInput(menu.container);
+        var registries = Minecraft.getInstance().level.registryAccess();
+        
         for (int i = this.startIndex; i < lastVisibleElementIndex && i < this.menu.getNumRecipes(); i++) {
             int j = i - this.startIndex;
             int buttonX = x + j % 4 * 16;
@@ -83,6 +85,7 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
             }
 
             guiGraphics.blitSprite(resourceLocation, buttonX, buttonY - 1, 16, 18);
+            guiGraphics.renderFakeItem(menu.getRecipes().get(i).value().assemble(input, registries), buttonX, buttonY + 1);
         }
     }
 
