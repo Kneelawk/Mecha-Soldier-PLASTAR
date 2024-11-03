@@ -270,13 +270,20 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
             MechaProgram program = usedStack.getOrDefault(PComponents.MECHA_PROGRAM.get(), MechaProgram.DEFAULT);
             Optional<MechaProgram> prev = entityData.get(MECHA_PROGRAM_ACCESSOR);
             entityData.set(MECHA_PROGRAM_ACCESSOR, Optional.of(program));
+            usedStack.shrink(1);
 
             ItemStack prevStack = ItemStack.EMPTY;
             if (prev.isPresent()) {
                 prevStack = new ItemStack(PItems.PUNCH_CARD.get());
                 prevStack.set(PComponents.MECHA_PROGRAM.get(), prev.get());
             }
-            player.setItemInHand(hand, prevStack);
+
+            if (usedStack.isEmpty()) {
+                player.setItemInHand(hand, prevStack);
+            } else if (!prevStack.isEmpty()) {
+                player.getInventory().placeItemBackInInventory(prevStack, false);
+            }
+
             return InteractionResult.CONSUME;
         } else if (usedStack.isEmpty()) {
             Optional<UUID> owner = entityData.get(OWNER_UUID_ACCESSOR);

@@ -32,7 +32,7 @@ public class CardPunchingRecipe extends CustomRecipe {
 
         for (ItemStack stack : input.items()) {
             if (stack.is(PItems.PUNCH_CARD.get())) {
-                punchCard = stack.copy();
+                punchCard = stack.copyWithCount(1);
             }
             if (stack.is(PItems.ZONING_TOOL.get())) {
                 zoningTool = stack.copy();
