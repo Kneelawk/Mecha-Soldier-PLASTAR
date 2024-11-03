@@ -72,6 +72,6 @@ public class ModelProvider extends FabricModelProvider {
         generators.generateFlatItem(PItems.TREE_TAP.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         generators.generateFlatItem(PItems.NIPPERS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         generators.generateFlatItem(PItems.PUNCH_CARD.get(), ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(PItems.ZONING_TOOL.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(PItems.ZONING_TOOL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 }
