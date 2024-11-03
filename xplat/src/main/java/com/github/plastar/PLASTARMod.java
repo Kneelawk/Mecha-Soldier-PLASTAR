@@ -7,6 +7,7 @@ import com.github.plastar.entity.PEntities;
 import com.github.plastar.item.PComponents;
 import com.github.plastar.item.PCreativeModeTab;
 import com.github.plastar.item.PItems;
+import com.github.plastar.item.modifier.PLootFunctions;
 import com.github.plastar.menu.PMenus;
 import com.github.plastar.registry.RegistrarSet;
 import com.github.plastar.sound.PSounds;
@@ -26,6 +27,7 @@ public class PLASTARMod {
         PCreativeModeTab.register();
         PSounds.register();
         PTreeDecoratorTypes.register();
+        PLootFunctions.register();
     }
 
     public static void initSync() {
