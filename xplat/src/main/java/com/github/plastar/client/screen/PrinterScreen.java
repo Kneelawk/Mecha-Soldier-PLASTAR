@@ -44,7 +44,7 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
     public PrinterScreen(PrinterMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         menu.registerUpdateListener(this::resetScroll);
-        titleLabelY -= 1;
+        titleLabelY -= 2;
     }
     
     @Override
@@ -61,7 +61,7 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
         int recipesTop = this.topPos + 14;
         int scrollbarPos = (int) (41 * scrollOffset);
         ResourceLocation resourceLocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(resourceLocation, recipesLeft + 119, recipesTop + 15 + scrollbarPos, 12, 15);
+        guiGraphics.blitSprite(resourceLocation, recipesLeft + 67, recipesTop + scrollbarPos, 12, 15);
         int elementIdx = this.startIndex + 12;
         renderButtons(guiGraphics, mouseX, mouseY, recipesLeft, recipesTop, elementIdx);
         renderRecipes(guiGraphics, recipesLeft, recipesTop, elementIdx);
@@ -72,7 +72,7 @@ public class PrinterScreen extends AbstractContainerScreen<PrinterMenu> {
             int j = i - this.startIndex;
             int buttonX = x + j % 4 * 16;
             int buttonRow = j / 4;
-            int buttonY = y + buttonRow * 18 + 2;
+            int buttonY = y + buttonRow * 18 + 1;
             ResourceLocation resourceLocation;
             if (i == this.menu.getSelectedRecipeIndex()) {
                 resourceLocation = RECIPE_SELECTED_SPRITE;
