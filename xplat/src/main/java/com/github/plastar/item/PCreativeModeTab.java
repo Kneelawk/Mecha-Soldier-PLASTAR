@@ -32,7 +32,7 @@ public class PCreativeModeTab {
                 output.accept(PItems.MECHA_ASSEMBLER.get());
                 output.accept(PItems.PRINTER.get());
                 output.accept(PItems.PUNCH_CARD.get());
-                output.accept(PItems.CARTOGRAPHER.get());
+                output.accept(PItems.ZONING_TOOL.get());
                 
                 var mechaStack = PItems.MECHA.get().getDefaultInstance();
                 var mecha = Mecha.getDefault(parameters.holders());

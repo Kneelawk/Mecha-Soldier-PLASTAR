@@ -24,7 +24,8 @@ public class PItems {
     public static final Supplier<Item> NIPPERS = REGISTRAR.register("nippers", () -> new NippersItem(new Item.Properties().stacksTo(1)));
     
     public static final Supplier<Item> PUNCH_CARD = REGISTRAR.register("punch_card", () -> new PunchCardItem(new Item.Properties().component(PComponents.MECHA_PROGRAM.get(), MechaProgram.DEFAULT)));
-    public static final Supplier<Item> CARTOGRAPHER = REGISTRAR.register("cartographer", () -> new CartographerItem(new Item.Properties()));
+    public static final Supplier<Item> ZONING_TOOL =
+        REGISTRAR.register("zoning_tool", () -> new ZoningToolItem(new Item.Properties()));
 
     /* Block Items */
     public static final Supplier<BlockItem> STORAX_ACACIA_LOG = REGISTRAR.register("storax_acacia_log", () -> new BlockItem(PBlocks.STORAX_ACACIA_LOG.get(), new Item.Properties()));
