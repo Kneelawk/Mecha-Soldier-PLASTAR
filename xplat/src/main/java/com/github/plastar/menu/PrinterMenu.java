@@ -2,6 +2,7 @@ package com.github.plastar.menu;
 
 import java.util.List;
 
+import com.github.plastar.block.PBlocks;
 import com.github.plastar.crafting.PRecipes;
 import com.github.plastar.crafting.PrintingRecipe;
 import com.github.plastar.crafting.PrintingRecipeInput;
@@ -23,7 +24,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 //TODO: do I need to check for additive even though it's technically optional?
 public class PrinterMenu extends AbstractContainerMenu {
@@ -53,7 +53,7 @@ public class PrinterMenu extends AbstractContainerMenu {
         this(containerId, playerInventory, ContainerLevelAccess.NULL);
     }
 
-    protected PrinterMenu(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
+    public PrinterMenu(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
         super(PMenus.PRINTER.get(), containerId);
         this.selectedRecipeIndex = DataSlot.standalone();
         this.recipes = Lists.newArrayList();
@@ -134,7 +134,7 @@ public class PrinterMenu extends AbstractContainerMenu {
     }
 
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, Blocks.STONECUTTER);
+        return stillValid(this.access, player, PBlocks.PRINTER.get());
     }
 
     public boolean clickMenuButton(Player player, int id) {

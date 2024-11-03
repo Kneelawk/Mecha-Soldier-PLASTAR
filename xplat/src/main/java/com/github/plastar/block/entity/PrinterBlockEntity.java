@@ -1,9 +1,6 @@
 package com.github.plastar.block.entity;
 
 import com.github.plastar.block.PBlocks;
-import com.github.plastar.menu.AssemblerSlotIds;
-import com.github.plastar.menu.MechaAssemblerMenu;
-
 import com.github.plastar.menu.PrinterMenu;
 
 import net.minecraft.core.BlockPos;
@@ -14,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,7 +40,7 @@ public class PrinterBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-        return new PrinterMenu(containerId, inventory);
+        return new PrinterMenu(containerId, inventory, ContainerLevelAccess.create(level, worldPosition));
     }
 
     @Override
