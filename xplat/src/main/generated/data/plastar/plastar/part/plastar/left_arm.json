@@ -1,5 +1,13 @@
 {
   "default_pattern": "plastar:base_sets/unpainted",
+  "modifiers": [
+    {
+      "amount": 3.0,
+      "attribute": "minecraft:player.entity_interaction_range",
+      "id": "plastar:plastar/left_arm",
+      "operation": "add_value"
+    }
+  ],
   "section": "left_arm",
   "supported_patterns": "#plastar:base_set_patterns"
 }

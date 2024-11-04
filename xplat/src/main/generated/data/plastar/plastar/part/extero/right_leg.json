@@ -1,5 +1,13 @@
 {
   "default_pattern": "plastar:base_sets/unpainted",
+  "modifiers": [
+    {
+      "amount": 0.2,
+      "attribute": "minecraft:generic.movement_speed",
+      "id": "plastar:extero/right_leg",
+      "operation": "add_multiplied_base"
+    }
+  ],
   "section": "right_leg",
   "supported_patterns": "#plastar:base_set_patterns"
 }

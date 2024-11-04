@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class Parts {
     public static final ResourceKey<PartDefinition> PLASTAR_HEAD = key("plastar/head");
@@ -45,26 +46,26 @@ public class Parts {
     public static void bootstrap(BootstrapContext<PartDefinition> context) {
         register(context, PLASTAR_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
         register(context, PLASTAR_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
-        register(context, PLASTAR_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM);
-        register(context, PLASTAR_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM);
-        register(context, PLASTAR_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG);
-        register(context, PLASTAR_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG);
+        register(context, PLASTAR_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 3);
+        register(context, PLASTAR_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 3);
+        register(context, PLASTAR_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 2);
+        register(context, PLASTAR_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 2);
         register(context, PLASTAR_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
 
         register(context, EXTERO_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
         register(context, EXTERO_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
-        register(context, EXTERO_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM);
-        register(context, EXTERO_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM);
-        register(context, EXTERO_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG);
-        register(context, EXTERO_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG);
+        register(context, EXTERO_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addAdditiveModifier(Attributes.ATTACK_DAMAGE, 6);
+        register(context, EXTERO_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addAdditiveModifier(Attributes.ATTACK_DAMAGE, 6);
+        register(context, EXTERO_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
+        register(context, EXTERO_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
         register(context, EXTERO_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
 
         register(context, NEORA_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
         register(context, NEORA_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
-        register(context, NEORA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM);
-        register(context, NEORA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM);
-        register(context, NEORA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG);
-        register(context, NEORA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG);
+        register(context, NEORA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addMultiplyBaseModifier(Attributes.ATTACK_SPEED, 6);
+        register(context, NEORA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addMultiplyBaseModifier(Attributes.ATTACK_SPEED, 6);
+        register(context, NEORA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
+        register(context, NEORA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
         register(context, NEORA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
     }
     
