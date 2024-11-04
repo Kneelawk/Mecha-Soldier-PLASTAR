@@ -1,3 +1,5 @@
+import net.neoforged.moddevgradle.tasks.JarJar
+
 plugins {
     id("com.kneelawk.versioning")
     id("com.kneelawk.submodule")
@@ -16,11 +18,14 @@ kpublish {
 
 dependencies {
     additionalRuntimeClasspath("de.javagl:jgltf-model:2.0.4")
-    jarJar(project(path = ":xplat", configuration = "includeTransitive"))
 }
 
 neoForge {
     accessTransformers.from(project(":xplat").file("src/main/resources/common-at.cfg"))
+}
+
+tasks.named<JarJar>("jarJar") {
+    configuration(project(":xplat").configurations["includeTransitive"])
 }
 
 // Hack to disable junit tests (which we don't use) in order to

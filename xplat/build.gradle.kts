@@ -26,7 +26,7 @@ submodule {
         }
         "dev.engine_room.flywheel:flywheel-$platform-$flywheel_mc_version:$flywheel_version"
     }
-    xplatExternalDependency { "de.javagl:jgltf-model:2.0.4" }
+    xplatExternalDependency(include = false) { "de.javagl:jgltf-model:2.0.4" }
     val smart_brain_lib_version: String by project
     val smart_brain_lib_mc_version: String by project
     xplatExternalDependency { 

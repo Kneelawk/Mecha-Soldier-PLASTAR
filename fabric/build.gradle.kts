@@ -1,3 +1,5 @@
+import net.fabricmc.loom.build.nesting.NestableJarGenerationTask
+
 plugins {
     id("com.kneelawk.versioning")
     id("com.kneelawk.submodule")
@@ -14,13 +16,18 @@ kpublish {
     createPublication()
 }
 
+configurations {
+    register("includeTransitive") {
+        extendsFrom(project(":xplat").configurations["includeTransitive"])
+    }
+}
+
 dependencies {
     val mod_menu_version: String by project
     modLocalRuntime("com.terraformersmc:modmenu:$mod_menu_version") {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }
-    include(project(path = ":xplat", configuration = "includeTransitive"))
 }
 
 loom {
@@ -31,6 +38,10 @@ fabricApi.configureDataGeneration {
     outputDirectory = project(":xplat").file("src/main/generated")
     addToResources = false
     createSourceSet = true
+}
+
+tasks.named<NestableJarGenerationTask>("processIncludeJars") {
+    from(configurations.named("includeTransitive").get())
 }
 
 // Hack to disable junit tests (which we don't use) in order to
