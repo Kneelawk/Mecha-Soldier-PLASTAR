@@ -1,6 +1,6 @@
 {
   "type": "plastar:printing",
-  "result": "plastar:hama/head",
+  "result": "plastar:plastar/right_leg",
   "sap": {
     "item": "plastar:polystyrene"
   },

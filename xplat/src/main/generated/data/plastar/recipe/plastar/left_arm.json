@@ -1,6 +1,6 @@
 {
   "type": "plastar:printing",
-  "result": "plastar:maple/torso",
+  "result": "plastar:plastar/left_arm",
   "sap": {
     "item": "plastar:polystyrene"
   },

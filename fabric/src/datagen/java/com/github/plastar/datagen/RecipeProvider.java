@@ -76,14 +76,14 @@ public class RecipeProvider extends FabricRecipeProvider {
         
         // TODO: Individual costs and stuff
         var parts = Arrays.asList(
-            Parts.EMMA_HEAD, Parts.EMMA_TORSO, Parts.EMMA_LEFT_ARM, Parts.EMMA_RIGHT_ARM,
-            Parts.EMMA_LEFT_LEG, Parts.EMMA_RIGHT_LEG, Parts.EMMA_BACKPACK,
+            Parts.PLASTAR_HEAD, Parts.PLASTAR_TORSO, Parts.PLASTAR_LEFT_ARM, Parts.PLASTAR_RIGHT_ARM,
+            Parts.PLASTAR_LEFT_LEG, Parts.PLASTAR_RIGHT_LEG, Parts.PLASTAR_BACKPACK,
             
-            Parts.HAMA_HEAD, Parts.HAMA_TORSO, Parts.HAMA_LEFT_ARM, Parts.HAMA_RIGHT_ARM,
-            Parts.HAMA_LEFT_LEG, Parts.HAMA_RIGHT_LEG, Parts.HAMA_BACKPACK,
+            Parts.EXTERO_HEAD, Parts.EXTERO_TORSO, Parts.EXTERO_LEFT_ARM, Parts.EXTERO_RIGHT_ARM,
+            Parts.EXTERO_LEFT_LEG, Parts.EXTERO_RIGHT_LEG, Parts.EXTERO_BACKPACK,
             
-            Parts.MAPLE_HEAD, Parts.MAPLE_TORSO, Parts.MAPLE_LEFT_ARM, Parts.MAPLE_RIGHT_ARM, 
-            Parts.MAPLE_LEFT_LEG, Parts.MAPLE_RIGHT_LEG, Parts.MAPLE_BACKPACK
+            Parts.NEORA_HEAD, Parts.NEORA_TORSO, Parts.NEORA_LEFT_ARM, Parts.NEORA_RIGHT_ARM, 
+            Parts.NEORA_LEFT_LEG, Parts.NEORA_RIGHT_LEG, Parts.NEORA_BACKPACK
         );
 
         for (var part : parts) {

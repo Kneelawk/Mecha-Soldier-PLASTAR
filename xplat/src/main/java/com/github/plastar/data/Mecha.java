@@ -42,12 +42,12 @@ public record Mecha(Map<MechaSection, MechaPart> parts) {
         var palette = RegistryUtil.getPreferred(Palettes.UNPAINTED, registries.lookupOrThrow(PRegistries.PALETTE));
         
         var preferredParts = Map.of(
-            MechaSection.HEAD, Parts.EMMA_HEAD,
-            MechaSection.TORSO, Parts.EMMA_TORSO,
-            MechaSection.LEFT_ARM, Parts.EMMA_LEFT_ARM,
-            MechaSection.RIGHT_ARM, Parts.EMMA_RIGHT_ARM,
-            MechaSection.LEFT_LEG, Parts.EMMA_LEFT_LEG,
-            MechaSection.RIGHT_LEG, Parts.EMMA_RIGHT_LEG
+            MechaSection.HEAD, Parts.PLASTAR_HEAD,
+            MechaSection.TORSO, Parts.PLASTAR_TORSO,
+            MechaSection.LEFT_ARM, Parts.PLASTAR_LEFT_ARM,
+            MechaSection.RIGHT_ARM, Parts.PLASTAR_RIGHT_ARM,
+            MechaSection.LEFT_LEG, Parts.PLASTAR_LEFT_LEG,
+            MechaSection.RIGHT_LEG, Parts.PLASTAR_RIGHT_LEG
         );
         var builder = ImmutableMap.<MechaSection, MechaPart>builder();
         preferredParts.forEach((section, preferred) -> {

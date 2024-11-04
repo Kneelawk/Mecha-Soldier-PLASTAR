@@ -1,6 +1,6 @@
 {
   "type": "plastar:printing",
-  "result": "plastar:hama/backpack",
+  "result": "plastar:plastar/backpack",
   "sap": {
     "item": "plastar:polystyrene"
   },
