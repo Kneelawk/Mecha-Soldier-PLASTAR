@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 import com.github.plastar.block.PBlocks;
+import com.github.plastar.crafting.CardPunchingRecipe;
 import com.github.plastar.crafting.PrintingRecipe;
-import com.github.plastar.data.PartDefinition;
 import com.github.plastar.data.Parts;
 import com.github.plastar.item.PItems;
 
@@ -13,14 +13,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import static com.github.plastar.Constants.rl;
@@ -73,16 +72,18 @@ public class RecipeProvider extends FabricRecipeProvider {
             .unlockedBy("has_storol", has(PItems.STYROL.get()))
             .save(output);
         
+        output.accept(rl("card_punching"), new CardPunchingRecipe(CraftingBookCategory.MISC), null);
+        
         // TODO: Individual costs and stuff
         var parts = Arrays.asList(
-            Parts.EMMA_HEAD, Parts.EMMA_TORSO, Parts.EMMA_LEFT_ARM, Parts.EMMA_RIGHT_ARM,
-            Parts.EMMA_LEFT_LEG, Parts.EMMA_RIGHT_LEG, Parts.EMMA_BACKPACK,
+            Parts.PLASTAR_HEAD, Parts.PLASTAR_TORSO, Parts.PLASTAR_LEFT_ARM, Parts.PLASTAR_RIGHT_ARM,
+            Parts.PLASTAR_LEFT_LEG, Parts.PLASTAR_RIGHT_LEG, Parts.PLASTAR_BACKPACK,
             
-            Parts.HAMA_HEAD, Parts.HAMA_TORSO, Parts.HAMA_LEFT_ARM, Parts.HAMA_RIGHT_ARM,
-            Parts.HAMA_LEFT_LEG, Parts.HAMA_RIGHT_LEG, Parts.HAMA_BACKPACK,
+            Parts.EXTERO_HEAD, Parts.EXTERO_TORSO, Parts.EXTERO_LEFT_ARM, Parts.EXTERO_RIGHT_ARM,
+            Parts.EXTERO_LEFT_LEG, Parts.EXTERO_RIGHT_LEG, Parts.EXTERO_BACKPACK,
             
-            Parts.MAPLE_HEAD, Parts.MAPLE_TORSO, Parts.MAPLE_LEFT_ARM, Parts.MAPLE_RIGHT_ARM, 
-            Parts.MAPLE_LEFT_LEG, Parts.MAPLE_RIGHT_LEG, Parts.MAPLE_BACKPACK
+            Parts.NEORA_HEAD, Parts.NEORA_TORSO, Parts.NEORA_LEFT_ARM, Parts.NEORA_RIGHT_ARM, 
+            Parts.NEORA_LEFT_LEG, Parts.NEORA_RIGHT_LEG, Parts.NEORA_BACKPACK
         );
 
         for (var part : parts) {

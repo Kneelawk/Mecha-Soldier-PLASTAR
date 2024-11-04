@@ -1,0 +1,8 @@
+{
+  "type": "plastar:printing",
+  "result": "plastar:neora/head",
+  "sap": {
+    "item": "plastar:polystyrene"
+  },
+  "sap_count": 4
+}

@@ -12,60 +12,61 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class Parts {
-    public static final ResourceKey<PartDefinition> EMMA_HEAD = key("emma/head");
-    public static final ResourceKey<PartDefinition> EMMA_TORSO = key("emma/torso");
-    public static final ResourceKey<PartDefinition> EMMA_LEFT_ARM = key("emma/left_arm");
-    public static final ResourceKey<PartDefinition> EMMA_RIGHT_ARM = key("emma/right_arm");
-    public static final ResourceKey<PartDefinition> EMMA_LEFT_LEG = key("emma/left_leg");
-    public static final ResourceKey<PartDefinition> EMMA_RIGHT_LEG = key("emma/right_leg");
-    public static final ResourceKey<PartDefinition> EMMA_BACKPACK = key("emma/backpack");
+    public static final ResourceKey<PartDefinition> PLASTAR_HEAD = key("plastar/head");
+    public static final ResourceKey<PartDefinition> PLASTAR_TORSO = key("plastar/torso");
+    public static final ResourceKey<PartDefinition> PLASTAR_LEFT_ARM = key("plastar/left_arm");
+    public static final ResourceKey<PartDefinition> PLASTAR_RIGHT_ARM = key("plastar/right_arm");
+    public static final ResourceKey<PartDefinition> PLASTAR_LEFT_LEG = key("plastar/left_leg");
+    public static final ResourceKey<PartDefinition> PLASTAR_RIGHT_LEG = key("plastar/right_leg");
+    public static final ResourceKey<PartDefinition> PLASTAR_BACKPACK = key("plastar/backpack");
     
-    public static final ResourceKey<PartDefinition> HAMA_HEAD = key("hama/head");
-    public static final ResourceKey<PartDefinition> HAMA_TORSO = key("hama/torso");
-    public static final ResourceKey<PartDefinition> HAMA_LEFT_ARM = key("hama/left_arm");
-    public static final ResourceKey<PartDefinition> HAMA_RIGHT_ARM = key("hama/right_arm");
-    public static final ResourceKey<PartDefinition> HAMA_LEFT_LEG = key("hama/left_leg");
-    public static final ResourceKey<PartDefinition> HAMA_RIGHT_LEG = key("hama/right_leg");
-    public static final ResourceKey<PartDefinition> HAMA_BACKPACK = key("hama/backpack");
+    public static final ResourceKey<PartDefinition> EXTERO_HEAD = key("extero/head");
+    public static final ResourceKey<PartDefinition> EXTERO_TORSO = key("extero/torso");
+    public static final ResourceKey<PartDefinition> EXTERO_LEFT_ARM = key("extero/left_arm");
+    public static final ResourceKey<PartDefinition> EXTERO_RIGHT_ARM = key("extero/right_arm");
+    public static final ResourceKey<PartDefinition> EXTERO_LEFT_LEG = key("extero/left_leg");
+    public static final ResourceKey<PartDefinition> EXTERO_RIGHT_LEG = key("extero/right_leg");
+    public static final ResourceKey<PartDefinition> EXTERO_BACKPACK = key("extero/backpack");
     
-    public static final ResourceKey<PartDefinition> MAPLE_HEAD = key("maple/head");
-    public static final ResourceKey<PartDefinition> MAPLE_TORSO = key("maple/torso");
-    public static final ResourceKey<PartDefinition> MAPLE_LEFT_ARM = key("maple/left_arm");
-    public static final ResourceKey<PartDefinition> MAPLE_RIGHT_ARM = key("maple/right_arm");
-    public static final ResourceKey<PartDefinition> MAPLE_LEFT_LEG = key("maple/left_leg");
-    public static final ResourceKey<PartDefinition> MAPLE_RIGHT_LEG = key("maple/right_leg");
-    public static final ResourceKey<PartDefinition> MAPLE_BACKPACK = key("maple/backpack");
+    public static final ResourceKey<PartDefinition> NEORA_HEAD = key("neora/head");
+    public static final ResourceKey<PartDefinition> NEORA_TORSO = key("neora/torso");
+    public static final ResourceKey<PartDefinition> NEORA_LEFT_ARM = key("neora/left_arm");
+    public static final ResourceKey<PartDefinition> NEORA_RIGHT_ARM = key("neora/right_arm");
+    public static final ResourceKey<PartDefinition> NEORA_LEFT_LEG = key("neora/left_leg");
+    public static final ResourceKey<PartDefinition> NEORA_RIGHT_LEG = key("neora/right_leg");
+    public static final ResourceKey<PartDefinition> NEORA_BACKPACK = key("neora/backpack");
 
     private static ResourceKey<PartDefinition> key(String path) {
         return ResourceKey.create(PRegistries.PART, Constants.rl(path));
     }
 
     public static void bootstrap(BootstrapContext<PartDefinition> context) {
-        register(context, EMMA_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
-        register(context, EMMA_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
-        register(context, EMMA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM);
-        register(context, EMMA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM);
-        register(context, EMMA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG);
-        register(context, EMMA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG);
-        register(context, EMMA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
+        register(context, PLASTAR_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
+        register(context, PLASTAR_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
+        register(context, PLASTAR_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 3);
+        register(context, PLASTAR_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 3);
+        register(context, PLASTAR_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 2);
+        register(context, PLASTAR_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 2);
+        register(context, PLASTAR_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
 
-        register(context, HAMA_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
-        register(context, HAMA_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
-        register(context, HAMA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM);
-        register(context, HAMA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM);
-        register(context, HAMA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG);
-        register(context, HAMA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG);
-        register(context, HAMA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
+        register(context, EXTERO_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
+        register(context, EXTERO_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
+        register(context, EXTERO_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addAdditiveModifier(Attributes.ATTACK_DAMAGE, 6);
+        register(context, EXTERO_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addAdditiveModifier(Attributes.ATTACK_DAMAGE, 6);
+        register(context, EXTERO_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
+        register(context, EXTERO_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
+        register(context, EXTERO_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
 
-        register(context, MAPLE_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
-        register(context, MAPLE_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
-        register(context, MAPLE_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM);
-        register(context, MAPLE_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM);
-        register(context, MAPLE_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG);
-        register(context, MAPLE_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG);
-        register(context, MAPLE_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
+        register(context, NEORA_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);
+        register(context, NEORA_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
+        register(context, NEORA_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addMultiplyBaseModifier(Attributes.ATTACK_SPEED, 6);
+        register(context, NEORA_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 1).addMultiplyBaseModifier(Attributes.ATTACK_SPEED, 6);
+        register(context, NEORA_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
+        register(context, NEORA_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.MOVEMENT_SPEED, 0.2);
+        register(context, NEORA_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
     }
     
     private static Builder register(BootstrapContext<PartDefinition> context, ResourceKey<PartDefinition> key, 

@@ -1,0 +1,8 @@
+{
+  "type": "plastar:printing",
+  "result": "plastar:plastar/torso",
+  "sap": {
+    "item": "plastar:polystyrene"
+  },
+  "sap_count": 4
+}

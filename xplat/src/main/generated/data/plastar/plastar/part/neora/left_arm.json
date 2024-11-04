@@ -1,0 +1,19 @@
+{
+  "default_pattern": "plastar:base_sets/unpainted",
+  "modifiers": [
+    {
+      "amount": 1.0,
+      "attribute": "minecraft:player.entity_interaction_range",
+      "id": "plastar:neora/left_arm",
+      "operation": "add_value"
+    },
+    {
+      "amount": 6.0,
+      "attribute": "minecraft:generic.attack_speed",
+      "id": "plastar:neora/left_arm",
+      "operation": "add_multiplied_base"
+    }
+  ],
+  "section": "left_arm",
+  "supported_patterns": "#plastar:base_set_patterns"
+}

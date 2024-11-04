@@ -1,8 +1,0 @@
-{
-  "type": "plastar:printing",
-  "result": "plastar:hama/head",
-  "sap": {
-    "item": "plastar:polystyrene"
-  },
-  "sap_count": 4
-}

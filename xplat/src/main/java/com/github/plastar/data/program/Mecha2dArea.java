@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -31,7 +32,7 @@ public record Mecha2dArea(int x0, int z0, int x1, int z1) {
     ).apply(instance, Mecha2dArea::sorted));
     public static final StreamCodec<ByteBuf, Mecha2dArea> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT, Mecha2dArea::x0,
-        ByteBufCodecs.VAR_INT, Mecha2dArea::z1,
+        ByteBufCodecs.VAR_INT, Mecha2dArea::z0,
         ByteBufCodecs.VAR_INT, Mecha2dArea::x1,
         ByteBufCodecs.VAR_INT, Mecha2dArea::z1,
         Mecha2dArea::new
@@ -51,5 +52,14 @@ public record Mecha2dArea(int x0, int z0, int x1, int z1) {
 
     public boolean isWithin(int x, int z) {
         return x >= x0 && x <= x1 && z >= z0 && z <= z1;
+    }
+
+    public Vec3 nearest(Vec3 current) {
+        return new Vec3(Math.min(Math.max(current.x, x0), x1), current.y, Math.min(Math.max(current.z, z0), z1));
+    }
+
+    public BlockPos nearest(Vec3i current) {
+        return new BlockPos(Math.min(Math.max(current.getX(), x0), x1), current.getY(),
+            Math.min(Math.max(current.getZ(), z0), z1));
     }
 }

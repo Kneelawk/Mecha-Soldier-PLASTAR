@@ -1,0 +1,8 @@
+{
+  "type": "plastar:printing",
+  "result": "plastar:extero/left_leg",
+  "sap": {
+    "item": "plastar:polystyrene"
+  },
+  "sap_count": 4
+}

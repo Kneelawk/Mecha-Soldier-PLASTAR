@@ -18,5 +18,7 @@ public record MechaProgram(Optional<Mecha2dArea> area) {
         Mecha2dArea.STREAM_CODEC.apply(ByteBufCodecs::optional), MechaProgram::area,
         MechaProgram::new
     );
+    public static final StreamCodec<ByteBuf, Optional<MechaProgram>> OPTIONAL_STREAM_CODEC =
+        STREAM_CODEC.apply(ByteBufCodecs::optional);
     public static final MechaProgram DEFAULT = new MechaProgram(Optional.empty());
 }
