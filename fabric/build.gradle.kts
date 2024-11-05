@@ -1,5 +1,3 @@
-import net.fabricmc.loom.build.nesting.NestableJarGenerationTask
-
 plugins {
     id("com.kneelawk.versioning")
     id("com.kneelawk.submodule")

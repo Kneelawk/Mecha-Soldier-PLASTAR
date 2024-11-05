@@ -4,14 +4,6 @@ plugins {
     id("com.kneelawk.kpublish")
 }
 
-configurations {
-    register("includeTransitive")
-}
-
-dependencies {
-    "includeTransitive"("de.javagl:jgltf-model:2.0.4")
-}
-
 submodule {
     setRefmaps("plastar")
     val knet_version: String by project
