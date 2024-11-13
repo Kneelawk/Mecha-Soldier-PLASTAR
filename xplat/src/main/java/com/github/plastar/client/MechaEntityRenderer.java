@@ -40,7 +40,7 @@ public class MechaEntityRenderer extends EntityRenderer<MechaEntity> {
                 MechaEntityRenderUtils.applyPartTransform(entry.getKey(), model.getMetadata(), partialTick, sharedMatrix, entity);
                 poseStack.mulPose(sharedMatrix);
 
-                model.getDirectModel(material).render(poseStack, bufferSource, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0));
+                model.getDirectModel(material).render(poseStack, bufferSource, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0), false);
 
                 poseStack.popPose();
             }

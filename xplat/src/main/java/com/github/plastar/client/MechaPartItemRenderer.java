@@ -38,6 +38,8 @@ public class MechaPartItemRenderer extends BlockEntityWithoutLevelRenderer {
         var texture = MechaEntityRenderUtils.getTexture(mechaPart.pattern().value(), mechaPart.palette().value());
         var material = new Material(Constants.ATLAS_ID, texture);
 
+        var needsFabulousHack = displayContext.firstPerson() || displayContext == ItemDisplayContext.GUI;
+
         poseStack.pushPose();
         var metadata = preparedModel.get().getMetadata();
         var offset = metadata.itemModelOffset();
@@ -45,7 +47,8 @@ public class MechaPartItemRenderer extends BlockEntityWithoutLevelRenderer {
         poseStack.translate(offset.x / 16f, offset.y / 16f, offset.z / 16f);
         poseStack.translate(0.5, 0, 0.5);
         
-        preparedModel.get().getDirectModel(material).render(poseStack, bufferSource, packedLight, packedOverlay);
+        preparedModel.get().getDirectModel(material)
+            .render(poseStack, bufferSource, packedLight, packedOverlay, needsFabulousHack);
         
         poseStack.popPose();
     }

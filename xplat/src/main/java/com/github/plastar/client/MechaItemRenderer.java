@@ -34,6 +34,8 @@ public class MechaItemRenderer extends BlockEntityWithoutLevelRenderer {
             .result()
             .orElseGet(() -> Mecha.getDefault(registries));
 
+        var needsFabulousHack = displayContext.firstPerson() || displayContext == ItemDisplayContext.GUI;
+
         poseStack.pushPose();
         poseStack.translate(0.5, 0, 0.5);
         for (var entry : mecha.parts().entrySet()) {
@@ -42,7 +44,8 @@ public class MechaItemRenderer extends BlockEntityWithoutLevelRenderer {
             if (MechaEntityRenderUtils.getModelAndMaterial(part) instanceof MechaEntityRenderUtils.ModelAndMaterial(
                 var model, var material
             )) {
-                model.getDirectModel(material).render(poseStack, bufferSource, packedLight, packedOverlay);
+                model.getDirectModel(material)
+                    .render(poseStack, bufferSource, packedLight, packedOverlay, needsFabulousHack);
             }
         }
         poseStack.popPose();
