@@ -186,7 +186,7 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        RegistryOps<Tag> ops = RegistryOps.create(NbtOps.INSTANCE, registryAccess());
+        var ops = RegistryOps.create(NbtOps.INSTANCE, registryAccess());
         Mecha.CODEC.parse(ops, compound.get("mecha"))
             .ifSuccess(this::setMecha);
 
@@ -205,6 +205,23 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
         }
     }
 
+    public void readItemData(CompoundTag compound) {
+        var ops = RegistryOps.create(NbtOps.INSTANCE, registryAccess());
+        Mecha.CODEC.parse(ops, compound.get("mecha"))
+            .ifSuccess(this::setMecha);
+
+        if (compound.contains("Health", Tag.TAG_ANY_NUMERIC)) {
+            setHealth(compound.getFloat("Health"));
+        }
+    }
+
+    public void saveItemData(CompoundTag compound) {
+        compound.put("mecha",
+            Mecha.CODEC.encodeStart(RegistryOps.create(NbtOps.INSTANCE, registryAccess()), getMecha())
+                .getOrThrow());
+        compound.putFloat("Health", getHealth());
+    }
+
     @Override
     protected void customServerAiStep() {
         tickBrain(this);
@@ -214,12 +231,7 @@ public class MechaEntity extends PathfinderMob implements SmartBrainOwner<MechaE
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (player.isShiftKeyDown()) {
             var stack = PItems.MECHA.get().getDefaultInstance();
-            CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, compound -> {
-                compound.put("mecha",
-                    Mecha.CODEC.encodeStart(RegistryOps.create(NbtOps.INSTANCE, registryAccess()), getMecha())
-                        .getOrThrow());
-                compound.putFloat("Health", getHealth());
-            });
+            CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, this::saveItemData);
             if (player.getItemInHand(hand).isEmpty()) {
                 player.setItemInHand(hand, stack);
             } else {

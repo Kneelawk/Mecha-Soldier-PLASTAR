@@ -41,15 +41,8 @@ public class MechaItem extends Item {
             try {
                 PEntities.MECHA_ENTITY.get().spawn(blockSource.level(),
                     EntityType.appendDefaultStackConfig(
-                        entity -> {
-                            var data = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag();
-                            // Remove unwanted keys to prevent force-op
-                            data.getAllKeys()
-                                .stream()
-                                .filter(key -> !key.equals("mecha") && !key.equals("Health"))
-                                .forEach(data::remove);
-                            entity.load(data);
-                        },
+                        entity -> entity.readItemData(
+                            stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag()),
                         blockSource.level(),
                         stack,
                         null),
@@ -91,7 +84,8 @@ public class MechaItem extends Item {
         var spawned = PEntities.MECHA_ENTITY.get().spawn(
             serverLevel,
             EntityType.appendDefaultStackConfig(
-                entity -> stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).loadInto(entity),
+                entity -> entity.readItemData(
+                    stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag()),
                 serverLevel,
                 stack,
                 player),
