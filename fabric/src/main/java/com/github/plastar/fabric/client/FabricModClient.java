@@ -5,6 +5,7 @@ import java.util.concurrent.Executor;
 
 import com.github.plastar.Constants;
 import com.github.plastar.block.PBlocks;
+import com.github.plastar.client.MechaEntityRenderer;
 import com.github.plastar.client.MechaItemRenderer;
 import com.github.plastar.client.MechaPartItemRenderer;
 import com.github.plastar.client.PLASTARClient;
@@ -22,7 +23,6 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -32,7 +32,7 @@ public class FabricModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         PLASTARClient.init();
-        EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), NoopRenderer::new);
+        EntityRendererRegistry.register(PEntities.MECHA_ENTITY.get(), MechaEntityRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA.get(), new MechaItemRenderer()::renderByItem);
         BuiltinItemRendererRegistry.INSTANCE.register(PItems.MECHA_PART.get(), new MechaPartItemRenderer()::renderByItem);
         BlockRenderLayerMap.INSTANCE.putBlock(PBlocks.PRINTER.get(), RenderType.cutoutMipped());

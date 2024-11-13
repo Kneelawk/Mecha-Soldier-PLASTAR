@@ -35,7 +35,7 @@ public class MechaPartItemRenderer extends BlockEntityWithoutLevelRenderer {
         var preparedModel = mechaPart.definition().unwrapKey().flatMap(MechaModelManager.INSTANCE::getModel);
         if (preparedModel.isEmpty()) return;
 
-        var texture = MechaEntityVisual.getTexture(mechaPart.pattern().value(), mechaPart.palette().value());
+        var texture = MechaEntityRenderUtils.getTexture(mechaPart.pattern().value(), mechaPart.palette().value());
         var material = new Material(Constants.ATLAS_ID, texture);
 
         poseStack.pushPose();
@@ -43,8 +43,9 @@ public class MechaPartItemRenderer extends BlockEntityWithoutLevelRenderer {
         var offset = metadata.itemModelOffset();
         poseStack.mulPose(new Matrix4f().scaleAround(metadata.itemModelScale(), 0.5f, 0.5f, 0.5f));
         poseStack.translate(offset.x / 16f, offset.y / 16f, offset.z / 16f);
+        poseStack.translate(0.5, 0, 0.5);
         
-        preparedModel.get().getItemModel(material).render(poseStack, bufferSource, packedLight, packedOverlay);
+        preparedModel.get().getDirectModel(material).render(poseStack, bufferSource, packedLight, packedOverlay);
         
         poseStack.popPose();
     }

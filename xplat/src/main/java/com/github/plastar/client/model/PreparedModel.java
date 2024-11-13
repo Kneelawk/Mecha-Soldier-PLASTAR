@@ -16,7 +16,7 @@ import net.minecraft.client.resources.model.Material;
 
 public final class PreparedModel {
     private final Map<Material, Model> modelCache = new HashMap<>();
-    private final Map<Material, ItemModel> itemModelCache = new HashMap<>();
+    private final Map<Material, DirectModel> itemModelCache = new HashMap<>();
 
     private final List<BridgedMesh> meshes;
     private final ModelMetadata metadata;
@@ -26,11 +26,11 @@ public final class PreparedModel {
         this.metadata = metadata;
     }
 
-    public Model getModel(Material material) {
+    public Model getFlywheelModel(Material material) {
         return modelCache.computeIfAbsent(material, this::configure);
     }
 
-    public ItemModel getItemModel(Material material) {
+    public DirectModel getDirectModel(Material material) {
         return itemModelCache.computeIfAbsent(material, this::configureItem);
     }
 
@@ -53,8 +53,8 @@ public final class PreparedModel {
         return new SimpleModel(configured);
     }
     
-    private ItemModel configureItem(Material mcMaterial) {
-        var modelMeshes = new ArrayList<ItemModel.Mesh>();
+    private DirectModel configureItem(Material mcMaterial) {
+        var modelMeshes = new ArrayList<DirectModel.Mesh>();
         var sprite = mcMaterial.sprite();
         for (var mesh : meshes) {
             var vertexList = new PosTexNormalVertexView();
@@ -69,8 +69,8 @@ public final class PreparedModel {
             var indexBlock = MemoryBlock.mallocTracked((long) mesh.indexCount() * Integer.BYTES);
             mesh.indexSequence().fill(indexBlock.ptr(), mesh.indexCount());
 
-            modelMeshes.add(new ItemModel.Mesh(indexBlock, mesh.indexCount(), vertexList, sprite.atlasLocation()));
+            modelMeshes.add(new DirectModel.Mesh(indexBlock, mesh.indexCount(), vertexList, sprite.atlasLocation()));
         }
-        return new ItemModel(modelMeshes);
+        return new DirectModel(modelMeshes);
     }
 }
