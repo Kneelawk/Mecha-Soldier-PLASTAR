@@ -48,8 +48,8 @@ public class Parts {
         register(context, PLASTAR_TORSO, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.TORSO);
         register(context, PLASTAR_LEFT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 3);
         register(context, PLASTAR_RIGHT_ARM, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_ARM).addAdditiveModifier(Attributes.ENTITY_INTERACTION_RANGE, 3);
-        register(context, PLASTAR_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 2);
-        register(context, PLASTAR_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 2);
+        register(context, PLASTAR_LEFT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.LEFT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 0.5).addMultiplyBaseModifier(Attributes.SAFE_FALL_DISTANCE, 1);
+        register(context, PLASTAR_RIGHT_LEG, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.RIGHT_LEG).addMultiplyBaseModifier(Attributes.JUMP_STRENGTH, 0.5).addMultiplyBaseModifier(Attributes.SAFE_FALL_DISTANCE, 1);
         register(context, PLASTAR_BACKPACK, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.BACKPACK);
 
         register(context, EXTERO_HEAD, Patterns.Tags.BASE_SET_PATTERNS, Patterns.UNPAINTED, MechaSection.HEAD);

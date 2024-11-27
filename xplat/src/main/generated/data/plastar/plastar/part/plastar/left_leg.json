@@ -2,8 +2,14 @@
   "default_pattern": "plastar:base_sets/unpainted",
   "modifiers": [
     {
-      "amount": 2.0,
+      "amount": 0.5,
       "attribute": "minecraft:generic.jump_strength",
+      "id": "plastar:plastar/left_leg",
+      "operation": "add_multiplied_base"
+    },
+    {
+      "amount": 1.0,
+      "attribute": "minecraft:generic.safe_fall_distance",
       "id": "plastar:plastar/left_leg",
       "operation": "add_multiplied_base"
     }
