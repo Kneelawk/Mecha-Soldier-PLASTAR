@@ -95,6 +95,7 @@ public class PrinterMenu extends AbstractContainerMenu {
                     }
 
                 });
+                slotsChanged(container);
                 super.onTake(player, stack);
             }
 
