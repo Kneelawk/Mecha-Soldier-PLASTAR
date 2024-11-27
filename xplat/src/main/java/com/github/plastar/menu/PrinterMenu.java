@@ -153,7 +153,7 @@ public class PrinterMenu extends AbstractContainerMenu {
     public void slotsChanged(Container container) {
         ItemStack sapStack = this.sapSlot.getItem();
         ItemStack additiveStack = this.sapSlot.getItem();
-        if (!sapStack.is(this.sap.getItem()) || !additive.is(this.additive.getItem())) {
+        if (!ItemStack.isSameItemSameComponents(sapStack, this.sap) || sapStack.getCount() != this.sap.getCount() || !ItemStack.isSameItemSameComponents(additiveStack, this.additive) || additiveStack.getCount() != this.additive.getCount() ) {
             this.sap = sapStack.copy();
             this.additive = additiveStack.copy();
             this.setupRecipeList(container, sapStack);
